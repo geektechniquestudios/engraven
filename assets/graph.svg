@@ -1,30 +1,94 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">
-  <title>A mature Engraven vault rendered as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Lookups pulse from the index node down into their subject clusters, and a meta-analysis hub rays out across all of them.</title>
+  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Four lookups land four different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, and an episodic archive read), each hop naming the doc it lands on. Then a new KB forms while stale docs elsewhere are repaired.</title>
   <style>
-    .ray { stroke-dasharray:100; animation: ray 14s infinite; }
-    @keyframes ray { 0%{stroke-dashoffset:100;opacity:0} 8%{opacity:.55} 26%{stroke-dashoffset:0;opacity:.5} 58%{stroke-dashoffset:0;opacity:.4} 74%,100%{stroke-dashoffset:0;opacity:0} }
+    .i1 { animation: i1 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes i1 { 0%,1%{transform:scale(.4);opacity:.9} 4.5%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
+    .l1a { animation: l1a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l1a { 0%,1.5%{stroke-dashoffset:100;opacity:0} 1.8%{opacity:.95} 4.5%{stroke-dashoffset:0;opacity:.9} 21%{stroke-dashoffset:0;opacity:.7} 23%,100%{stroke-dashoffset:0;opacity:0} }
+    .f1a { animation: f1a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f1a { 0%,4.2%{opacity:0} 4.7%{opacity:.85} 6%{opacity:.7} 7.4%{opacity:0} 100%{opacity:0} }
+    .t1a { animation: t1a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t1a { 0%,4.5%{opacity:0} 5.3%{opacity:1} 20.8%{opacity:1} 22%,100%{opacity:0} }
+    .l1b { animation: l1b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l1b { 0%,5%{stroke-dashoffset:100;opacity:0} 5.3%{opacity:.95} 8%{stroke-dashoffset:0;opacity:.9} 21%{stroke-dashoffset:0;opacity:.7} 23%,100%{stroke-dashoffset:0;opacity:0} }
+    .f1b { animation: f1b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f1b { 0%,7.7%{opacity:0} 8.2%{opacity:.85} 9.5%{opacity:.7} 10.9%{opacity:0} 100%{opacity:0} }
+    .t1b { animation: t1b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t1b { 0%,8%{opacity:0} 8.8%{opacity:1} 20.8%{opacity:1} 22%,100%{opacity:0} }
+    .l1c { animation: l1c 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l1c { 0%,8.5%{stroke-dashoffset:100;opacity:0} 8.8%{opacity:.95} 11.5%{stroke-dashoffset:0;opacity:.9} 21%{stroke-dashoffset:0;opacity:.7} 23%,100%{stroke-dashoffset:0;opacity:0} }
+    .f1c { animation: f1c 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f1c { 0%,11.2%{opacity:0} 11.7%{opacity:.85} 13%{opacity:.7} 14.4%{opacity:0} 100%{opacity:0} }
+    .t1c { animation: t1c 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t1c { 0%,11.5%{opacity:0} 12.3%{opacity:1} 20.8%{opacity:1} 22%,100%{opacity:0} }
+    .i2 { animation: i2 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes i2 { 0%,25.5%{transform:scale(.4);opacity:.9} 29%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
+    .l2 { animation: l2 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l2 { 0%,26%{stroke-dashoffset:100;opacity:0} 26.3%{opacity:.95} 29.5%{stroke-dashoffset:0;opacity:.9} 36%{stroke-dashoffset:0;opacity:.7} 38%,100%{stroke-dashoffset:0;opacity:0} }
+    .f2 { animation: f2 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f2 { 0%,29.2%{opacity:0} 29.7%{opacity:.85} 31%{opacity:.7} 32.4%{opacity:0} 100%{opacity:0} }
+    .t2 { animation: t2 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t2 { 0%,29.5%{opacity:0} 30.3%{opacity:1} 35.8%{opacity:1} 37%,100%{opacity:0} }
+    .i3 { animation: i3 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes i3 { 0%,40.5%{transform:scale(.4);opacity:.9} 44%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
+    .l3a { animation: l3a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l3a { 0%,41%{stroke-dashoffset:100;opacity:0} 41.3%{opacity:.95} 44%{stroke-dashoffset:0;opacity:.9} 55%{stroke-dashoffset:0;opacity:.7} 57%,100%{stroke-dashoffset:0;opacity:0} }
+    .f3a { animation: f3a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f3a { 0%,43.7%{opacity:0} 44.2%{opacity:.85} 45.5%{opacity:.7} 46.9%{opacity:0} 100%{opacity:0} }
+    .t3a { animation: t3a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t3a { 0%,44%{opacity:0} 44.8%{opacity:1} 53.8%{opacity:1} 55%,100%{opacity:0} }
+    .l3x { animation: l3x 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l3x { 0%,44.5%{stroke-dashoffset:100;opacity:0} 44.8%{opacity:.95} 47.5%{stroke-dashoffset:0;opacity:.9} 55%{stroke-dashoffset:0;opacity:.7} 57%,100%{stroke-dashoffset:0;opacity:0} }
+    .f3b { animation: f3b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f3b { 0%,47.2%{opacity:0} 47.7%{opacity:.85} 49%{opacity:.7} 50.4%{opacity:0} 100%{opacity:0} }
+    .t3b { animation: t3b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t3b { 0%,47.5%{opacity:0} 48.3%{opacity:1} 53.8%{opacity:1} 55%,100%{opacity:0} }
+    .i4 { animation: i4 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes i4 { 0%,59.5%{transform:scale(.4);opacity:.9} 63%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
+    .l4a { animation: l4a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l4a { 0%,60%{stroke-dashoffset:100;opacity:0} 60.3%{opacity:.95} 63%{stroke-dashoffset:0;opacity:.9} 74%{stroke-dashoffset:0;opacity:.7} 76%,100%{stroke-dashoffset:0;opacity:0} }
+    .f4a { animation: f4a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f4a { 0%,62.7%{opacity:0} 63.2%{opacity:.85} 64.5%{opacity:.7} 65.9%{opacity:0} 100%{opacity:0} }
+    .t4a { animation: t4a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t4a { 0%,63%{opacity:0} 63.8%{opacity:1} 72.8%{opacity:1} 74%,100%{opacity:0} }
+    .l4b { animation: l4b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l4b { 0%,63.5%{stroke-dashoffset:100;opacity:0} 63.8%{opacity:.95} 66.5%{stroke-dashoffset:0;opacity:.9} 74%{stroke-dashoffset:0;opacity:.7} 76%,100%{stroke-dashoffset:0;opacity:0} }
+    .f4b { animation: f4b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f4b { 0%,66.2%{opacity:0} 66.7%{opacity:.85} 68%{opacity:.7} 69.4%{opacity:0} 100%{opacity:0} }
+    .t4b { animation: t4b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t4b { 0%,66.5%{opacity:0} 67.3%{opacity:1} 72.8%{opacity:1} 74%,100%{opacity:0} }
+    .nw0 { animation: nw0 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes nw0 { 0%,78%{transform:scale(0);opacity:0} 78.6%{transform:scale(1.3);opacity:1} 79.1%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{transform:scale(1);opacity:0} }
+    .ne0 { animation: ne0 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes ne0 { 0%,78.8%{stroke-dashoffset:100;opacity:0} 79%{opacity:.5} 80.2%{stroke-dashoffset:0;opacity:.3} 96%{stroke-dashoffset:0;opacity:.25} 98.5%,100%{opacity:0} }
+    .nw1 { animation: nw1 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes nw1 { 0%,80.5%{transform:scale(0);opacity:0} 81.1%{transform:scale(1.3);opacity:1} 81.6%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{transform:scale(1);opacity:0} }
+    .ne1 { animation: ne1 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes ne1 { 0%,81.3%{stroke-dashoffset:100;opacity:0} 81.5%{opacity:.5} 82.7%{stroke-dashoffset:0;opacity:.3} 96%{stroke-dashoffset:0;opacity:.25} 98.5%,100%{opacity:0} }
+    .nw2 { animation: nw2 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes nw2 { 0%,83%{transform:scale(0);opacity:0} 83.6%{transform:scale(1.3);opacity:1} 84.1%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{transform:scale(1);opacity:0} }
+    .ne2 { animation: ne2 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes ne2 { 0%,83.8%{stroke-dashoffset:100;opacity:0} 84%{opacity:.5} 85.2%{stroke-dashoffset:0;opacity:.3} 96%{stroke-dashoffset:0;opacity:.25} 98.5%,100%{opacity:0} }
+    .nw3 { animation: nw3 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes nw3 { 0%,85.5%{transform:scale(0);opacity:0} 86.1%{transform:scale(1.3);opacity:1} 86.6%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{transform:scale(1);opacity:0} }
+    .ne3 { animation: ne3 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes ne3 { 0%,86.3%{stroke-dashoffset:100;opacity:0} 86.5%{opacity:.5} 87.7%{stroke-dashoffset:0;opacity:.3} 96%{stroke-dashoffset:0;opacity:.25} 98.5%,100%{opacity:0} }
+    .nkm { animation: nkm 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes nkm { 0%,88%{transform:scale(0);opacity:0} 88.8%{transform:scale(1.35);opacity:1} 89.5%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{opacity:0} }
+    .nkh { animation: nkh 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes nkh { 0%,88%{opacity:0} 88.5%{opacity:.85} 89.8%{opacity:.7} 91.2%{opacity:0} 100%{opacity:0} }
+    .nkl { animation: nkl 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes nkl { 0%,89%{opacity:0} 89.8%{opacity:1} 94.8%{opacity:1} 96%,100%{opacity:0} }
+    .rp0 { animation: rp0 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes rp0 { 0%,78%{transform:scale(.5);opacity:0;stroke:#f85149} 78.5%{opacity:.95;stroke:#f85149} 80%{transform:scale(1.5);stroke:#f85149;opacity:.7} 80.5%{stroke:#3fb950;opacity:.95} 83%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0} }
+    .rp1 { animation: rp1 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes rp1 { 0%,82%{transform:scale(.5);opacity:0;stroke:#f85149} 82.5%{opacity:.95;stroke:#f85149} 84%{transform:scale(1.5);stroke:#f85149;opacity:.7} 84.5%{stroke:#3fb950;opacity:.95} 87%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0} }
+    .rp2 { animation: rp2 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes rp2 { 0%,86%{transform:scale(.5);opacity:0;stroke:#f85149} 86.5%{opacity:.95;stroke:#f85149} 88%{transform:scale(1.5);stroke:#f85149;opacity:.7} 88.5%{stroke:#3fb950;opacity:.95} 91%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0} }
     .halo { transform-box: fill-box; transform-origin: center; animation: halo 7s infinite; }
     @keyframes halo { 0%{transform:scale(.5);opacity:.8} 60%{transform:scale(2.6);opacity:0} 100%{transform:scale(2.6);opacity:0} }
-    .star { animation: star 14s infinite; }
-    @keyframes star { 0%,100%{opacity:.75} 30%{opacity:1} 74%{opacity:.75} }
-    .idx { animation: idx 6s ease-in-out infinite; }
-    @keyframes idx { 0%,100%{opacity:.85} 50%{opacity:1} }
-    .lkI { transform-box: fill-box; transform-origin: center; animation: lkI 24s infinite; }
-    @keyframes lkI { 0%{transform:scale(.4);opacity:.9} 5%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
-    .lkA { stroke-dasharray:100; animation: lkA 24s infinite; }
-    @keyframes lkA { 0%{stroke-dashoffset:100;opacity:0} 0.8%{opacity:.9} 4.5%{stroke-dashoffset:0;opacity:.9} 15%{stroke-dashoffset:0;opacity:.65} 20%,100%{stroke-dashoffset:0;opacity:0} }
-    .lkB { stroke-dasharray:100; animation: lkB 24s infinite; }
-    @keyframes lkB { 0%,4.5%{stroke-dashoffset:100;opacity:0} 5%{opacity:.9} 7.5%{stroke-dashoffset:0;opacity:.9} 15%{stroke-dashoffset:0;opacity:.65} 20%,100%{stroke-dashoffset:0;opacity:0} }
-    .lkC { stroke-dasharray:100; animation: lkC 24s infinite; }
-    @keyframes lkC { 0%,7.5%{stroke-dashoffset:100;opacity:0} 8%{opacity:.9} 10.5%{stroke-dashoffset:0;opacity:.9} 15%{stroke-dashoffset:0;opacity:.65} 20%,100%{stroke-dashoffset:0;opacity:0} }
-    .lkM { animation: lkM 24s infinite; }
-    @keyframes lkM { 0%,4%{opacity:0} 5.5%{opacity:1} 15%{opacity:.8} 20%,100%{opacity:0} }
-    .lkH { animation: lkH 24s infinite; }
-    @keyframes lkH { 0%,7%{opacity:0} 8.5%{opacity:1} 15%{opacity:.8} 20%,100%{opacity:0} }
-    .lkD { animation: lkD 24s infinite; }
-    @keyframes lkD { 0%,10%{opacity:0} 11.5%{opacity:1} 16%{opacity:1} 21%,100%{opacity:0} }
-    /* hide delayed cascades until their turn: apply the 0% frame during the delay */
-    .lkI, .lkA, .lkB, .lkC, .lkM, .lkH, .lkD { animation-fill-mode: backwards; }
+    .idx { animation: idxb 6s ease-in-out infinite; }
+    @keyframes idxb { 0%,100%{opacity:.85} 50%{opacity:1} }
   </style>
   <rect x="0.5" y="0.5" width="1199" height="799" rx="14" fill="#0d1117" stroke="#30363d"/>
   <g stroke="#8b949e" stroke-width="0.5">
@@ -1406,41 +1470,97 @@
     <line x1="1097.4" y1="685.5" x2="377.9" y2="134.8" opacity="0.200"/>
     <line x1="560.2" y1="682.7" x2="186.6" y2="188.5" opacity="0.200"/>
   </g>
-  <g stroke="#a78bfa" stroke-width="0.7" fill="none">
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="263.9" y2="590.7" style="animation-delay:0.00s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="635.2" y2="105.1" style="animation-delay:0.11s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="386.8" y2="93.9" style="animation-delay:0.22s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="468.5" y2="549.9" style="animation-delay:0.33s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="979.8" y2="466" style="animation-delay:0.44s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="204.1" y2="628.3" style="animation-delay:0.55s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="377.5" y2="135.1" style="animation-delay:0.66s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="393.3" y2="526.7" style="animation-delay:0.77s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="1049.5" y2="645.1" style="animation-delay:0.88s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="420.7" y2="303.2" style="animation-delay:0.99s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="96.8" y2="431.8" style="animation-delay:1.10s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="165.7" y2="563.8" style="animation-delay:1.21s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="237.1" y2="573.5" style="animation-delay:1.32s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="876.5" y2="656.7" style="animation-delay:1.43s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="989" y2="449.3" style="animation-delay:1.54s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="440.7" y2="560.4" style="animation-delay:1.65s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="121.8" y2="155.4" style="animation-delay:1.76s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="213.3" y2="596.1" style="animation-delay:1.87s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="450.6" y2="140" style="animation-delay:1.98s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="789.2" y2="424.2" style="animation-delay:2.09s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="89.9" y2="342.7" style="animation-delay:2.20s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="1118.7" y2="654" style="animation-delay:2.31s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="826.3" y2="400.3" style="animation-delay:2.42s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="744.2" y2="346.3" style="animation-delay:2.53s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="1029" y2="419.9" style="animation-delay:2.64s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="573.4" y2="158" style="animation-delay:2.75s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="331.6" y2="80.1" style="animation-delay:2.86s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="1070.5" y2="690.6" style="animation-delay:2.97s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="684.6" y2="564.4" style="animation-delay:3.08s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="146.9" y2="397.8" style="animation-delay:3.19s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="1064" y2="617.2" style="animation-delay:3.30s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="431.9" y2="477.8" style="animation-delay:3.41s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="415.4" y2="150.7" style="animation-delay:3.52s"/>
-    <line class="ray" pathLength="100" x1="795" y1="330" x2="838.6" y2="247.7" style="animation-delay:3.63s"/>
+  <g stroke="#8b949e" stroke-width="0.5">
+    <line x1="502.6" y1="382.1" x2="553.9" y2="366.5" opacity="0.13"/>
+    <line x1="695.5" y1="480.9" x2="687.2" y2="498.8" opacity="0.13"/>
+    <line x1="727.6" y1="672.1" x2="797.4" y2="648" opacity="0.13"/>
+    <line x1="104.3" y1="673" x2="165.4" y2="652" opacity="0.13"/>
+    <line x1="672.2" y1="622.1" x2="671.9" y2="605.7" opacity="0.13"/>
+    <line x1="514.5" y1="655.2" x2="519.6" y2="656.6" opacity="0.13"/>
+    <line x1="43.7" y1="706.2" x2="165.4" y2="652" opacity="0.13"/>
+    <line x1="462.4" y1="111.1" x2="457.4" y2="103.7" opacity="0.13"/>
+    <line x1="476.3" y1="467.1" x2="431.9" y2="477.8" opacity="0.13"/>
+    <line x1="1127.5" y1="446.6" x2="1104" y2="420.7" opacity="0.13"/>
+    <line x1="93.5" y1="604.3" x2="132.8" y2="593.7" opacity="0.13"/>
+    <line x1="935.3" y1="597.8" x2="926.5" y2="579.6" opacity="0.13"/>
+    <line x1="818.4" y1="490.8" x2="833.2" y2="515.1" opacity="0.13"/>
+    <line x1="74.7" y1="103.6" x2="103.1" y2="121.3" opacity="0.13"/>
+    <line x1="653.7" y1="244.3" x2="646.4" y2="251.2" opacity="0.13"/>
+    <line x1="747.8" y1="109.9" x2="782.3" y2="107.4" opacity="0.13"/>
+    <line x1="594.4" y1="290.5" x2="587.3" y2="293.5" opacity="0.13"/>
+    <line x1="1029" y1="674.6" x2="1036.8" y2="682.4" opacity="0.13"/>
+    <line x1="1063.4" y1="328.4" x2="1030.8" y2="296.1" opacity="0.13"/>
+    <line x1="132.8" y1="574.8" x2="132.8" y2="593.7" opacity="0.13"/>
+    <line x1="279" y1="361" x2="314.4" y2="353.3" opacity="0.13"/>
+    <line x1="144.8" y1="368" x2="156.4" y2="371.5" opacity="0.13"/>
+    <line x1="832.5" y1="686.8" x2="836.6" y2="669.2" opacity="0.13"/>
+    <line x1="200.2" y1="495" x2="186.9" y2="476.7" opacity="0.13"/>
+    <line x1="792.9" y1="669.1" x2="797.4" y2="648" opacity="0.13"/>
+    <line x1="649.4" y1="642.6" x2="634" y2="621.8" opacity="0.13"/>
+    <line x1="793.2" y1="244.2" x2="776.4" y2="254.9" opacity="0.13"/>
+    <line x1="988.1" y1="425.8" x2="987.6" y2="425.8" opacity="0.13"/>
+    <line x1="413.9" y1="449.3" x2="431.9" y2="477.8" opacity="0.13"/>
+    <line x1="271.3" y1="625.2" x2="261" y2="621.9" opacity="0.13"/>
+    <line x1="106.6" y1="628.9" x2="132.8" y2="593.7" opacity="0.13"/>
+    <line x1="1056.2" y1="622.1" x2="1064" y2="617.2" opacity="0.13"/>
+    <line x1="926" y1="246.1" x2="971.4" y2="249.9" opacity="0.13"/>
+    <line x1="599.2" y1="564.7" x2="590.2" y2="557.3" opacity="0.13"/>
+    <line x1="479.9" y1="669.1" x2="486.8" y2="666.7" opacity="0.13"/>
+    <line x1="796.5" y1="325.1" x2="800.8" y2="323.4" opacity="0.13"/>
+    <line x1="235.9" y1="337.2" x2="193.9" y2="367.8" opacity="0.13"/>
+    <line x1="417.3" y1="558" x2="415.1" y2="565.4" opacity="0.13"/>
+    <line x1="55.1" y1="425.5" x2="96.8" y2="431.8" opacity="0.13"/>
+    <line x1="475.8" y1="472.5" x2="431.9" y2="477.8" opacity="0.13"/>
+    <line x1="287.8" y1="36.6" x2="331.6" y2="80.1" opacity="0.13"/>
+    <line x1="398.1" y1="296.7" x2="388.8" y2="293.1" opacity="0.13"/>
+    <line x1="184.4" y1="600.6" x2="184" y2="599.4" opacity="0.13"/>
+    <line x1="569.2" y1="562.8" x2="590.2" y2="557.3" opacity="0.13"/>
+    <line x1="106.1" y1="210.1" x2="119.8" y2="211.3" opacity="0.13"/>
+    <line x1="670.1" y1="218.9" x2="646.4" y2="251.2" opacity="0.13"/>
+    <line x1="1134.9" y1="410" x2="1104" y2="420.7" opacity="0.13"/>
+    <line x1="395.3" y1="40.4" x2="364" y2="78.9" opacity="0.13"/>
+    <line x1="905.3" y1="81.3" x2="895.7" y2="116" opacity="0.13"/>
+    <line x1="807.5" y1="618.3" x2="809.5" y2="606.5" opacity="0.13"/>
+    <line x1="368" y1="709.2" x2="287.2" y2="646.2" opacity="0.13"/>
+    <line x1="865.6" y1="239.6" x2="873.6" y2="257.9" opacity="0.13"/>
+    <line x1="649.8" y1="526.9" x2="664.8" y2="536" opacity="0.13"/>
+    <line x1="278.6" y1="648.7" x2="287.2" y2="646.2" opacity="0.13"/>
+    <line x1="432.2" y1="130.6" x2="438.8" y2="140.3" opacity="0.13"/>
+    <line x1="552.6" y1="436.1" x2="582" y2="377.4" opacity="0.13"/>
+    <line x1="168.1" y1="509.9" x2="177.9" y2="481.6" opacity="0.13"/>
+    <line x1="252.9" y1="93.7" x2="222.2" y2="102.4" opacity="0.13"/>
+    <line x1="253.9" y1="543.7" x2="247.8" y2="549.9" opacity="0.13"/>
+    <line x1="633.4" y1="520.4" x2="631" y2="511.1" opacity="0.13"/>
+    <line x1="303.4" y1="79.3" x2="331.6" y2="80.1" opacity="0.13"/>
+    <line x1="1121.9" y1="390.8" x2="1104" y2="420.7" opacity="0.13"/>
+    <line x1="96" y1="602.3" x2="132.8" y2="593.7" opacity="0.13"/>
+    <line x1="928" y1="582.6" x2="926.5" y2="579.6" opacity="0.13"/>
+    <line x1="343.1" y1="514.4" x2="380.5" y2="531.1" opacity="0.13"/>
+    <line x1="203.4" y1="444.8" x2="203.7" y2="450.8" opacity="0.13"/>
+    <line x1="177" y1="110.3" x2="183.8" y2="111.9" opacity="0.13"/>
+    <line x1="422" y1="544.7" x2="410.7" y2="541.7" opacity="0.13"/>
+    <line x1="359.7" y1="591.1" x2="388.4" y2="576.4" opacity="0.13"/>
+    <line x1="258.4" y1="382.4" x2="204.8" y2="402.5" opacity="0.13"/>
+    <line x1="806.5" y1="252.5" x2="818.1" y2="253.5" opacity="0.13"/>
+    <line x1="86" y1="411.3" x2="107" y2="409.8" opacity="0.13"/>
+    <line x1="140.6" y1="514.4" x2="151.2" y2="477" opacity="0.13"/>
+    <line x1="473.1" y1="344.9" x2="510.2" y2="301.6" opacity="0.13"/>
+    <line x1="402.9" y1="623.7" x2="409.4" y2="603.2" opacity="0.13"/>
+    <line x1="341.1" y1="634.4" x2="297.1" y2="618.1" opacity="0.13"/>
+    <line x1="899.5" y1="401.8" x2="849.3" y2="385.9" opacity="0.13"/>
+    <line x1="623.3" y1="433.4" x2="636.8" y2="477.4" opacity="0.13"/>
+    <line x1="516.3" y1="338.3" x2="536.3" y2="332.2" opacity="0.13"/>
+    <line x1="294.7" y1="203.4" x2="327.5" y2="164.1" opacity="0.13"/>
+    <line x1="506.5" y1="595.3" x2="496.3" y2="580.8" opacity="0.13"/>
+    <line x1="299.8" y1="294.2" x2="300.7" y2="306.4" opacity="0.13"/>
+    <line x1="114.9" y1="688.2" x2="169.9" y2="663.4" opacity="0.13"/>
+    <line x1="562.6" y1="294.6" x2="562.7" y2="300.3" opacity="0.13"/>
+    <line x1="607.6" y1="641.4" x2="599.7" y2="609.6" opacity="0.13"/>
+    <line x1="932.3" y1="115.5" x2="910.6" y2="131.8" opacity="0.13"/>
+    <line x1="134.2" y1="551.6" x2="165.7" y2="563.8" opacity="0.13"/>
+    <line x1="286" y1="389.9" x2="314.4" y2="353.3" opacity="0.13"/>
+    <line x1="398.7" y1="452.8" x2="418.5" y2="482.8" opacity="0.13"/>
+    <line x1="468.7" y1="121.7" x2="457.4" y2="103.7" opacity="0.13"/>
   </g>
   <g>
     <circle cx="214.3" cy="208.7" r="2.5" fill="#4cc9f0" opacity="0.92"/>
@@ -2298,42 +2418,42 @@
     <circle cx="1031.6" cy="597.3" r="2.4" fill="#8b949e" opacity="0.92"/>
     <circle cx="1070.5" cy="690.6" r="2.3" fill="#c77dff" opacity="0.92"/>
     <circle cx="992.2" cy="642.5" r="2.3" fill="#c77dff" opacity="0.92"/>
-    <circle cx="536.4" cy="720.6" r="1.8" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="522.2" cy="685.7" r="1.5" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="480" cy="724" r="2.5" fill="#ff99c8" opacity="0.92"/>
+    <circle cx="536.4" cy="720.6" r="1.8" fill="#768390" opacity="0.92"/>
+    <circle cx="522.2" cy="685.7" r="1.5" fill="#768390" opacity="0.92"/>
+    <circle cx="480" cy="724" r="2.5" fill="#768390" opacity="0.92"/>
     <circle cx="525.3" cy="647.8" r="2.6" fill="#8b949e" opacity="0.92"/>
     <circle cx="535.4" cy="647.3" r="2.7" fill="#8b949e" opacity="0.92"/>
-    <circle cx="560.2" cy="682.7" r="5.5" fill="#ff99c8"/>
-    <circle cx="500.1" cy="724" r="3.1" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="476.6" cy="654.8" r="2.2" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="566.9" cy="668.8" r="1.8" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="540" cy="677" r="2" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="528.2" cy="724" r="2.9" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="499.7" cy="724" r="2.8" fill="#ff99c8" opacity="0.92"/>
+    <circle cx="560.2" cy="682.7" r="5.5" fill="#768390"/>
+    <circle cx="500.1" cy="724" r="3.1" fill="#768390" opacity="0.92"/>
+    <circle cx="476.6" cy="654.8" r="2.2" fill="#768390" opacity="0.92"/>
+    <circle cx="566.9" cy="668.8" r="1.8" fill="#768390" opacity="0.92"/>
+    <circle cx="540" cy="677" r="2" fill="#768390" opacity="0.92"/>
+    <circle cx="528.2" cy="724" r="2.9" fill="#768390" opacity="0.92"/>
+    <circle cx="499.7" cy="724" r="2.8" fill="#768390" opacity="0.92"/>
     <circle cx="544.2" cy="683.2" r="2.3" fill="#8b949e" opacity="0.92"/>
-    <circle cx="554.4" cy="715.2" r="4.7" fill="#ff99c8"/>
+    <circle cx="554.4" cy="715.2" r="4.7" fill="#768390"/>
     <circle cx="502" cy="724" r="1.5" fill="#8b949e" opacity="0.92"/>
-    <circle cx="524.3" cy="637.2" r="2.5" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="542" cy="663.4" r="2.5" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="511.6" cy="724" r="2.8" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="480.9" cy="654.6" r="3" fill="#ff99c8" opacity="0.92"/>
+    <circle cx="524.3" cy="637.2" r="2.5" fill="#768390" opacity="0.92"/>
+    <circle cx="542" cy="663.4" r="2.5" fill="#768390" opacity="0.92"/>
+    <circle cx="511.6" cy="724" r="2.8" fill="#768390" opacity="0.92"/>
+    <circle cx="480.9" cy="654.6" r="3" fill="#768390" opacity="0.92"/>
     <circle cx="543.4" cy="666.6" r="2" fill="#8b949e" opacity="0.92"/>
-    <circle cx="505.3" cy="666.5" r="2" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="531.2" cy="628.4" r="1.9" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="486.6" cy="676.1" r="2.3" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="542.7" cy="650.2" r="1.6" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="512.4" cy="682.4" r="4.7" fill="#ff99c8"/>
-    <circle cx="527.8" cy="639.1" r="4.3" fill="#ff99c8"/>
-    <circle cx="492.3" cy="681.2" r="1.6" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="483.9" cy="715.3" r="2.1" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="536" cy="718.8" r="2.4" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="543.3" cy="711.3" r="2.5" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="496.7" cy="700.4" r="2.2" fill="#ff99c8" opacity="0.92"/>
+    <circle cx="505.3" cy="666.5" r="2" fill="#768390" opacity="0.92"/>
+    <circle cx="531.2" cy="628.4" r="1.9" fill="#768390" opacity="0.92"/>
+    <circle cx="486.6" cy="676.1" r="2.3" fill="#768390" opacity="0.92"/>
+    <circle cx="542.7" cy="650.2" r="1.6" fill="#768390" opacity="0.92"/>
+    <circle cx="512.4" cy="682.4" r="4.7" fill="#768390"/>
+    <circle cx="527.8" cy="639.1" r="4.3" fill="#768390"/>
+    <circle cx="492.3" cy="681.2" r="1.6" fill="#768390" opacity="0.92"/>
+    <circle cx="483.9" cy="715.3" r="2.1" fill="#768390" opacity="0.92"/>
+    <circle cx="536" cy="718.8" r="2.4" fill="#768390" opacity="0.92"/>
+    <circle cx="543.3" cy="711.3" r="2.5" fill="#768390" opacity="0.92"/>
+    <circle cx="496.7" cy="700.4" r="2.2" fill="#768390" opacity="0.92"/>
     <circle cx="486.8" cy="666.7" r="2.7" fill="#8b949e" opacity="0.92"/>
-    <circle cx="506.6" cy="715.4" r="2.8" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="530.7" cy="724" r="3" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="519.6" cy="656.6" r="1.7" fill="#ff99c8" opacity="0.92"/>
-    <circle cx="511" cy="666.3" r="3" fill="#ff99c8" opacity="0.92"/>
+    <circle cx="506.6" cy="715.4" r="2.8" fill="#768390" opacity="0.92"/>
+    <circle cx="530.7" cy="724" r="3" fill="#768390" opacity="0.92"/>
+    <circle cx="519.6" cy="656.6" r="1.7" fill="#768390" opacity="0.92"/>
+    <circle cx="511" cy="666.3" r="3" fill="#768390" opacity="0.92"/>
     <circle cx="502.6" cy="382.1" r="1.6" fill="#6e7681" opacity="0.92"/>
     <circle cx="695.5" cy="480.9" r="2" fill="#6e7681" opacity="0.92"/>
     <circle cx="727.6" cy="672.1" r="1.7" fill="#6e7681" opacity="0.92"/>
@@ -2432,49 +2552,107 @@
   <circle class="halo" cx="806.8" cy="589.7" r="9" fill="none" stroke="#43aa8b" stroke-width="1.6" style="animation-delay:4.60s"/>
   <circle class="halo" cx="1097.6" cy="254.2" r="9" fill="none" stroke="#3a86ff" stroke-width="1.6" style="animation-delay:5.75s"/>
   <g fill="none" stroke="#fbbf24">
-    <circle class="lkI" cx="598" cy="428" r="8" stroke-width="1.5" style="animation-delay:0s"/>
-    <line class="lkA" pathLength="100" x1="598" y1="428" x2="186.6" y2="188.5" stroke-width="1.2" style="animation-delay:0s"/>
-    <line class="lkB" pathLength="100" x1="186.6" y1="188.5" x2="145.2" y2="153.1" stroke-width="1.2" style="animation-delay:0s"/>
-    <line class="lkC" pathLength="100" x1="145.2" y1="153.1" x2="103.1" y2="121.3" stroke-width="1.2" style="animation-delay:0s"/>
-    <circle class="lkM" cx="186.6" cy="188.5" r="7.5" stroke-width="1.4" opacity="0" style="animation-delay:0s"/>
-    <circle class="lkH" cx="145.2" cy="153.1" r="5.5" stroke-width="1.4" opacity="0" style="animation-delay:0s"/>
-    <circle class="lkD" cx="103.1" cy="121.3" r="4.6" stroke-width="1.6" opacity="0" style="animation-delay:0s"/>
+    <circle class="i1" cx="598" cy="428" r="8" stroke-width="1.5"/>
+    <line class="l1a" pathLength="100" x1="598" y1="428" x2="186.6" y2="188.5" stroke-width="1.2"/>
+    <line class="l1b" pathLength="100" x1="186.6" y1="188.5" x2="145.2" y2="153.1" stroke-width="1.2"/>
+    <line class="l1c" pathLength="100" x1="145.2" y1="153.1" x2="103.1" y2="121.3" stroke-width="1.2"/>
+    <circle class="i2" cx="598" cy="428" r="8" stroke-width="1.5"/>
+    <line class="l2" pathLength="100" x1="598" y1="428" x2="1030.2" y2="409.8" stroke-width="1.2"/>
+    <circle class="i3" cx="598" cy="428" r="8" stroke-width="1.5"/>
+    <line class="l3a" pathLength="100" x1="598" y1="428" x2="348.8" y2="363" stroke-width="1.2"/>
+    <circle class="i4" cx="598" cy="428" r="8" stroke-width="1.5"/>
+    <line class="l4a" pathLength="100" x1="598" y1="428" x2="560.2" y2="682.7" stroke-width="1.2"/>
+    <line class="l4b" pathLength="100" x1="560.2" y1="682.7" x2="480" y2="724" stroke-width="1.2"/>
   </g>
-  <circle class="lkD" cx="103.1" cy="121.3" r="2.2" fill="#fbbf24" opacity="0" style="animation-delay:0s"/>
-  <g fill="none" stroke="#fbbf24">
-    <circle class="lkI" cx="598" cy="428" r="8" stroke-width="1.5" style="animation-delay:6s"/>
-    <line class="lkA" pathLength="100" x1="598" y1="428" x2="1097.6" y2="254.2" stroke-width="1.2" style="animation-delay:6s"/>
-    <line class="lkB" pathLength="100" x1="1097.6" y1="254.2" x2="1030.3" y2="257.6" stroke-width="1.2" style="animation-delay:6s"/>
-    <line class="lkC" pathLength="100" x1="1030.3" y1="257.6" x2="971.4" y2="249.9" stroke-width="1.2" style="animation-delay:6s"/>
-    <circle class="lkM" cx="1097.6" cy="254.2" r="9.2" stroke-width="1.4" opacity="0" style="animation-delay:6s"/>
-    <circle class="lkH" cx="1030.3" cy="257.6" r="4.6" stroke-width="1.4" opacity="0" style="animation-delay:6s"/>
-    <circle class="lkD" cx="971.4" cy="249.9" r="5.9" stroke-width="1.6" opacity="0" style="animation-delay:6s"/>
+  <path class="l3x" pathLength="100" d="M 348.8 363 Q 467.8 322.7 589.4 354.3" fill="none" stroke="#a78bfa" stroke-width="1.2"/>
+  <g class="f1a" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="186.6" y1="188.5" x2="149.9" y2="206.1"/>
+    <line x1="163.9" y1="224.4" x2="186.6" y2="188.5"/>
+    <line x1="141.2" y1="186.7" x2="186.6" y2="188.5"/>
+    <line x1="146.8" y1="245.3" x2="186.6" y2="188.5"/>
+    <line x1="154.3" y1="120.5" x2="186.6" y2="188.5"/>
   </g>
-  <circle class="lkD" cx="971.4" cy="249.9" r="2.9" fill="#fbbf24" opacity="0" style="animation-delay:6s"/>
-  <g fill="none" stroke="#fbbf24">
-    <circle class="lkI" cx="598" cy="428" r="8" stroke-width="1.5" style="animation-delay:12s"/>
-    <line class="lkA" pathLength="100" x1="598" y1="428" x2="806.8" y2="589.7" stroke-width="1.2" style="animation-delay:12s"/>
-    <line class="lkB" pathLength="100" x1="806.8" y1="589.7" x2="857.2" y2="557.1" stroke-width="1.2" style="animation-delay:12s"/>
-    <line class="lkC" pathLength="100" x1="857.2" y1="557.1" x2="914.2" y2="529.7" stroke-width="1.2" style="animation-delay:12s"/>
-    <circle class="lkM" cx="806.8" cy="589.7" r="7.5" stroke-width="1.4" opacity="0" style="animation-delay:12s"/>
-    <circle class="lkH" cx="857.2" cy="557.1" r="5.5" stroke-width="1.4" opacity="0" style="animation-delay:12s"/>
-    <circle class="lkD" cx="914.2" cy="529.7" r="5.6" stroke-width="1.6" opacity="0" style="animation-delay:12s"/>
+  <g class="f1b" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="145.2" y1="153.1" x2="186.6" y2="188.5"/>
   </g>
-  <circle class="lkD" cx="914.2" cy="529.7" r="2.6" fill="#fbbf24" opacity="0" style="animation-delay:12s"/>
-  <g fill="none" stroke="#fbbf24">
-    <circle class="lkI" cx="598" cy="428" r="8" stroke-width="1.5" style="animation-delay:18s"/>
-    <line class="lkA" pathLength="100" x1="598" y1="428" x2="247.8" y2="549.9" stroke-width="1.2" style="animation-delay:18s"/>
-    <line class="lkB" pathLength="100" x1="247.8" y1="549.9" x2="214.8" y2="625.3" stroke-width="1.2" style="animation-delay:18s"/>
-    <line class="lkC" pathLength="100" x1="214.8" y1="625.3" x2="193" y2="681" stroke-width="1.2" style="animation-delay:18s"/>
-    <circle class="lkM" cx="247.8" cy="549.9" r="9.4" stroke-width="1.4" opacity="0" style="animation-delay:18s"/>
-    <circle class="lkH" cx="214.8" cy="625.3" r="5.0" stroke-width="1.4" opacity="0" style="animation-delay:18s"/>
-    <circle class="lkD" cx="193" cy="681" r="5.0" stroke-width="1.6" opacity="0" style="animation-delay:18s"/>
+  <g class="f1c" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="74.7" y1="103.6" x2="103.1" y2="121.3"/>
   </g>
-  <circle class="lkD" cx="193" cy="681" r="2.2" fill="#fbbf24" opacity="0" style="animation-delay:18s"/>
+  <g class="f2" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="1030.2" y1="409.8" x2="1038.4" y2="402.2"/>
+    <line x1="1032.8" y1="437.5" x2="1030.2" y2="409.8"/>
+    <line x1="1055.7" y1="434.4" x2="1030.2" y2="409.8"/>
+    <line x1="1006.4" y1="446.4" x2="1030.2" y2="409.8"/>
+    <line x1="1076.9" y1="403.4" x2="1030.2" y2="409.8"/>
+  </g>
+  <g class="f3a" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="380.4" y1="349.4" x2="348.8" y2="363"/>
+    <line x1="388.7" y1="391.9" x2="348.8" y2="363"/>
+    <line x1="384.3" y1="315.8" x2="348.8" y2="363"/>
+    <line x1="371.5" y1="301.4" x2="348.8" y2="363"/>
+    <line x1="337.3" y1="295.9" x2="348.8" y2="363"/>
+  </g>
+  <g class="f3b" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="577.9" y1="348.2" x2="589.4" y2="354.3"/>
+    <line x1="569.4" y1="359.6" x2="589.4" y2="354.3"/>
+    <line x1="560.4" y1="352.5" x2="589.4" y2="354.3"/>
+    <line x1="589.4" y1="354.3" x2="553.4" y2="361"/>
+    <line x1="630.8" y1="335.3" x2="589.4" y2="354.3"/>
+  </g>
+  <g class="f4a" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="525.3" y1="647.8" x2="560.2" y2="682.7"/>
+    <line x1="560.2" y1="682.7" x2="527.8" y2="639.1"/>
+    <line x1="486.6" y1="676.1" x2="560.2" y2="682.7"/>
+    <line x1="476.6" y1="654.8" x2="560.2" y2="682.7"/>
+  </g>
+  <g class="f4b" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="566.9" y1="668.8" x2="480" y2="724"/>
+  </g>
+  <text class="t1a" x="186.6" y="208.5" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Infrastructure - Meta-Analysis</text>
+  <text class="t1b" x="145.2" y="173.1" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">AWS Environments - Section Hub</text>
+  <text class="t1c" x="118" y="141.3" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">dev-east Access Runbook</text>
+  <text class="t2" x="1030.2" y="429.8" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Deploy Freeze Checklist</text>
+  <text class="t3a" x="348.8" y="383" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Caching Strategy</text>
+  <text class="t3b" x="589.4" y="374.3" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Rate Limiting</text>
+  <text class="t4a" x="560.2" y="702.7" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Session Archive Index</text>
+  <text class="t4b" x="466.0" y="728.0" text-anchor="end" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">2026-05-12 Incident Review</text>
+  <g stroke="#fb7185" stroke-width="0.6" fill="none">
+    <line class="ne0" pathLength="100" x1="384" y1="446" x2="357.4" y2="449.5"/>
+    <line class="ne0" pathLength="100" x1="350" y1="470.4" x2="357.4" y2="449.5"/>
+    <line class="ne0" pathLength="100" x1="346.5" y1="446.9" x2="357.4" y2="449.5"/>
+    <line class="ne1" pathLength="100" x1="339.2" y1="449.7" x2="343.9" y2="451.1"/>
+    <line class="ne1" pathLength="100" x1="343.9" y1="451.1" x2="339.2" y2="449.7"/>
+    <line class="ne1" pathLength="100" x1="360.8" y1="432.3" x2="357.4" y2="449.5"/>
+    <line class="ne2" pathLength="100" x1="385.7" y1="472.1" x2="406.1" y2="462.8"/>
+    <line class="ne2" pathLength="100" x1="406.1" y1="462.8" x2="385.7" y2="472.1"/>
+    <line class="ne2" pathLength="100" x1="372.3" y1="448.1" x2="384" y2="446"/>
+    <line class="ne2" pathLength="100" x1="382.7" y1="439" x2="384" y2="446"/>
+    <line class="ne3" pathLength="100" x1="361.3" y1="458.7" x2="357.4" y2="449.5"/>
+    <line class="ne3" pathLength="100" x1="390" y1="442.9" x2="384" y2="446"/>
+  </g>
+  <g fill="#fb7185">
+    <circle class="nw0" cx="357.4" cy="449.5" r="2.6" style="animation-delay:0.01s"/>
+    <circle class="nw0" cx="384" cy="446" r="2.6" style="animation-delay:0.07s"/>
+    <circle class="nw0" cx="350" cy="470.4" r="2.5" style="animation-delay:0.05s"/>
+    <circle class="nw0" cx="346.5" cy="446.9" r="2.5" style="animation-delay:-0.08s"/>
+    <circle class="nw1" cx="339.2" cy="449.7" r="2.9" style="animation-delay:-0.01s"/>
+    <circle class="nw1" cx="343.9" cy="451.1" r="1.9" style="animation-delay:0.07s"/>
+    <circle class="nw1" cx="360.8" cy="432.3" r="2.8" style="animation-delay:0.04s"/>
+    <circle class="nw2" cx="385.7" cy="472.1" r="1.9" style="animation-delay:0.1s"/>
+    <circle class="nw2" cx="406.1" cy="462.8" r="3" style="animation-delay:0.05s"/>
+    <circle class="nw2" cx="372.3" cy="448.1" r="2.7" style="animation-delay:0.06s"/>
+    <circle class="nw2" cx="382.7" cy="439" r="1.9" style="animation-delay:0.08s"/>
+    <circle class="nw3" cx="361.3" cy="458.7" r="2.2" style="animation-delay:0.03s"/>
+    <circle class="nw3" cx="390" cy="442.9" r="2" style="animation-delay:0.1s"/>
+  </g>
+  <circle class="nkh" cx="365" cy="455" r="10" fill="none" stroke="#fb7185" stroke-width="1.6"/>
+  <circle class="nkm" cx="365" cy="455" r="5.5" fill="#fb7185"/>
+  <text class="nkl" x="365" y="479" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Queue Backpressure - Meta-Analysis</text>
+  <circle class="rp0" cx="618.8" cy="104.6" r="9.0" fill="none" stroke="#f85149" stroke-width="1.8"/>
+  <circle class="rp1" cx="832.4" cy="279.6" r="9.0" fill="none" stroke="#f85149" stroke-width="1.8"/>
+  <circle class="rp2" cx="678.2" cy="563.2" r="9.0" fill="none" stroke="#f85149" stroke-width="1.8"/>
   <circle class="idx" cx="598" cy="428" r="5.5" fill="#e6edf3"/>
   <text x="598" y="450" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">00-Index</text>
-  <circle class="star" cx="795" cy="330" r="7.5" fill="#a78bfa"/>
-  <text x="795" y="354" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Architecture - Meta-Analysis</text>
   <text x="600" y="766" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>
   <text x="600" y="786" text-anchor="middle" font-size="11" fill="#6e7681">clusters emerge from links, not folders. open your vault in Obsidian and this is your agent's brain</text>
 </svg>

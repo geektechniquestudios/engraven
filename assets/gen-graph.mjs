@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 // Generator for assets/graph.svg: a synthetic Obsidian-style vault graph.
+// The still image is a mature vault; the animation layer is a day in its
+// life: four lookups land four different ways (3-hop drill-down, 1-hop deep
+// link, cross-KB wiki-link, episodic archive read) with node names appearing
+// at each hop, then a new KB forms while stale docs elsewhere are repaired.
 // Deterministic (seeded PRNG) so regeneration is reproducible.
 // Run from the repo root: node assets/gen-graph.mjs
 import { writeFileSync } from "node:fs";
@@ -32,7 +36,7 @@ const clusters = [
   { x: 655, y: 545, r: 82, n: 58, c: "#577590" },
   { x: 860, y: 595, r: 88, n: 64, c: "#43aa8b" },
   { x: 1055, y: 655, r: 64, n: 40, c: "#c77dff" },
-  { x: 520, y: 685, r: 58, n: 36, c: "#ff99c8" },
+  { x: 520, y: 685, r: 58, n: 36, c: "#768390" }, // the session archive: muted slate
 ];
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -89,70 +93,161 @@ for (let i = 0; i < 16; i++) {
   const b = hubsOf[cb][0] || byCluster[cb][0];
   highways.push({ a, b, o: 0.2 });
 }
-
-// the meta-analysis star: violet node raying across the whole graph
-const star = { x: 795, y: 330, r: 7.5 };
-const rayTargets = [];
-for (let i = 0; i < 34; i++) {
-  const n = nodes[Math.floor(rnd() * nodes.length)];
-  if (n.cluster === -1) { i--; continue; }
-  rayTargets.push(n);
+// no orphans: every straggler links to its nearest clustered doc
+// (fixed opacity, zero PRNG draws, so the approved layout is untouched)
+const stragglerEdges = [];
+for (const st of nodes.filter((n) => n.cluster === -1)) {
+  let best = null, bd = Infinity;
+  for (const n of nodes) {
+    if (n.cluster === -1) continue;
+    const d = (n.x - st.x) ** 2 + (n.y - st.y) ** 2;
+    if (d < bd) { bd = d; best = n; }
+  }
+  stragglerEdges.push({ a: st, b: best, o: 0.13 });
 }
 
 // pulsing hubs (staggered halos)
 const haloPicks = [0, 3, 7, 10, 13, 4].map((ci) => hubsOf[ci][0] || byCluster[ci][0]);
 
-// lookup cascades: 00-Index → cluster meta → hub → doc, one every 6s, clockwise
+// ── the animation cast (deterministic picks; no PRNG so layout is stable) ──
 const INDEX = { x: 598, y: 428 };
-const lookupClusters = [0, 4, 13, 10]; // top-left, top-right, bottom-right, bottom-left
-const lookups = lookupClusters.map((ci, k) => {
-  const ns = byCluster[ci];
-  const meta = hubsOf[ci][0] || ns[0];
-  let doc = ns[0], best = -1;
+const far = (ns, from, skip = []) => {
+  let best = null, bd = -1;
   for (const n of ns) {
-    if (n === meta) continue;
-    const d = (n.x - meta.x) ** 2 + (n.y - meta.y) ** 2;
-    if (d > best) { best = d; doc = n; }
+    if (n === from || skip.includes(n)) continue;
+    const d = (n.x - from.x) ** 2 + (n.y - from.y) ** 2;
+    if (d > bd) { bd = d; best = n; }
   }
-  const mx = (meta.x + doc.x) / 2, my = (meta.y + doc.y) / 2;
-  let hub = null, bd = Infinity;
+  return best;
+};
+const nearMid = (ns, a, b, skip = []) => {
+  const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+  let best = null, bd = Infinity;
   for (const n of ns) {
-    if (n === meta || n === doc) continue;
-    const d = ((n.x - mx) ** 2 + (n.y - my) ** 2) * (n.hub ? 0.55 : 1); // prefer hub nodes near the midpoint
-    if (d < bd) { bd = d; hub = n; }
+    if (n === a || n === b || skip.includes(n)) continue;
+    const d = ((n.x - mx) ** 2 + (n.y - my) ** 2) * (n.hub ? 0.55 : 1);
+    if (d < bd) { bd = d; best = n; }
   }
-  return { k, meta, hub, doc };
+  return best;
+};
+
+// L1 · drill-down, 3 hops (the dev-east read)
+const l1meta = hubsOf[0][0] || byCluster[0][0];
+const l1doc = far(byCluster[0], l1meta);
+const l1hub = nearMid(byCluster[0], l1meta, l1doc);
+// L2 · deep link, 1 hop
+const l2doc = hubsOf[9][0] || byCluster[9][0];
+// L3 · cross-KB: hop to one doc, wiki-link arc to its neighbor KB
+const l3a = hubsOf[6][0] || byCluster[6][0];
+const l3b = hubsOf[7][0] || byCluster[7][0];
+// L4 · episodic: two hops into the session archive
+const l4sai = hubsOf[15][0] || byCluster[15][0];
+const l4doc = far(byCluster[15], l4sai);
+// stale repairs while the vault grows
+const repairs = [byCluster[2][7], byCluster[8][11], byCluster[12][9]];
+
+// new KB forming (all PRNG below runs after the existing layout draws)
+const NK = { x: 365, y: 455, r: 42, c: "#fb7185" };
+const nkNodes = [];
+for (let i = 0; i < 13; i++) {
+  const a = R(0, Math.PI * 2);
+  const d = NK.r * Math.sqrt(rnd()) * R(0.5, 1.0);
+  nkNodes.push({
+    x: +(NK.x + Math.cos(a) * d * 1.2).toFixed(1),
+    y: +(NK.y + Math.sin(a) * d).toFixed(1),
+    r: +R(1.8, 3).toFixed(1),
+    wave: Math.min(3, Math.floor(i / 3.5)),
+    jit: +R(-0.1, 0.1).toFixed(2),
+  });
+}
+const nkEdges = nkNodes.slice(1).map((n) => {
+  let best = nkNodes[0], bd = Infinity;
+  for (const m of nkNodes) {
+    if (m === n || m.wave > n.wave) continue;
+    const d = (n.x - m.x) ** 2 + (n.y - m.y) ** 2;
+    if (d < bd) { bd = d; best = m; }
+  }
+  return { a: n, b: best, w: n.wave };
 });
+
+const arcPath = (a, b, bulge) => {
+  const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+  const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1;
+  return `M ${a.x} ${a.y} Q ${(mx + (-dy / len) * bulge).toFixed(1)} ${(my + (dx / len) * bulge).toFixed(1)} ${b.x} ${b.y}`;
+};
+
+// ── SVG ─────────────────────────────────────────────────────────────────────
+const DUR = 32;
+let css = "";
+const kf = (name, frames) => { css += `    @keyframes ${name} { ${frames} }\n`; };
+const cls = (name, extra = "") => { css += `    .${name} { animation: ${name} ${DUR}s linear infinite; animation-fill-mode: backwards; ${extra}}\n`; };
+const f2 = (v) => +v.toFixed(2);
+
+// a routed read: line draws S→E, holds, fades by F
+const lineKF = (name, S, E, F) => {
+  cls(name);
+  kf(name, `0%,${S}%{stroke-dashoffset:100;opacity:0} ${f2(S + 0.3)}%{opacity:.95} ${E}%{stroke-dashoffset:0;opacity:.9} ${f2(F - 2)}%{stroke-dashoffset:0;opacity:.7} ${F}%,100%{stroke-dashoffset:0;opacity:0}`);
+};
+// a node name label: in at S, out by F
+const textKF = (name, S, F) => {
+  cls(name);
+  kf(name, `0%,${S}%{opacity:0} ${f2(S + 0.8)}%{opacity:1} ${f2(F - 1.2)}%{opacity:1} ${F}%,100%{opacity:0}`);
+};
+// a violet potentiation pulse: some of the landed node's own links glow
+// exactly as its name shows (never all of them, and never the index's)
+const burstKF = (name, S) => {
+  cls(name);
+  kf(name, `0%,${S}%{opacity:0} ${f2(S + 0.5)}%{opacity:.85} ${f2(S + 1.8)}%{opacity:.7} ${f2(S + 3.2)}%{opacity:0} 100%{opacity:0}`);
+};
+const flashKF = burstKF;
+// the index pings when a lookup starts
+const pingKF = (name, S) => {
+  cls(name, "transform-box: fill-box; transform-origin: center; ");
+  kf(name, `0%,${S}%{transform:scale(.4);opacity:.9} ${f2(S + 3.5)}%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0}`);
+};
+
+// L1 drill-down: index → meta → hub → doc (1.5%..23%)
+pingKF("i1", 1);
+lineKF("l1a", 1.5, 4.5, 23); flashKF("f1a", 4.2); textKF("t1a", 4.5, 22);
+lineKF("l1b", 5, 8, 23); flashKF("f1b", 7.7); textKF("t1b", 8, 22);
+lineKF("l1c", 8.5, 11.5, 23); flashKF("f1c", 11.2); textKF("t1c", 11.5, 22);
+// L2 deep link: one hop, done (26%..38%)
+pingKF("i2", 25.5);
+lineKF("l2", 26, 29.5, 38); flashKF("f2", 29.2); textKF("t2", 29.5, 37);
+// L3 cross-KB: hop, then the wiki-link bridge (41%..57%)
+pingKF("i3", 40.5);
+lineKF("l3a", 41, 44, 57); flashKF("f3a", 43.7); textKF("t3a", 44, 55);
+lineKF("l3x", 44.5, 47.5, 57); flashKF("f3b", 47.2); textKF("t3b", 47.5, 55);
+// L4 episodic: two hops into the archive (60%..76%)
+pingKF("i4", 59.5);
+lineKF("l4a", 60, 63, 76); flashKF("f4a", 62.7); textKF("t4a", 63, 74);
+lineKF("l4b", 63.5, 66.5, 76); flashKF("f4b", 66.2); textKF("t4b", 66.5, 74);
+// a new KB forms... (78%..98%)
+[78, 80.5, 83, 85.5].forEach((S, k) => {
+  cls(`nw${k}`, "transform-box: fill-box; transform-origin: center; ");
+  kf(`nw${k}`, `0%,${S}%{transform:scale(0);opacity:0} ${f2(S + 0.6)}%{transform:scale(1.3);opacity:1} ${f2(S + 1.1)}%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{transform:scale(1);opacity:0}`);
+  cls(`ne${k}`);
+  kf(`ne${k}`, `0%,${f2(S + 0.8)}%{stroke-dashoffset:100;opacity:0} ${f2(S + 1)}%{opacity:.5} ${f2(S + 2.2)}%{stroke-dashoffset:0;opacity:.3} 96%{stroke-dashoffset:0;opacity:.25} 98.5%,100%{opacity:0}`);
+});
+cls("nkm", "transform-box: fill-box; transform-origin: center; ");
+kf("nkm", `0%,88%{transform:scale(0);opacity:0} 88.8%{transform:scale(1.35);opacity:1} 89.5%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{opacity:0}`);
+flashKF("nkh", 88);
+textKF("nkl", 89, 96);
+// ...while stale docs get repaired: red pulse → green pulse → healthy
+[78, 82, 86].forEach((S, k) => {
+  cls(`rp${k}`, "transform-box: fill-box; transform-origin: center; ");
+  kf(`rp${k}`, `0%,${S}%{transform:scale(.5);opacity:0;stroke:#f85149} ${f2(S + 0.5)}%{opacity:.95;stroke:#f85149} ${f2(S + 2)}%{transform:scale(1.5);stroke:#f85149;opacity:.7} ${f2(S + 2.5)}%{stroke:#3fb950;opacity:.95} ${f2(S + 5)}%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0}`);
+});
+// ambient life
+css += `    .halo { transform-box: fill-box; transform-origin: center; animation: halo 7s infinite; }\n`;
+kf("halo", `0%{transform:scale(.5);opacity:.8} 60%{transform:scale(2.6);opacity:0} 100%{transform:scale(2.6);opacity:0}`);
+css += `    .idx { animation: idxb 6s ease-in-out infinite; }\n`;
+kf("idxb", `0%,100%{opacity:.85} 50%{opacity:1}`);
 
 let s = "";
 s += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">\n`;
-s += `  <title>A mature Engraven vault rendered as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Lookups pulse from the index node down into their subject clusters, and a meta-analysis hub rays out across all of them.</title>\n`;
-s += `  <style>\n`;
-s += `    .ray { stroke-dasharray:100; animation: ray 14s infinite; }\n`;
-s += `    @keyframes ray { 0%{stroke-dashoffset:100;opacity:0} 8%{opacity:.55} 26%{stroke-dashoffset:0;opacity:.5} 58%{stroke-dashoffset:0;opacity:.4} 74%,100%{stroke-dashoffset:0;opacity:0} }\n`;
-s += `    .halo { transform-box: fill-box; transform-origin: center; animation: halo 7s infinite; }\n`;
-s += `    @keyframes halo { 0%{transform:scale(.5);opacity:.8} 60%{transform:scale(2.6);opacity:0} 100%{transform:scale(2.6);opacity:0} }\n`;
-s += `    .star { animation: star 14s infinite; }\n`;
-s += `    @keyframes star { 0%,100%{opacity:.75} 30%{opacity:1} 74%{opacity:.75} }\n`;
-s += `    .idx { animation: idx 6s ease-in-out infinite; }\n`;
-s += `    @keyframes idx { 0%,100%{opacity:.85} 50%{opacity:1} }\n`;
-s += `    .lkI { transform-box: fill-box; transform-origin: center; animation: lkI 24s infinite; }\n`;
-s += `    @keyframes lkI { 0%{transform:scale(.4);opacity:.9} 5%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }\n`;
-s += `    .lkA { stroke-dasharray:100; animation: lkA 24s infinite; }\n`;
-s += `    @keyframes lkA { 0%{stroke-dashoffset:100;opacity:0} 0.8%{opacity:.9} 4.5%{stroke-dashoffset:0;opacity:.9} 15%{stroke-dashoffset:0;opacity:.65} 20%,100%{stroke-dashoffset:0;opacity:0} }\n`;
-s += `    .lkB { stroke-dasharray:100; animation: lkB 24s infinite; }\n`;
-s += `    @keyframes lkB { 0%,4.5%{stroke-dashoffset:100;opacity:0} 5%{opacity:.9} 7.5%{stroke-dashoffset:0;opacity:.9} 15%{stroke-dashoffset:0;opacity:.65} 20%,100%{stroke-dashoffset:0;opacity:0} }\n`;
-s += `    .lkC { stroke-dasharray:100; animation: lkC 24s infinite; }\n`;
-s += `    @keyframes lkC { 0%,7.5%{stroke-dashoffset:100;opacity:0} 8%{opacity:.9} 10.5%{stroke-dashoffset:0;opacity:.9} 15%{stroke-dashoffset:0;opacity:.65} 20%,100%{stroke-dashoffset:0;opacity:0} }\n`;
-s += `    .lkM { animation: lkM 24s infinite; }\n`;
-s += `    @keyframes lkM { 0%,4%{opacity:0} 5.5%{opacity:1} 15%{opacity:.8} 20%,100%{opacity:0} }\n`;
-s += `    .lkH { animation: lkH 24s infinite; }\n`;
-s += `    @keyframes lkH { 0%,7%{opacity:0} 8.5%{opacity:1} 15%{opacity:.8} 20%,100%{opacity:0} }\n`;
-s += `    .lkD { animation: lkD 24s infinite; }\n`;
-s += `    @keyframes lkD { 0%,10%{opacity:0} 11.5%{opacity:1} 16%{opacity:1} 21%,100%{opacity:0} }\n`;
-s += `    /* hide delayed cascades until their turn: apply the 0% frame during the delay */\n`;
-s += `    .lkI, .lkA, .lkB, .lkC, .lkM, .lkH, .lkD { animation-fill-mode: backwards; }\n`;
-s += `  </style>\n`;
+s += `  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Four lookups land four different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, and an episodic archive read), each hop naming the doc it lands on. Then a new KB forms while stale docs elsewhere are repaired.</title>\n`;
+s += `  <style>\n${css}  </style>\n`;
 s += `  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" fill="#0d1117" stroke="#30363d"/>\n`;
 
 s += `  <g stroke="#8b949e" stroke-width="0.5">\n`;
@@ -164,11 +259,8 @@ s += `  </g>\n`;
 s += `  <g stroke="#9aa5b1" stroke-width="0.85">\n`;
 for (const e of highways) s += `    <line x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}" opacity="${e.o.toFixed(3)}"/>\n`;
 s += `  </g>\n`;
-
-s += `  <g stroke="#a78bfa" stroke-width="0.7" fill="none">\n`;
-rayTargets.forEach((t, i) => {
-  s += `    <line class="ray" pathLength="100" x1="${star.x}" y1="${star.y}" x2="${t.x}" y2="${t.y}" style="animation-delay:${(i * 0.11).toFixed(2)}s"/>\n`;
-});
+s += `  <g stroke="#8b949e" stroke-width="0.5">\n`;
+for (const e of stragglerEdges) s += `    <line x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}" opacity="${e.o}"/>\n`;
 s += `  </g>\n`;
 
 s += `  <g>\n`;
@@ -176,34 +268,89 @@ for (const n of nodes) s += `    <circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill
 s += `  </g>\n`;
 
 haloPicks.forEach((h, i) => {
-  s += `  <circle class="halo" cx="${h.x}" cy="${h.y}" r="9" fill="none" stroke="${clusters[[0,3,7,10,13,4][i]].c}" stroke-width="1.6" style="animation-delay:${(i * 1.15).toFixed(2)}s"/>\n`;
+  s += `  <circle class="halo" cx="${h.x}" cy="${h.y}" r="9" fill="none" stroke="${clusters[[0, 3, 7, 10, 13, 4][i]].c}" stroke-width="1.6" style="animation-delay:${(i * 1.15).toFixed(2)}s"/>\n`;
 });
 
-// lookup cascades painted above the dots so the trail reads as the active read
-lookups.forEach(({ k, meta, hub, doc }) => {
-  const d = `style="animation-delay:${k * 6}s"`;
-  s += `  <g fill="none" stroke="#fbbf24">\n`;
-  s += `    <circle class="lkI" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5" ${d}/>\n`;
-  s += `    <line class="lkA" pathLength="100" x1="${INDEX.x}" y1="${INDEX.y}" x2="${meta.x}" y2="${meta.y}" stroke-width="1.2" ${d}/>\n`;
-  s += `    <line class="lkB" pathLength="100" x1="${meta.x}" y1="${meta.y}" x2="${hub.x}" y2="${hub.y}" stroke-width="1.2" ${d}/>\n`;
-  s += `    <line class="lkC" pathLength="100" x1="${hub.x}" y1="${hub.y}" x2="${doc.x}" y2="${doc.y}" stroke-width="1.2" ${d}/>\n`;
-  s += `    <circle class="lkM" cx="${meta.x}" cy="${meta.y}" r="${(+meta.r + 3.2).toFixed(1)}" stroke-width="1.4" opacity="0" ${d}/>\n`;
-  s += `    <circle class="lkH" cx="${hub.x}" cy="${hub.y}" r="${(+hub.r + 2.8).toFixed(1)}" stroke-width="1.4" opacity="0" ${d}/>\n`;
-  s += `    <circle class="lkD" cx="${doc.x}" cy="${doc.y}" r="${(+doc.r + 3).toFixed(1)}" stroke-width="1.6" opacity="0" ${d}/>\n`;
-  s += `  </g>\n`;
-  s += `  <circle class="lkD" cx="${doc.x}" cy="${doc.y}" r="${Math.max(+doc.r, 2.2).toFixed(1)}" fill="#fbbf24" opacity="0" ${d}/>\n`;
+// hop label helper: stroked name that appears when the trace lands
+const label = (cl2, n, text, dy = 20, side = null) => {
+  if (side === "left") {
+    return `  <text class="${cl2}" x="${(n.x - 14).toFixed(1)}" y="${(n.y + 4).toFixed(1)}" text-anchor="end" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">${text}</text>\n`;
+  }
+  const lx = clamp(n.x, 118, W - 118);
+  const ly = n.y > CAP_Y - 44 ? n.y - 14 : n.y + dy;
+  return `  <text class="${cl2}" x="${lx}" y="${ly}" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">${text}</text>\n`;
+};
+const trace = (cl2, a, b, w = 1.2) =>
+  `    <line class="${cl2}" pathLength="100" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke-width="${w}"/>\n`;
+const allEdges = [...intra, ...weave, ...highways, ...stragglerEdges];
+const flash = (cl2, n, _color = "#a78bfa", k = 0) => {
+  // roughly half of this node's real links, shortest first, capped so a
+  // hub landing never floods the canvas
+  const inc = allEdges
+    .filter((e) => e.a === n || e.b === n)
+    .sort((e1, e2) => {
+      const len = (e) => (e.a.x - e.b.x) ** 2 + (e.a.y - e.b.y) ** 2;
+      return len(e1) - len(e2);
+    });
+  const take = Math.max(1, Math.min(5, Math.ceil(inc.length * 0.45)));
+  const picked = inc.filter((_, i) => i % 2 === k % 2).slice(0, take);
+  const chosen = picked.length ? picked : inc.slice(0, take);
+  let g = `  <g class="${cl2}" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">\n`;
+  for (const e of chosen) g += `    <line x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}"/>\n`;
+  return g + `  </g>\n`;
+};
+
+// the four lookups (amber = routed read, violet = wiki-link bridge)
+s += `  <g fill="none" stroke="#fbbf24">\n`;
+s += `    <circle class="i1" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
+s += trace("l1a", INDEX, l1meta);
+s += trace("l1b", l1meta, l1hub);
+s += trace("l1c", l1hub, l1doc);
+s += `    <circle class="i2" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
+s += trace("l2", INDEX, l2doc);
+s += `    <circle class="i3" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
+s += trace("l3a", INDEX, l3a);
+s += `    <circle class="i4" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
+s += trace("l4a", INDEX, l4sai);
+s += trace("l4b", l4sai, l4doc);
+s += `  </g>\n`;
+s += `  <path class="l3x" pathLength="100" d="${arcPath(l3a, l3b, -36)}" fill="none" stroke="#a78bfa" stroke-width="1.2"/>\n`;
+
+s += flash("f1a", l1meta, "#a78bfa", 0) + flash("f1b", l1hub, "#a78bfa", 1) + flash("f1c", l1doc, "#a78bfa", 2);
+s += flash("f2", l2doc, "#a78bfa", 3);
+s += flash("f3a", l3a, "#a78bfa", 4) + flash("f3b", l3b, "#a78bfa", 5);
+s += flash("f4a", l4sai, "#a78bfa", 6) + flash("f4b", l4doc, "#a78bfa", 7);
+
+s += label("t1a", l1meta, "Infrastructure - Meta-Analysis");
+s += label("t1b", l1hub, "AWS Environments - Section Hub");
+s += label("t1c", l1doc, "dev-east Access Runbook");
+s += label("t2", l2doc, "Deploy Freeze Checklist");
+s += label("t3a", l3a, "Caching Strategy");
+s += label("t3b", l3b, "Rate Limiting");
+s += label("t4a", l4sai, "Session Archive Index");
+s += label("t4b", l4doc, "2026-05-12 Incident Review", 20, "left");
+
+// a new KB grows in while three stale docs get repaired
+s += `  <g stroke="${NK.c}" stroke-width="0.6" fill="none">\n`;
+for (const e of nkEdges) s += `    <line class="ne${e.w}" pathLength="100" x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}"/>\n`;
+s += `  </g>\n`;
+s += `  <g fill="${NK.c}">\n`;
+for (const n of nkNodes) s += `    <circle class="nw${n.wave}" cx="${n.x}" cy="${n.y}" r="${n.r}" style="animation-delay:${n.jit}s"/>\n`;
+s += `  </g>\n`;
+s += `  <circle class="nkh" cx="${NK.x}" cy="${NK.y}" r="10" fill="none" stroke="${NK.c}" stroke-width="1.6"/>\n`;
+s += `  <circle class="nkm" cx="${NK.x}" cy="${NK.y}" r="5.5" fill="${NK.c}"/>\n`;
+s += label("nkl", { x: NK.x, y: NK.y, r: 5.5 }, "Queue Backpressure - Meta-Analysis", 24);
+repairs.forEach((n, k) => {
+  s += `  <circle class="rp${k}" cx="${n.x}" cy="${n.y}" r="${(Math.max(+n.r, 3) + 6).toFixed(1)}" fill="none" stroke="#f85149" stroke-width="1.8"/>\n`;
 });
 
 // the index node: where every lookup starts
 s += `  <circle class="idx" cx="${INDEX.x}" cy="${INDEX.y}" r="5.5" fill="#e6edf3"/>\n`;
 s += `  <text x="${INDEX.x}" y="${INDEX.y + 22}" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">00-Index</text>\n`;
 
-s += `  <circle class="star" cx="${star.x}" cy="${star.y}" r="${star.r}" fill="#a78bfa"/>\n`;
-s += `  <text x="${star.x}" y="${star.y + 24}" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Architecture - Meta-Analysis</text>\n`;
-
 s += `  <text x="${W / 2}" y="766" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>\n`;
 s += `  <text x="${W / 2}" y="786" text-anchor="middle" font-size="11" fill="#6e7681">clusters emerge from links, not folders. open your vault in Obsidian and this is your agent's brain</text>\n`;
 s += `</svg>\n`;
 
 writeFileSync(new URL("./graph.svg", import.meta.url).pathname, s);
-console.log(`graph.svg: ${nodes.length} nodes, ${intra.length + weave.length + highways.length} edges, ${rayTargets.length} rays, ${lookups.length} lookups, ${(s.length / 1024).toFixed(0)} KB`);
+console.log(`graph.svg: ${nodes.length + nkNodes.length} nodes, ${intra.length + weave.length + highways.length + nkEdges.length} edges, 4 lookups, 3 repairs, ${(s.length / 1024).toFixed(0)} KB`);

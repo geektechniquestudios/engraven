@@ -3,7 +3,7 @@
   "owner": {
     "name": "Geektechnique Studios"
   },
-  "description": "Engraven: compounding memory for coding agents.",
+  "description": "Engraven: memory + research for coding agents.",
   "plugins": [
     {
       "name": "engraven",

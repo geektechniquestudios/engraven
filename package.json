@@ -2,7 +2,7 @@
   "name": "engraven",
   "version": "0.1.0",
   "private": true,
-  "description": "Compounding memory for coding agents. An Obsidian-based knowledge graph that lints like code, with a research pipeline that grows it.",
+  "description": "Long-term memory for coding agents. An Obsidian-based knowledge graph that lints like code, with a research pipeline that grows it.",
   "type": "module",
   "scripts": {
     "check": "node scripts/vault-check.mjs --vault template/vault --strict --allow-placeholders",

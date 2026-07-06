@@ -32,7 +32,7 @@ reads the nearest existing meta-analyses and links both ways: confirmations,
 contradictions, constraints. Where two KBs jointly answer a question neither
 answers alone, a **synthesis doc** is written — it leads with the joint
 answer and links into both KBs. This is why a healthy vault graphs as a web,
-not a forest of separate trees: the cross-links are where compound knowledge
+not a forest of separate trees: the cross-links are where joint knowledge
 lives.
 
 Contradictions are recorded, not smoothed over: which source wins, and why,

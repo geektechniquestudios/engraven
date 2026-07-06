@@ -35,7 +35,7 @@ single-home rule that prevents drift.
 
 ## Growing Things
 
-[[The Knowledge Pipeline]] covers how the vault compounds: the `research`
+[[The Knowledge Pipeline]] covers how the vault grows: the `research`
 skill produces a KB, cross-synthesis links it into what the vault already
 knows, and abstraction rolls the synthesis up into decision guidance with an
 expiry condition.

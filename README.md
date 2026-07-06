@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="assets/logo.svg" width="440" alt="engraven: compounding memory for coding agents. The mark is a three-tier knowledge graph drawn as a neuron, with an amber memory trace lighting the route through it.">
+<img src="assets/logo.svg" width="440" alt="engraven: memory + research for coding agents. The mark is a three-tier knowledge graph drawn as a neuron, with an amber memory trace lighting the route through it.">
 
-**Compounding memory for coding agents: an Obsidian-based knowledge graph that lints like code, with a research pipeline that grows it.**
+**Long-term memory for coding agents: an Obsidian-based knowledge graph that lints like code, with a research pipeline that grows it.**
 
 *Engraven, as in engraved: a trace cut in deep enough to stay. This one lives in your repo.*
 
@@ -12,7 +12,7 @@
 [![Scripts: zero deps](https://img.shields.io/badge/scripts-zero%20deps-a78bfa)](scripts/)
 [![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Codex%20·%20Cursor-67e8f9)](docs/HARNESSES.md)
 
-<img src="assets/graph.svg" width="1000" alt="An Obsidian-style knowledge graph of a mature Engraven vault: hundreds of documents as dots, clustered and colored by knowledge base, densely cross-linked. Lookups pulse from the index node down into their subject clusters while a meta-analysis star rays out across all of them.">
+<img src="assets/graph.svg" width="1000" alt="An Obsidian-style knowledge graph of a mature Engraven vault: hundreds of documents as dots, clustered and colored by knowledge base, densely cross-linked. Four lookups land four different ways: a three-hop drill-down ending at a dev-east access runbook, a one-hop deep link, a cross-KB wiki-link read, and an episodic read into the session archive, with each hop naming the doc it lands on while a few of its links glow violet. Then a new knowledge base forms while stale docs elsewhere are flagged red and repaired green.">
 
 *Every dot is a doc, every line is a `[[wiki-link]]`, every color is a knowledge base.<br>Engraven is the extracted skeleton of a real system that grew to 3,800+ docs, 29 research KBs, and 386 section hubs, still routed by one index under 200 lines.*
 
@@ -110,7 +110,7 @@ Payments-Domain/
 
 The tiers give you the three-hop guarantee; the **cross-links** give you the graph. The vault is Obsidian-compatible by construction: `[[wiki-links]]` are the edges, and the graph view at the top of this page is what a healthy one looks like, with per-KB clusters, hubs raying outward, and a dense web of links *between* clusters. The shape is enforced, not aspirational: the linter rejects orphan docs, solitary docs, and unreachable KBs, so the graph stays connected by contract. [`docs/KB-GUIDE.md`](docs/KB-GUIDE.md) covers what deserves a KB and how to grow one without it rotting.
 
-## Knowledge that compounds
+## Memory that grows
 
 <div align="center">
 <img src="assets/research.svg" width="1000" alt="Animated timelapse of one /research run on a vault graph. A command chip reads: /research postgres replication. Findings pop into an empty region as a new rose-colored cluster in accelerating bursts, hubs and a labeled meta-analysis star form while weak sources are culled, violet synthesis arcs weld the new cluster into three neighboring knowledge bases with new seam docs on the boundaries, and finally an amber line draws to the 00-Index node with a chip reading Research Library +1, MEMORY.md +1 row.">
@@ -119,7 +119,7 @@ The tiers give you the three-hop guarantee; the **cross-links** give you the gra
 That is one `/research` run, in timelapse: findings land as a wiki-linked cluster, structure forms, synthesis welds it into every KB it touches, and one router row makes it routable next session. The write path is a pipeline, and each stage has its own skill and its own linter checks:
 
 1. **Research produces a KB.** `/research <topic>` starts from the decision the research is *for*, gathers evidence (primary docs, your codebase, your head), and builds a three-tier KB whose executive summary is three to five claims, not a table of contents. Every KB is registered in `Research Library.md`, so the registry reads as a list of things the project has learned.
-2. **Cross-synthesis connects it.** The new KB is linked both ways into its nearest neighbors: confirmations, contradictions, constraints. Where two KBs jointly answer a question neither answers alone, a **synthesis doc** captures the joint answer. This is why the graph is a web rather than a forest; the cross-links are where compound knowledge lives.
+2. **Cross-synthesis connects it.** The new KB is linked both ways into its nearest neighbors: confirmations, contradictions, constraints. Where two KBs jointly answer a question neither answers alone, a **synthesis doc** captures the joint answer. This is why the graph is a web rather than a forest; the cross-links are where the joint answers live.
 3. **Abstraction turns it into doctrine.** The synthesis rolls up into the motive: "given our constraints, do X; revisit if Y changes" lands in the meta-analysis, a router row makes it ambient if it changes default behavior, and a **falsifier** records what observation would expire it. Doctrine without an expiry condition is dogma.
 
 <div align="center">
@@ -227,7 +227,7 @@ Roughly 5k tokens ambient (instructions + router). The vault costs nothing until
 It is files in your repo. Nothing phones home, nothing is uploaded, there is no service. The checks run locally, as a Rust binary or Node and bash scripts.
 
 **How is this different from just writing a NOTES.md?**
-Structure and verification. A flat file has no retrieval story past a couple hundred lines and no defense against rot. Engraven gives knowledge a shape agents can navigate (router to meta-analysis to hub to doc), a pipeline that compounds it (research, synthesis, doctrine), and linters that fail CI when memory lies.
+Structure and verification. A flat file has no retrieval story past a couple hundred lines and no defense against rot. Engraven gives knowledge a shape agents can navigate (router to meta-analysis to hub to doc), a pipeline that grows it (research, synthesis, doctrine), and linters that fail CI when memory lies.
 
 **Where did this come from?**
 Engraven is the extracted skeleton of the memory system running a real production venture-studio monorepo, where it grew to roughly 3,800 vault docs across 29 research KBs and 386 section hubs, maintained by multiple agents working parallel branches, while keeping the always-loaded footprint near 5k tokens. The patterns here are the ones that survived contact; [`docs/SPEC.md`](docs/SPEC.md) is the distillation.

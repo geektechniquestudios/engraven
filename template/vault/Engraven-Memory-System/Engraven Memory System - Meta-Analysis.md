@@ -34,7 +34,7 @@ these shapes.
    silently. The linters make rot loud. See [[Memory Hygiene and Verification]].
 5. **History is memory too.** Session archives capture the *why* behind
    changes; six months later they're the only witness. See [[Session Archiving]].
-6. **Knowledge compounds through a pipeline.** Research produces KBs,
+6. **Knowledge builds on itself through a pipeline.** Research produces KBs,
    cross-synthesis links them, abstraction turns the links into decision
    guidance with an expiry condition. See [[The Knowledge Pipeline]].
 
