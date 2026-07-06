@@ -2824,6 +2824,5 @@
     <circle cx="477" cy="41" r="3.6" fill="#fbbf24"/>
     <text x="492" y="46" font-size="14" fill="#e6edf3">"when should we shed load?"</text>
   </g>
-  <text x="600" y="766" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>
-  <text x="600" y="786" text-anchor="middle" font-size="11" fill="#6e7681">one day in the vault's life: six lookups, three repairs, and a new KB welded in as it grows</text>
+  <text x="600" y="773" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>
 </svg>

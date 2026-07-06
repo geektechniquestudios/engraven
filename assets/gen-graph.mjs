@@ -491,8 +491,7 @@ s += toast("q4", `"didn't we try this before?"`);
 s += toast("q5", `"what's a safe backpressure threshold?"`);
 s += toast("q6", `"when should we shed load?"`);
 
-s += `  <text x="${W / 2}" y="766" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>\n`;
-s += `  <text x="${W / 2}" y="786" text-anchor="middle" font-size="11" fill="#6e7681">one day in the vault's life: six lookups, three repairs, and a new KB welded in as it grows</text>\n`;
+s += `  <text x="${W / 2}" y="773" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>\n`;
 s += `</svg>\n`;
 
 writeFileSync(new URL("./graph.svg", import.meta.url).pathname, s);
