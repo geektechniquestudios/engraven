@@ -94,7 +94,7 @@
     .nkh { animation: nkh 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
     @keyframes nkh { 0%,60%{transform:scale(.4);opacity:0} 60.8%{opacity:.85} 64%{transform:scale(2.1);opacity:0} 100%{transform:scale(2.1);opacity:0} }
     .nkl { animation: nkl 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes nkl { 0%,61.5%{opacity:0} 62.5%{opacity:1} 92.6%{opacity:1} 94%,100%{opacity:0} }
+    @keyframes nkl { 0%,61.5%{opacity:0} 62.5%{opacity:1} 65.2%{opacity:1} 66.4%{opacity:0} 70.3%{opacity:0} 71.3%{opacity:1} 78.1%{opacity:1} 79.5%,100%{opacity:0} }
     .nsp { animation: nsp 32s linear infinite; animation-fill-mode: backwards; }
     @keyframes nsp { 0%,60.8%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 61%{opacity:.6;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 62.8%{stroke-dashoffset:0;opacity:.45} 65%{stroke-dashoffset:0;opacity:.3} 95.5%{stroke-dashoffset:0;opacity:.28} 99.2%,100%{opacity:0} }
     .wd0 { animation: wd0 32s linear infinite; animation-fill-mode: backwards; }

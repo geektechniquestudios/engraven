@@ -291,7 +291,10 @@ cls("nkm", "transform-box: fill-box; transform-origin: center; ");
 kf("nkm", `0%,60%{transform:scale(0);opacity:0} 60.8%{transform:scale(1.35);opacity:1} 61.5%{transform:scale(1)} 95.5%{transform:scale(1);opacity:1} 99.2%,100%{opacity:0}`);
 cls("nkh", "transform-box: fill-box; transform-origin: center; ");
 kf("nkh", `0%,60%{transform:scale(.4);opacity:0} 60.8%{opacity:.85} 64%{transform:scale(2.1);opacity:0} 100%{transform:scale(2.1);opacity:0}`);
-textKF("nkl", 61.5, 94);
+// the meta's name shows twice, briefly, matching every other label's
+// rhythm: once as the node forms, once when the finale lookup lands on it
+cls("nkl");
+kf("nkl", `0%,61.5%{opacity:0} 62.5%{opacity:1} 65.2%{opacity:1} 66.4%{opacity:0} 70.3%{opacity:0} 71.3%{opacity:1} 78.1%{opacity:1} 79.5%,100%{opacity:0}`);
 // the meta's spokes draw as it forms; then the synthesis welds reach out to
 // the neighbor KBs, draw once, and settle in as permanent structure
 cls("nsp");
