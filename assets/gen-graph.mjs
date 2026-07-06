@@ -472,13 +472,15 @@ s += `  <text x="${INDEX.x}" y="${INDEX.y + 22}" text-anchor="middle" font-size=
 // the prompting questions, as toasts floating over the graph (drawn last so
 // they sit on top; short on purpose, they are the readme's narration)
 const toast = (cl2, text) => {
-  const w = Math.round(text.length * 7.5 + 34);
+  // 14px ui-monospace advances ~8.4px/char; pad generously so no fallback
+  // font can push the text against the bubble edge (render-measured)
+  const w = Math.ceil(text.length * 8.5) + 62;
   const x = ((W - w) / 2).toFixed(0);
   return (
     `  <g class="${cl2}">\n` +
-    `    <rect x="${x}" y="26" width="${w}" height="30" rx="15" fill="#161b22" stroke="#30363d"/>\n` +
-    `    <circle cx="${+x + 19}" cy="41" r="3" fill="#fbbf24"/>\n` +
-    `    <text x="${+x + 32}" y="45.5" font-size="12.5" fill="#e6edf3">${text}</text>\n` +
+    `    <rect x="${x}" y="22" width="${w}" height="38" rx="19" fill="#161b22" stroke="#30363d"/>\n` +
+    `    <circle cx="${+x + 23}" cy="41" r="3.6" fill="#fbbf24"/>\n` +
+    `    <text x="${+x + 38}" y="46" font-size="14" fill="#e6edf3">${text}</text>\n` +
     `  </g>\n`
   );
 };
