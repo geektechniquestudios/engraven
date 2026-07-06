@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/geektechniquestudios/engram/main/docs/engram.config.schema.json",
+  "projectSlug": "{{PROJECT_SLUG}}",
+  "vaultDir": "docs/vault",
+  "memoryBudget": 200,
+  "topicFileSoftCap": 150,
+  "requireFrontmatter": ["tags", "date"],
+  "sessionArchiveDir": "Session-Archive"
+}

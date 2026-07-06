@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-template:
+    name: Template vault lints green
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # The shipped template must pass its own linter (placeholders are
+      # expected pre-bootstrap, hence the flag).
+      - run: node scripts/vault-check.mjs --vault template/vault --strict --allow-placeholders
+      - run: bash scripts/validate-memory.sh --self-test

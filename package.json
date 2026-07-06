@@ -1,0 +1,15 @@
+{
+  "name": "engram-memory",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A verified, file-based memory system for coding agents — thin router, deep knowledge vault, and a linter that keeps both honest.",
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/vault-check.mjs --vault template/vault --strict",
+    "check:memory": "bash scripts/validate-memory.sh --self-test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" font-family="-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+  <title>The vault as a living heatmap: a routed read lights up docs, cross-KB synthesis links distant knowledge, and the integrity lint finds and fixes rot.</title>
+  <style>
+    .m { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .kbl { fill: #8b949e; font-size: 11px; }
+    /* phase A — retrieval (0-30%) */
+    .arc { stroke-dasharray:100; animation: arc 15s infinite; }
+    @keyframes arc { 0%,4%{stroke-dashoffset:100;opacity:1} 11%{stroke-dashoffset:0;opacity:1} 26%{stroke-dashoffset:0;opacity:1} 30%,100%{stroke-dashoffset:0;opacity:0} }
+    .idx { animation: idx 15s infinite; }
+    @keyframes idx { 0%{fill:#1d1530;stroke:#4c3a75} 3%,26%{fill:#2c1f4d;stroke:#a78bfa} 30%,100%{fill:#1d1530;stroke:#4c3a75} }
+    .hot { animation: hot 15s infinite; }
+    @keyframes hot { 0%,10%{fill:#1a2028;stroke:#2a313b} 13%,25%{fill:#fbbf24;stroke:#fbbf24} 30%,100%{fill:#1a2028;stroke:#2a313b} }
+    .warm { animation: warm 15s infinite; }
+    @keyframes warm { 0%,12%{fill:#1a2028;stroke:#2a313b} 15%,24%{fill:#7c2d12;stroke:#f97316} 29%,100%{fill:#1a2028;stroke:#2a313b} }
+    /* phase B — synthesis (33-60%) */
+    .sw1 { animation: sw1 15s infinite; } .sw2 { animation: sw2 15s infinite; }
+    @keyframes sw1 { 0%,33%{fill:#1a2028;stroke:#2a313b} 36%,57%{fill:#7c2d12;stroke:#f97316} 61%,100%{fill:#1a2028;stroke:#2a313b} }
+    @keyframes sw2 { 0%,34%{fill:#1a2028;stroke:#2a313b} 37%,57%{fill:#7c2d12;stroke:#f97316} 61%,100%{fill:#1a2028;stroke:#2a313b} }
+    .syn1 { stroke-dasharray:100; animation: syn1 15s infinite; }
+    .syn2 { stroke-dasharray:100; animation: syn2 15s infinite; }
+    @keyframes syn1 { 0%,36%{stroke-dashoffset:100;opacity:1} 43%{stroke-dashoffset:0} 57%{stroke-dashoffset:0;opacity:1} 61%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes syn2 { 0%,38%{stroke-dashoffset:100;opacity:1} 45%{stroke-dashoffset:0} 57%{stroke-dashoffset:0;opacity:1} 61%,100%{stroke-dashoffset:0;opacity:0} }
+    .synnode { animation: synnode 15s infinite; }
+    @keyframes synnode { 0%,44%{fill:#1a2028;stroke:#2a313b} 48%,57%{fill:#fbbf24;stroke:#fbbf24} 61%,100%{fill:#1a2028;stroke:#2a313b} }
+    .synlbl { animation: synlbl 15s infinite; }
+    @keyframes synlbl { 0%,46%{opacity:0} 50%,57%{opacity:1} 61%,100%{opacity:0} }
+    /* phase C — lint (63-97%) */
+    .scan { animation: scan 15s infinite; }
+    @keyframes scan { 0%,64%{transform:translateX(0);opacity:0} 66%{opacity:.7} 86%{transform:translateX(720px);opacity:.7} 88%,100%{transform:translateX(720px);opacity:0} }
+    .rot1 { animation: rot1 15s infinite; } .rot2 { animation: rot2 15s infinite; }
+    @keyframes rot1 { 0%,62%{fill:#1a2028;stroke:#2a313b} 64%{fill:#3d1214;stroke:#f85149} 67%{fill:#2a1012;stroke:#a03030} 70%{fill:#3d1214;stroke:#f85149} 72%,95%{fill:#12271a;stroke:#3fb950} 98%,100%{fill:#1a2028;stroke:#2a313b} }
+    @keyframes rot2 { 0%,62%{fill:#1a2028;stroke:#2a313b} 65%{fill:#3d1214;stroke:#f85149} 69%{fill:#2a1012;stroke:#a03030} 73%{fill:#3d1214;stroke:#f85149} 77%{fill:#3d1214;stroke:#f85149} 82%,95%{fill:#12271a;stroke:#3fb950} 98%,100%{fill:#1a2028;stroke:#2a313b} }
+    .fx1 { animation: fx1 15s infinite; } .fk1 { animation: fk1 15s infinite; }
+    @keyframes fx1 { 0%,66%{opacity:0} 68%,70%{opacity:1} 72%,100%{opacity:0} }
+    @keyframes fk1 { 0%,71%{opacity:0} 73%,94%{opacity:1} 97%,100%{opacity:0} }
+    .fx2 { animation: fx2 15s infinite; } .fk2 { animation: fk2 15s infinite; }
+    @keyframes fx2 { 0%,76%{opacity:0} 78%,80%{opacity:1} 82%,100%{opacity:0} }
+    @keyframes fk2 { 0%,81%{opacity:0} 83%,94%{opacity:1} 97%,100%{opacity:0} }
+    /* captions */
+    .capA { animation: capA 15s infinite; } .capB { animation: capB 15s infinite; } .capC { animation: capC 15s infinite; }
+    @keyframes capA { 0%,1%{opacity:0} 4%,27%{opacity:1} 31%,100%{opacity:0} }
+    @keyframes capB { 0%,33%{opacity:0} 37%,57%{opacity:1} 61%,100%{opacity:0} }
+    @keyframes capC { 0%,63%{opacity:0} 67%,94%{opacity:1} 98%,100%{opacity:0} }
+  </style>
+
+  <rect x="0.5" y="0.5" width="879" height="429" rx="12" fill="#0d1117" stroke="#30363d"/>
+
+  <defs>
+    <rect id="c" width="34" height="26" rx="5"/>
+  </defs>
+
+  <!-- index -->
+  <rect class="idx" x="80" y="44" width="120" height="30" rx="8" fill="#1d1530" stroke="#4c3a75"/>
+  <text class="m" x="140" y="63" font-size="11.5" fill="#a78bfa" text-anchor="middle">00-Index</text>
+  <path class="arc" pathLength="100" d="M 160 76 C 240 110, 330 138, 392 168" fill="none" stroke="#fbbf24" stroke-width="1.8"/>
+
+  <!-- KB clusters -->
+  <g stroke="#242b34" fill="none">
+    <rect x="80" y="120" width="192" height="134" rx="10"/>
+    <rect x="340" y="120" width="192" height="134" rx="10"/>
+    <rect x="600" y="120" width="192" height="134" rx="10"/>
+  </g>
+  <text class="m kbl" x="86" y="112">KB · payments</text>
+  <text class="m kbl" x="346" y="112">KB · architecture</text>
+  <text class="m kbl" x="606" y="112">KB · operations</text>
+
+  <!-- static cells -->
+  <g fill="#1a2028" stroke="#2a313b">
+    <use href="#c" x="90" y="136"/><use href="#c" x="134" y="136"/><use href="#c" x="178" y="136"/>
+    <use href="#c" x="90" y="172"/><use href="#c" x="134" y="172"/><use href="#c" x="178" y="172"/><use href="#c" x="222" y="172"/>
+    <use href="#c" x="90" y="208"/><use href="#c" x="134" y="208"/><use href="#c" x="222" y="208"/>
+    <use href="#c" x="350" y="136"/><use href="#c" x="438" y="136"/><use href="#c" x="482" y="136"/>
+    <use href="#c" x="482" y="172"/>
+    <use href="#c" x="350" y="208"/><use href="#c" x="394" y="208"/><use href="#c" x="438" y="208"/><use href="#c" x="482" y="208"/>
+    <use href="#c" x="610" y="136"/><use href="#c" x="698" y="136"/><use href="#c" x="742" y="136"/>
+    <use href="#c" x="610" y="172"/><use href="#c" x="654" y="172"/><use href="#c" x="698" y="172"/><use href="#c" x="742" y="172"/>
+    <use href="#c" x="610" y="208"/><use href="#c" x="654" y="208"/><use href="#c" x="742" y="208"/>
+  </g>
+
+  <!-- phase A cells: target + ripple neighbors (KB architecture) -->
+  <use class="hot"  href="#c" x="394" y="172" fill="#1a2028" stroke="#2a313b"/>
+  <use class="warm" href="#c" x="350" y="172" fill="#1a2028" stroke="#2a313b"/>
+  <use class="warm" href="#c" x="438" y="172" fill="#1a2028" stroke="#2a313b"/>
+  <use class="warm" href="#c" x="394" y="136" fill="#1a2028" stroke="#2a313b"/>
+
+  <!-- phase B cells + links + synthesis node -->
+  <use class="sw1" href="#c" x="178" y="208" fill="#1a2028" stroke="#2a313b"/>
+  <use class="sw2" href="#c" x="698" y="208" fill="#1a2028" stroke="#2a313b"/>
+  <path class="syn1" pathLength="100" d="M 195 236 C 250 300, 340 330, 420 332" fill="none" stroke="#f97316" stroke-width="1.6"/>
+  <path class="syn2" pathLength="100" d="M 715 236 C 660 300, 560 330, 462 332" fill="none" stroke="#f97316" stroke-width="1.6"/>
+  <g transform="translate(441 332) rotate(45)">
+    <rect class="synnode" x="-13" y="-13" width="26" height="26" rx="5" fill="#1a2028" stroke="#2a313b"/>
+  </g>
+  <text class="m synlbl" x="441" y="372" font-size="11" fill="#fbbf24" text-anchor="middle" opacity="0">synthesis doc — knowledge neither KB holds alone</text>
+
+  <!-- phase C: rot cells + scanline + verdicts -->
+  <use class="rot1" href="#c" x="222" y="136" fill="#1a2028" stroke="#2a313b"/>
+  <use class="rot2" href="#c" x="654" y="136" fill="#1a2028" stroke="#2a313b"/>
+  <g class="scan" opacity="0">
+    <rect x="76" y="36" width="3" height="228" rx="1.5" fill="#67e8f9"/>
+  </g>
+  <text class="m fx1" x="239" y="130" font-size="12" fill="#f85149" text-anchor="middle" opacity="0">✕ broken link</text>
+  <text class="m fk1" x="239" y="130" font-size="12" fill="#3fb950" text-anchor="middle" opacity="0">✓ fixed</text>
+  <text class="m fx2" x="671" y="130" font-size="12" fill="#f85149" text-anchor="middle" opacity="0">✕ stale</text>
+  <text class="m fk2" x="671" y="130" font-size="12" fill="#3fb950" text-anchor="middle" opacity="0">✓ re-verified</text>
+
+  <!-- cycling captions -->
+  <g font-size="12">
+    <text class="m capA" x="80" y="404" fill="#fbbf24" opacity="0">① retrieval — a routed read heats exactly the docs needed, nothing else</text>
+    <text class="m capB" x="80" y="404" fill="#f97316" opacity="0">② cross-KB synthesis — connections between distant docs become new knowledge</text>
+    <text class="m capC" x="80" y="404" fill="#67e8f9" opacity="0">③ integrity lint — rot is found and fixed before an agent trusts it</text>
+  </g>
+</svg>

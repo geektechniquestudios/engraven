@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" font-family="-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+  <title>Engram: a query routes through the always-loaded router into the on-demand vault — meta-analysis, hub, doc — in three hops.</title>
+  <style>
+    .m { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .lbl { fill: #e6edf3; font-size: 13px; font-weight: 700; letter-spacing: .08em; }
+    .sub { fill: #8b949e; font-size: 11px; }
+    .tiny { fill: #8b949e; font-size: 10px; }
+    .q { animation: qin 12s infinite; }
+    @keyframes qin { 0%,2%{opacity:0} 6%,88%{opacity:1} 94%,100%{opacity:0} }
+    .rbox { animation: breathe 12s infinite; }
+    @keyframes breathe { 0%,100%{stroke-opacity:.55} 50%{stroke-opacity:1} }
+    .h1 { animation: h1 12s infinite; } .h2 { animation: h2 12s infinite; } .h3 { animation: h3 12s infinite; }
+    @keyframes h1 { 0%,9%{opacity:0} 10%,12%{opacity:.9} 13%,100%{opacity:0} }
+    @keyframes h2 { 0%,13%{opacity:0} 14%,16%{opacity:.9} 17%,100%{opacity:0} }
+    @keyframes h3 { 0%,17%{opacity:0} 19%,20%{opacity:.55} 22%,78%{opacity:1} 84%,100%{opacity:0} }
+    .p1 { stroke-dasharray:100; animation: p1 12s infinite; }
+    .p2 { stroke-dasharray:100; animation: p2 12s infinite; }
+    .p3 { stroke-dasharray:100; animation: p3 12s infinite; }
+    @keyframes p1 { 0%,23%{stroke-dashoffset:100;opacity:1} 32%{stroke-dashoffset:0} 80%{stroke-dashoffset:0;opacity:1} 86%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes p2 { 0%,35%{stroke-dashoffset:100;opacity:1} 42%{stroke-dashoffset:0} 80%{stroke-dashoffset:0;opacity:1} 86%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes p3 { 0%,45%{stroke-dashoffset:100;opacity:1} 52%{stroke-dashoffset:0} 80%{stroke-dashoffset:0;opacity:1} 86%,100%{stroke-dashoffset:0;opacity:0} }
+    .meta { animation: meta 12s infinite; } .hub { animation: hub 12s infinite; } .doc { animation: doc 12s infinite; }
+    @keyframes meta { 0%,31%{fill:#21262d;stroke:#30363d} 35%,78%{fill:#3b2410;stroke:#f97316} 86%,100%{fill:#21262d;stroke:#30363d} }
+    @keyframes hub  { 0%,41%{fill:#21262d;stroke:#30363d} 45%,78%{fill:#3b2410;stroke:#f97316} 86%,100%{fill:#21262d;stroke:#30363d} }
+    @keyframes doc  { 0%,51%{fill:#21262d;stroke:#30363d} 56%,76%{fill:#fbbf24;stroke:#fbbf24} 86%,100%{fill:#21262d;stroke:#30363d} }
+    .pulse { animation: pulse 12s infinite; transform-origin: 653px 265px; }
+    @keyframes pulse { 0%,52%{opacity:0;transform:scale(.4)} 56%{opacity:.5;transform:scale(1)} 64%{opacity:0;transform:scale(2.4)} 100%{opacity:0} }
+    .ans { animation: ans 12s infinite; }
+    @keyframes ans { 0%,62%{opacity:0} 68%,86%{opacity:1} 92%,100%{opacity:0} }
+  </style>
+
+  <rect x="0.5" y="0.5" width="879" height="399" rx="12" fill="#0d1117" stroke="#30363d"/>
+
+  <!-- query chip -->
+  <g class="q">
+    <rect x="48" y="20" width="252" height="30" rx="15" fill="#0b2733" stroke="#67e8f9"/>
+    <text class="m" x="64" y="39" font-size="12" fill="#67e8f9">"why is the webhook failing?"</text>
+  </g>
+
+  <!-- answer chip -->
+  <g class="ans">
+    <rect x="316" y="20" width="240" height="30" rx="15" fill="#3b2410" stroke="#fbbf24"/>
+    <text class="m" x="332" y="39" font-size="12" fill="#fbbf24">→ [[Dunning and Retries]] ✓</text>
+  </g>
+
+  <!-- ══ ROUTER ══ -->
+  <text class="lbl" x="48" y="86">ROUTER</text>
+  <text class="sub" x="112" y="86">MEMORY.md · always loaded · ≤200 lines</text>
+  <rect class="rbox" x="48" y="96" width="310" height="170" rx="8" fill="#161b22" stroke="#a78bfa"/>
+
+  <!-- rows -->
+  <g>
+    <rect class="h1" x="56" y="106" width="294" height="24" rx="6" fill="#a78bfa" opacity="0"/>
+    <rect class="h2" x="56" y="134" width="294" height="24" rx="6" fill="#a78bfa" opacity="0"/>
+    <rect class="h3" x="56" y="162" width="294" height="24" rx="6" fill="#fbbf24" opacity="0"/>
+    <g fill="#30363d">
+      <circle cx="68" cy="118" r="2.5" fill="#8b949e"/><rect x="80" y="115" width="118" height="6" rx="3"/><rect x="208" y="115" width="76" height="6" rx="3" fill="#262c36"/>
+      <circle cx="68" cy="146" r="2.5" fill="#8b949e"/><rect x="80" y="143" width="96" height="6" rx="3"/><rect x="186" y="143" width="104" height="6" rx="3" fill="#262c36"/>
+    </g>
+    <g>
+      <circle cx="68" cy="174" r="2.5" fill="#fbbf24"/>
+      <text class="m" x="80" y="178" font-size="10.5" fill="#e6edf3">payment webhook · retries</text>
+      <text class="m" x="238" y="178" font-size="10.5" fill="#fbbf24">→ read</text>
+    </g>
+    <g fill="#30363d">
+      <circle cx="68" cy="202" r="2.5" fill="#8b949e"/><rect x="80" y="199" width="130" height="6" rx="3"/><rect x="220" y="199" width="66" height="6" rx="3" fill="#262c36"/>
+      <circle cx="68" cy="230" r="2.5" fill="#8b949e"/><rect x="80" y="227" width="88" height="6" rx="3"/><rect x="178" y="227" width="110" height="6" rx="3" fill="#262c36"/>
+    </g>
+  </g>
+  <text class="tiny m" x="48" y="286">trigger tables: “encounter X → read Y”</text>
+
+  <!-- ══ VAULT ══ -->
+  <text class="lbl" x="470" y="86">VAULT</text>
+  <text class="sub" x="528" y="86">docs/vault/ · loaded on demand · grows unbounded</text>
+  <rect x="470" y="96" width="362" height="272" rx="8" fill="#161b22" stroke="#30363d"/>
+
+  <!-- tier 1: meta-analysis -->
+  <rect class="meta" x="601" y="112" width="104" height="26" rx="6" fill="#21262d" stroke="#30363d"/>
+  <text class="tiny m" x="653" y="129" text-anchor="middle" fill="#e6edf3">meta-analysis</text>
+
+  <!-- tier 2: hubs -->
+  <rect x="500" y="188" width="76" height="24" rx="6" fill="#21262d" stroke="#30363d"/>
+  <rect class="hub" x="615" y="188" width="76" height="24" rx="6" fill="#21262d" stroke="#30363d"/>
+  <rect x="730" y="188" width="76" height="24" rx="6" fill="#21262d" stroke="#30363d"/>
+  <text class="tiny m" x="538" y="204" text-anchor="middle" fill="#8b949e">hub</text>
+  <text class="tiny m" x="653" y="204" text-anchor="middle" fill="#8b949e">hub</text>
+  <text class="tiny m" x="768" y="204" text-anchor="middle" fill="#8b949e">hub</text>
+
+  <!-- static tier lines -->
+  <g stroke="#262c36" stroke-width="1">
+    <path d="M 653 138 L 538 186" fill="none"/>
+    <path d="M 653 138 L 768 186" fill="none"/>
+    <path d="M 538 212 L 510 254 M 538 212 L 538 254 M 538 212 L 566 254" fill="none"/>
+    <path d="M 653 212 L 625 254 M 653 212 L 653 254 M 653 212 L 681 254" fill="none"/>
+    <path d="M 768 212 L 740 254 M 768 212 L 768 254 M 768 212 L 796 254" fill="none"/>
+  </g>
+
+  <!-- tier 3: docs -->
+  <g fill="#21262d" stroke="#30363d">
+    <rect x="498" y="256" width="24" height="18" rx="4"/><rect x="526" y="256" width="24" height="18" rx="4"/><rect x="554" y="256" width="24" height="18" rx="4"/>
+    <rect x="613" y="256" width="24" height="18" rx="4"/><rect class="doc" x="641" y="256" width="24" height="18" rx="4"/><rect x="669" y="256" width="24" height="18" rx="4"/>
+    <rect x="728" y="256" width="24" height="18" rx="4"/><rect x="756" y="256" width="24" height="18" rx="4"/><rect x="784" y="256" width="24" height="18" rx="4"/>
+  </g>
+  <circle class="pulse" cx="653" cy="265" r="12" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0"/>
+  <text class="tiny m" x="653" y="300" text-anchor="middle">docs — deep content, leads with the answer</text>
+  <text class="tiny m" x="653" y="348" text-anchor="middle" fill="#6e7681">three tiers: meta-analysis → hub → doc</text>
+
+  <!-- routed hops -->
+  <g fill="none" stroke="#fbbf24" stroke-width="1.8">
+    <path class="p1" pathLength="100" d="M 358 174 C 430 174, 430 125, 599 125"/>
+    <path class="p2" pathLength="100" d="M 653 140 L 653 186"/>
+    <path class="p3" pathLength="100" d="M 653 214 L 653 254"/>
+  </g>
+
+  <text class="tiny m" x="440" y="386" text-anchor="middle" fill="#6e7681">deterministic retrieval · ≤3 hops · no embeddings, no index server — just files and attention</text>
+</svg>
