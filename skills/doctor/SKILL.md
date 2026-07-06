@@ -10,11 +10,13 @@ anything.
 1. Locate the vault: read `engraven.config.json` at the project root if it
    exists; otherwise try `docs/vault/`. If neither exists, say Engraven is
    not installed here and offer `/engraven:bootstrap`.
-2. Run the vault linter with the project's own copy if it has one
-   (`scripts/vault-check.mjs`), otherwise fall back to
+2. Run the vault check, preferring the Rust CLI: if `command -v engraven`
+   succeeds, run `engraven vault --vault <vault-path>`. Otherwise use the
+   project's own `scripts/vault-check.mjs`, and as a last resort
    `node ${CLAUDE_PLUGIN_ROOT}/scripts/vault-check.mjs --vault <vault-path>`.
-3. Run the router linter the same way: prefer the project's
-   `scripts/validate-memory.sh`, else
+   All three run the same checks with the same output.
+3. Run the router check the same way: `engraven memory` if the CLI is on
+   PATH, else the project's `scripts/validate-memory.sh`, else
    `bash ${CLAUDE_PLUGIN_ROOT}/scripts/validate-memory.sh`.
 4. Report plainly: errors first, then warnings, then what is healthy. For
    each problem, name the fix (most remedies are one edit; see

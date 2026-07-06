@@ -170,7 +170,7 @@ Print a closing cheat sheet for the human, roughly:
 Engraven is installed. What you now have:
   docs/vault/           your project's long-term memory (open it in Obsidian!)
   <router>              a ≤200-line index auto-loaded into every session
-  scripts/              two linters that keep memory honest (wired into CI: yes/no)
+  scripts/              the integrity checks (CI runs the Rust CLI, these are the fallback)
   .claude/skills/       archive-session · new-kb · research · memory-maintenance
 
 How to use it day to day:

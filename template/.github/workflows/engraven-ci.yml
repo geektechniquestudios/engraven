@@ -1,7 +1,10 @@
 # Engraven memory integrity in CI — copied into your repo by the bootstrap.
-# The vault is repo-shared, so it lints on every PR. Harness-local memory
-# (the router + topic files) lives outside the repo; validate-memory.sh
-# skips cleanly on runners and is run locally / by the agent instead.
+# The vault is repo-shared, so it lints on every PR. Integrity is enforced
+# by the engraven CLI (a single static Rust binary); the vendored Node
+# script is the automatic fallback, and parity between the two is enforced
+# upstream. Harness-local memory (the router + topic files) lives outside
+# the repo; validate-memory.sh skips cleanly on runners and is run locally
+# / by the agent instead.
 name: Memory Integrity
 
 on:
@@ -20,7 +23,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch the engraven CLI
+        id: cli
+        continue-on-error: true
+        # pin a tag instead of latest if you want fully reproducible CI
+        run: |
+          curl -fsSL --retry 3 -o engraven \
+            https://github.com/geektechniquestudios/engraven/releases/latest/download/engraven-x86_64-linux
+          chmod +x engraven
+      - name: Vault integrity (engraven CLI)
+        if: steps.cli.outcome == 'success'
+        run: ./engraven vault --strict
       - uses: actions/setup-node@v4
+        if: steps.cli.outcome != 'success'
         with:
           node-version: 20
-      - run: node scripts/vault-check.mjs --strict
+      - name: Vault integrity (script fallback)
+        if: steps.cli.outcome != 'success'
+        run: node scripts/vault-check.mjs --strict
