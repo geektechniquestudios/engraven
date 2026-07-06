@@ -3,7 +3,9 @@
 // The still image is a mature vault; the animation layer is a day in its
 // life: four lookups land four different ways (3-hop drill-down, 1-hop deep
 // link, cross-KB wiki-link, episodic archive read) with node names appearing
-// at each hop, then a new KB forms while stale docs elsewhere are repaired.
+// at each hop, while a new KB quietly grows in the background and stale docs
+// get repaired. The finale is a fifth lookup routing into the newly grown
+// KB. Traces draw as eased curves with a comet head at the drawing tip.
 // Deterministic (seeded PRNG) so regeneration is reproducible.
 // Run from the repo root: node assets/gen-graph.mjs
 import { writeFileSync } from "node:fs";
@@ -120,21 +122,26 @@ const far = (ns, from, skip = []) => {
   }
   return best;
 };
-const nearMid = (ns, a, b, skip = []) => {
-  const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-  let best = null, bd = Infinity;
+// a traversal should visibly change direction at each hop: pick the node
+// with the biggest perpendicular offset from the straight a→b line
+const zigPick = (ns, a, b, skip = []) => {
+  const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1;
+  let best = null, bd = -1;
   for (const n of ns) {
     if (n === a || n === b || skip.includes(n)) continue;
-    const d = ((n.x - mx) ** 2 + (n.y - my) ** 2) * (n.hub ? 0.55 : 1);
-    if (d < bd) { bd = d; best = n; }
+    const t = ((n.x - a.x) * dx + (n.y - a.y) * dy) / (len * len);
+    if (t < 0.15 || t > 0.85) continue; // stay between the endpoints
+    const perp = Math.abs((n.x - a.x) * dy - (n.y - a.y) * dx) / len;
+    const score = perp * (n.hub ? 1.5 : 1);
+    if (score > bd) { bd = score; best = n; }
   }
-  return best;
+  return best || far(ns, a, [b, ...skip]);
 };
 
 // L1 · drill-down, 3 hops (the dev-east read)
 const l1meta = hubsOf[0][0] || byCluster[0][0];
 const l1doc = far(byCluster[0], l1meta);
-const l1hub = nearMid(byCluster[0], l1meta, l1doc);
+const l1hub = zigPick(byCluster[0], l1meta, l1doc);
 // L2 · deep link, 1 hop
 const l2doc = hubsOf[9][0] || byCluster[9][0];
 // L3 · cross-KB: hop to one doc, wiki-link arc to its neighbor KB
@@ -143,10 +150,11 @@ const l3b = hubsOf[7][0] || byCluster[7][0];
 // L4 · episodic: two hops into the session archive
 const l4sai = hubsOf[15][0] || byCluster[15][0];
 const l4doc = far(byCluster[15], l4sai);
-// stale repairs while the vault grows
+// stale repairs, spread through the day
 const repairs = [byCluster[2][7], byCluster[8][11], byCluster[12][9]];
 
-// new KB forming (all PRNG below runs after the existing layout draws)
+// new KB growing in the background (all PRNG below runs after the existing
+// layout draws)
 const NK = { x: 365, y: 455, r: 42, c: "#fb7185" };
 const nkNodes = [];
 for (let i = 0; i < 13; i++) {
@@ -169,6 +177,10 @@ const nkEdges = nkNodes.slice(1).map((n) => {
   }
   return { a: n, b: best, w: n.wave };
 });
+// L5 · the payoff: a lookup routes into the KB that just grew; the doc is
+// picked north of the meta so its label clears the meta-analysis label
+const nkMeta = { x: NK.x, y: NK.y, r: 5.5 };
+const nkDoc = far(nkNodes.filter((n) => n.y <= NK.y - 6), nkMeta) || far(nkNodes, nkMeta);
 
 const arcPath = (a, b, bulge) => {
   const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
@@ -178,63 +190,75 @@ const arcPath = (a, b, bulge) => {
 
 // ── SVG ─────────────────────────────────────────────────────────────────────
 const DUR = 32;
+const EASE = "cubic-bezier(.33,.09,.22,1)"; // quick start, feathered landing
 let css = "";
 const kf = (name, frames) => { css += `    @keyframes ${name} { ${frames} }\n`; };
 const cls = (name, extra = "") => { css += `    .${name} { animation: ${name} ${DUR}s linear infinite; animation-fill-mode: backwards; ${extra}}\n`; };
 const f2 = (v) => +v.toFixed(2);
 
-// a routed read: line draws S→E, holds, fades by F
+// a routed read: the curve draws with an eased sweep, holds, melts away
 const lineKF = (name, S, E, F) => {
   cls(name);
-  kf(name, `0%,${S}%{stroke-dashoffset:100;opacity:0} ${f2(S + 0.3)}%{opacity:.95} ${E}%{stroke-dashoffset:0;opacity:.9} ${f2(F - 2)}%{stroke-dashoffset:0;opacity:.7} ${F}%,100%{stroke-dashoffset:0;opacity:0}`);
+  kf(name, `0%,${S}%{stroke-dashoffset:100;opacity:0;animation-timing-function:${EASE}} ${f2(S + 0.25)}%{opacity:.9;animation-timing-function:${EASE}} ${E}%{stroke-dashoffset:0;opacity:.88} ${f2(F - 2.5)}%{stroke-dashoffset:0;opacity:.65} ${F}%,100%{stroke-dashoffset:0;opacity:0}`);
+};
+// the comet: a bright 7-unit head riding the drawing tip of the same curve
+const cometKF = (name, S, E) => {
+  cls(name);
+  kf(name, `0%,${S}%{stroke-dashoffset:107;opacity:0;animation-timing-function:${EASE}} ${f2(S + 0.25)}%{opacity:.95;animation-timing-function:${EASE}} ${E}%{stroke-dashoffset:7;opacity:.9} ${f2(E + 1.6)}%,100%{stroke-dashoffset:7;opacity:0}`);
 };
 // a node name label: in at S, out by F
 const textKF = (name, S, F) => {
   cls(name);
-  kf(name, `0%,${S}%{opacity:0} ${f2(S + 0.8)}%{opacity:1} ${f2(F - 1.2)}%{opacity:1} ${F}%,100%{opacity:0}`);
+  kf(name, `0%,${S}%{opacity:0} ${f2(S + 1)}%{opacity:1} ${f2(F - 1.4)}%{opacity:1} ${F}%,100%{opacity:0}`);
 };
 // a violet potentiation pulse: some of the landed node's own links glow
 // exactly as its name shows (never all of them, and never the index's)
 const burstKF = (name, S) => {
   cls(name);
-  kf(name, `0%,${S}%{opacity:0} ${f2(S + 0.5)}%{opacity:.85} ${f2(S + 1.8)}%{opacity:.7} ${f2(S + 3.2)}%{opacity:0} 100%{opacity:0}`);
+  kf(name, `0%,${S}%{opacity:0} ${f2(S + 0.7)}%{opacity:.85} ${f2(S + 2.2)}%{opacity:.65} ${f2(S + 3.8)}%{opacity:0} 100%{opacity:0}`);
 };
-const flashKF = burstKF;
 // the index pings when a lookup starts
 const pingKF = (name, S) => {
   cls(name, "transform-box: fill-box; transform-origin: center; ");
   kf(name, `0%,${S}%{transform:scale(.4);opacity:.9} ${f2(S + 3.5)}%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0}`);
 };
+// one lookup segment = eased curve + comet head, drawn together
+const seg = (name, S, E, F) => { lineKF(name, S, E, F); cometKF(`c${name}`, S, E); };
 
-// L1 drill-down: index → meta → hub → doc (1.5%..23%)
+// L1 drill-down: index → meta → hub → doc (1.5%..21%)
 pingKF("i1", 1);
-lineKF("l1a", 1.5, 4.5, 23); flashKF("f1a", 4.2); textKF("t1a", 4.5, 22);
-lineKF("l1b", 5, 8, 23); flashKF("f1b", 7.7); textKF("t1b", 8, 22);
-lineKF("l1c", 8.5, 11.5, 23); flashKF("f1c", 11.2); textKF("t1c", 11.5, 22);
-// L2 deep link: one hop, done (26%..38%)
-pingKF("i2", 25.5);
-lineKF("l2", 26, 29.5, 38); flashKF("f2", 29.2); textKF("t2", 29.5, 37);
-// L3 cross-KB: hop, then the wiki-link bridge (41%..57%)
-pingKF("i3", 40.5);
-lineKF("l3a", 41, 44, 57); flashKF("f3a", 43.7); textKF("t3a", 44, 55);
-lineKF("l3x", 44.5, 47.5, 57); flashKF("f3b", 47.2); textKF("t3b", 47.5, 55);
-// L4 episodic: two hops into the archive (60%..76%)
-pingKF("i4", 59.5);
-lineKF("l4a", 60, 63, 76); flashKF("f4a", 62.7); textKF("t4a", 63, 74);
-lineKF("l4b", 63.5, 66.5, 76); flashKF("f4b", 66.2); textKF("t4b", 66.5, 74);
-// a new KB forms... (78%..98%)
-[78, 80.5, 83, 85.5].forEach((S, k) => {
+seg("l1a", 1.5, 5, 21); burstKF("f1a", 4.6); textKF("t1a", 5, 20);
+seg("l1b", 5.5, 8.2, 21); burstKF("f1b", 7.8); textKF("t1b", 8.2, 20);
+seg("l1c", 8.7, 11.4, 21); burstKF("f1c", 11); textKF("t1c", 11.4, 20);
+// L2 deep link: one hop, done (23%..33%)
+pingKF("i2", 22.5);
+seg("l2", 23, 26.5, 33); burstKF("f2", 26.1); textKF("t2", 26.5, 32);
+// L3 cross-KB: hop, then the wiki-link bridge (35%..47%)
+pingKF("i3", 34.5);
+seg("l3a", 35, 38, 47); burstKF("f3a", 37.6); textKF("t3a", 38, 45.5);
+seg("l3x", 38.5, 41.5, 47); burstKF("f3b", 41.1); textKF("t3b", 41.5, 45.5);
+// L4 episodic: two hops into the archive (49%..61%)
+pingKF("i4", 48.5);
+seg("l4a", 49, 52, 61); burstKF("f4a", 51.6); textKF("t4a", 52, 59.5);
+seg("l4b", 52.5, 55.5, 61); burstKF("f4b", 55.1); textKF("t4b", 55.5, 59.5);
+// ...meanwhile a new KB has been growing all along (8%..58%)
+[8, 22, 36, 50].forEach((S, k) => {
   cls(`nw${k}`, "transform-box: fill-box; transform-origin: center; ");
-  kf(`nw${k}`, `0%,${S}%{transform:scale(0);opacity:0} ${f2(S + 0.6)}%{transform:scale(1.3);opacity:1} ${f2(S + 1.1)}%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{transform:scale(1);opacity:0}`);
+  kf(`nw${k}`, `0%,${S}%{transform:scale(0);opacity:0} ${f2(S + 0.7)}%{transform:scale(1.3);opacity:1} ${f2(S + 1.3)}%{transform:scale(1)} 95.5%{transform:scale(1);opacity:1} 99.2%,100%{transform:scale(1);opacity:0}`);
   cls(`ne${k}`);
-  kf(`ne${k}`, `0%,${f2(S + 0.8)}%{stroke-dashoffset:100;opacity:0} ${f2(S + 1)}%{opacity:.5} ${f2(S + 2.2)}%{stroke-dashoffset:0;opacity:.3} 96%{stroke-dashoffset:0;opacity:.25} 98.5%,100%{opacity:0}`);
+  kf(`ne${k}`, `0%,${f2(S + 1)}%{stroke-dashoffset:100;opacity:0;animation-timing-function:${EASE}} ${f2(S + 1.2)}%{opacity:.5} ${f2(S + 2.6)}%{stroke-dashoffset:0;opacity:.3} 95.5%{stroke-dashoffset:0;opacity:.25} 99.2%,100%{opacity:0}`);
 });
 cls("nkm", "transform-box: fill-box; transform-origin: center; ");
-kf("nkm", `0%,88%{transform:scale(0);opacity:0} 88.8%{transform:scale(1.35);opacity:1} 89.5%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{opacity:0}`);
-flashKF("nkh", 88);
-textKF("nkl", 89, 96);
+kf("nkm", `0%,60%{transform:scale(0);opacity:0} 60.8%{transform:scale(1.35);opacity:1} 61.5%{transform:scale(1)} 95.5%{transform:scale(1);opacity:1} 99.2%,100%{opacity:0}`);
+cls("nkh", "transform-box: fill-box; transform-origin: center; ");
+kf("nkh", `0%,60%{transform:scale(.4);opacity:0} 60.8%{opacity:.85} 64%{transform:scale(2.1);opacity:0} 100%{transform:scale(2.1);opacity:0}`);
+textKF("nkl", 61.5, 93);
+// L5 the finale: routing into the KB that grew during the demo (67%..90%)
+pingKF("i5", 66.5);
+seg("l5a", 67, 70.5, 90); burstKF("f5a", 70.1);
+seg("l5b", 71, 73.8, 90); burstKF("f5b", 73.4); textKF("t5b", 73.8, 90);
 // ...while stale docs get repaired: red pulse → green pulse → healthy
-[78, 82, 86].forEach((S, k) => {
+[24, 40, 56].forEach((S, k) => {
   cls(`rp${k}`, "transform-box: fill-box; transform-origin: center; ");
   kf(`rp${k}`, `0%,${S}%{transform:scale(.5);opacity:0;stroke:#f85149} ${f2(S + 0.5)}%{opacity:.95;stroke:#f85149} ${f2(S + 2)}%{transform:scale(1.5);stroke:#f85149;opacity:.7} ${f2(S + 2.5)}%{stroke:#3fb950;opacity:.95} ${f2(S + 5)}%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0}`);
 });
@@ -246,7 +270,7 @@ kf("idxb", `0%,100%{opacity:.85} 50%{opacity:1}`);
 
 let s = "";
 s += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">\n`;
-s += `  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Four lookups land four different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, and an episodic archive read), each hop naming the doc it lands on. Then a new KB forms while stale docs elsewhere are repaired.</title>\n`;
+s += `  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Five lookups land five different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, an episodic archive read, and finally a read into a knowledge base that grew during the demo), each hop naming the doc it lands on while stale docs elsewhere are repaired.</title>\n`;
 s += `  <style>\n${css}  </style>\n`;
 s += `  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" fill="#0d1117" stroke="#30363d"/>\n`;
 
@@ -280,10 +304,16 @@ const label = (cl2, n, text, dy = 20, side = null) => {
   const ly = n.y > CAP_Y - 44 ? n.y - 14 : n.y + dy;
   return `  <text class="${cl2}" x="${lx}" y="${ly}" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">${text}</text>\n`;
 };
-const trace = (cl2, a, b, w = 1.2) =>
-  `    <line class="${cl2}" pathLength="100" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke-width="${w}"/>\n`;
-const allEdges = [...intra, ...weave, ...highways, ...stragglerEdges];
-const flash = (cl2, n, _color = "#a78bfa", k = 0) => {
+// one traversal segment: the eased curve plus its comet twin on the same path
+const trace = (cl2, a, b, bulge, w = 1.2) => {
+  const d = arcPath(a, b, bulge);
+  return (
+    `    <path class="${cl2}" pathLength="100" d="${d}" stroke-width="${w}"/>\n` +
+    `    <path class="c${cl2}" pathLength="100" d="${d}" stroke="#fde68a" stroke-width="${(w + 0.6).toFixed(1)}" stroke-dasharray="7 93" stroke-linecap="round"/>\n`
+  );
+};
+const allEdges = [...intra, ...weave, ...highways, ...stragglerEdges, ...nkEdges];
+const flash = (cl2, n, k = 0) => {
   // roughly half of this node's real links, shortest first, capped so a
   // hub landing never floods the canvas
   const inc = allEdges
@@ -300,26 +330,32 @@ const flash = (cl2, n, _color = "#a78bfa", k = 0) => {
   return g + `  </g>\n`;
 };
 
-// the four lookups (amber = routed read, violet = wiki-link bridge)
+// the five lookups (amber = routed read, violet = wiki-link bridge)
 s += `  <g fill="none" stroke="#fbbf24">\n`;
 s += `    <circle class="i1" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
-s += trace("l1a", INDEX, l1meta);
-s += trace("l1b", l1meta, l1hub);
-s += trace("l1c", l1hub, l1doc);
+s += trace("l1a", INDEX, l1meta, 26);
+s += trace("l1b", l1meta, l1hub, -20);
+s += trace("l1c", l1hub, l1doc, 16);
 s += `    <circle class="i2" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
-s += trace("l2", INDEX, l2doc);
+s += trace("l2", INDEX, l2doc, 30);
 s += `    <circle class="i3" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
-s += trace("l3a", INDEX, l3a);
+s += trace("l3a", INDEX, l3a, -24);
 s += `    <circle class="i4" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
-s += trace("l4a", INDEX, l4sai);
-s += trace("l4b", l4sai, l4doc);
+s += trace("l4a", INDEX, l4sai, 22);
+s += trace("l4b", l4sai, l4doc, -16);
+s += `    <circle class="i5" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
+s += trace("l5a", INDEX, nkMeta, -24);
+s += trace("l5b", nkMeta, nkDoc, 14);
 s += `  </g>\n`;
-s += `  <path class="l3x" pathLength="100" d="${arcPath(l3a, l3b, -36)}" fill="none" stroke="#a78bfa" stroke-width="1.2"/>\n`;
+s += `  <g fill="none" stroke="#a78bfa">\n`;
+s += trace("l3x", l3a, l3b, -36, 1.1).replace('stroke="#fde68a"', 'stroke="#c4b5fd"');
+s += `  </g>\n`;
 
-s += flash("f1a", l1meta, "#a78bfa", 0) + flash("f1b", l1hub, "#a78bfa", 1) + flash("f1c", l1doc, "#a78bfa", 2);
-s += flash("f2", l2doc, "#a78bfa", 3);
-s += flash("f3a", l3a, "#a78bfa", 4) + flash("f3b", l3b, "#a78bfa", 5);
-s += flash("f4a", l4sai, "#a78bfa", 6) + flash("f4b", l4doc, "#a78bfa", 7);
+s += flash("f1a", l1meta, 0) + flash("f1b", l1hub, 1) + flash("f1c", l1doc, 2);
+s += flash("f2", l2doc, 3);
+s += flash("f3a", l3a, 4) + flash("f3b", l3b, 5);
+s += flash("f4a", l4sai, 6) + flash("f4b", l4doc, 7);
+s += flash("f5a", nkMeta, 8) + flash("f5b", nkDoc, 9);
 
 s += label("t1a", l1meta, "Infrastructure - Meta-Analysis");
 s += label("t1b", l1hub, "AWS Environments - Section Hub");
@@ -329,8 +365,9 @@ s += label("t3a", l3a, "Caching Strategy");
 s += label("t3b", l3b, "Rate Limiting");
 s += label("t4a", l4sai, "Session Archive Index");
 s += label("t4b", l4doc, "2026-05-12 Incident Review", 20, "left");
+s += label("t5b", nkDoc, "Backpressure Thresholds", -12);
 
-// a new KB grows in while three stale docs get repaired
+// the new KB grows through the whole demo, then gets looked up
 s += `  <g stroke="${NK.c}" stroke-width="0.6" fill="none">\n`;
 for (const e of nkEdges) s += `    <line class="ne${e.w}" pathLength="100" x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}"/>\n`;
 s += `  </g>\n`;
@@ -353,4 +390,4 @@ s += `  <text x="${W / 2}" y="786" text-anchor="middle" font-size="11" fill="#6e
 s += `</svg>\n`;
 
 writeFileSync(new URL("./graph.svg", import.meta.url).pathname, s);
-console.log(`graph.svg: ${nodes.length + nkNodes.length} nodes, ${intra.length + weave.length + highways.length + nkEdges.length} edges, 4 lookups, 3 repairs, ${(s.length / 1024).toFixed(0)} KB`);
+console.log(`graph.svg: ${nodes.length + nkNodes.length} nodes, ${intra.length + weave.length + highways.length + stragglerEdges.length + nkEdges.length} edges, 5 lookups, 3 repairs, ${(s.length / 1024).toFixed(0)} KB`);
