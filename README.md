@@ -2,7 +2,7 @@
 
 <img src="assets/logo.svg" width="440" alt="engraven: memory + research for coding agents. The mark is a three-tier knowledge graph drawn as a neuron, with an amber memory trace lighting the route through it.">
 
-**Long-term memory for coding agents: an Obsidian-based knowledge graph that lints like code, with a research pipeline that grows it.**
+**A self-correcting memory fabric for coding agents: an Obsidian-based knowledge graph that stays light in context, lints like code, and grows through research.**
 
 [![CI](https://github.com/geektechniquestudios/engraven/actions/workflows/ci.yml/badge.svg)](https://github.com/geektechniquestudios/engraven/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-3fb950)](LICENSE)
