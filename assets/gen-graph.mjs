@@ -256,6 +256,11 @@ const burstKF = (name, S) => {
   cls(name);
   kf(name, `0%,${S}%{opacity:0} ${f2(S + 0.7)}%{opacity:.85} ${f2(S + 2.2)}%{opacity:.65} ${f2(S + 3.8)}%{opacity:0} 100%{opacity:0}`);
 };
+// the question that prompts each lookup, shown as a toast over the graph
+const toastKF = (name, S, F) => {
+  cls(name);
+  kf(name, `0%,${f2(S)}%{opacity:0;transform:translateY(-10px)} ${f2(S + 1)}%{opacity:1;transform:translateY(0)} ${f2(F - 1.2)}%{opacity:1;transform:translateY(0)} ${f2(F)}%,100%{opacity:0;transform:translateY(0)}`);
+};
 // the index pings when a lookup starts
 const pingKF = (name, S) => {
   cls(name, "transform-box: fill-box; transform-origin: center; ");
@@ -264,6 +269,13 @@ const pingKF = (name, S) => {
 // one lookup segment = eased curve + comet head, drawn together
 const seg = (name, S, E, F) => { lineKF(name, S, E, F); cometKF(`c${name}`, S, E); };
 
+// each lookup's prompting question, timed to its act
+toastKF("q1", 0.8, 19.5);
+toastKF("q2", 22.2, 31);
+toastKF("q3", 34.2, 45);
+toastKF("q4", 48.2, 59);
+toastKF("q5", 66.2, 79);
+toastKF("q6", 80.3, 93.5);
 // L1 drill-down: index → meta → hub → doc (1.5%..21%)
 pingKF("i1", 1);
 seg("l1a", 1.5, 5, 21); burstKF("f1a", 4.6); textKF("t1a", 5, 20);
@@ -328,7 +340,7 @@ kf("idxb", `0%,100%{opacity:.85} 50%{opacity:1}`);
 
 let s = "";
 s += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">\n`;
-s += `  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Six lookups land six different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, an episodic archive read, a read into a knowledge base that grew during the demo, and a cross-KB read riding one of the synthesis links that welded the new KB to its neighbors), each hop naming the doc it lands on while stale docs elsewhere are repaired.</title>\n`;
+s += `  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Six lookups land six different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, an episodic archive read, a read into a knowledge base that grew during the demo, and a cross-KB read riding one of the synthesis links that welded the new KB to its neighbors). A toast above the graph shows the short question that prompts each lookup, each hop names the doc it lands on, and stale docs elsewhere are repaired.</title>\n`;
 s += `  <style>\n${css}  </style>\n`;
 s += `  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" fill="#0d1117" stroke="#30363d"/>\n`;
 
@@ -456,6 +468,26 @@ repairs.forEach((n, k) => {
 // the index node: where every lookup starts
 s += `  <circle class="idx" cx="${INDEX.x}" cy="${INDEX.y}" r="5.5" fill="#e6edf3"/>\n`;
 s += `  <text x="${INDEX.x}" y="${INDEX.y + 22}" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">00-Index</text>\n`;
+
+// the prompting questions, as toasts floating over the graph (drawn last so
+// they sit on top; short on purpose, they are the readme's narration)
+const toast = (cl2, text) => {
+  const w = Math.round(text.length * 7.5 + 34);
+  const x = ((W - w) / 2).toFixed(0);
+  return (
+    `  <g class="${cl2}">\n` +
+    `    <rect x="${x}" y="26" width="${w}" height="30" rx="15" fill="#161b22" stroke="#30363d"/>\n` +
+    `    <circle cx="${+x + 19}" cy="41" r="3" fill="#fbbf24"/>\n` +
+    `    <text x="${+x + 32}" y="45.5" font-size="12.5" fill="#e6edf3">${text}</text>\n` +
+    `  </g>\n`
+  );
+};
+s += toast("q1", `"how many namespaces in dev-east?"`);
+s += toast("q2", `"can we deploy today?"`);
+s += toast("q3", `"does caching change our rate limits?"`);
+s += toast("q4", `"didn't we try this before?"`);
+s += toast("q5", `"what's a safe backpressure threshold?"`);
+s += toast("q6", `"when should we shed load?"`);
 
 s += `  <text x="${W / 2}" y="766" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>\n`;
 s += `  <text x="${W / 2}" y="786" text-anchor="middle" font-size="11" fill="#6e7681">one day in the vault's life: six lookups, three repairs, and a new KB welded in as it grows</text>\n`;
