@@ -1,0 +1,30 @@
+name: Feature request
+description: Propose a change to the system, the checks, or the template
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What happened in real use that this feature would have prevented or improved? Concrete stories beat preferences.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: What should change, and where (CLI, scripts, template, spec, bootstrap)?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What did you try instead, and why was it not enough?
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This keeps the linters dependency-free (Node stdlib / bash) and the CLI at serde_json + regex
+        - label: I understand structural changes ripple into every install and need a story from real use

@@ -80,13 +80,23 @@ for (let i = 0; i < 44; i++) {
   const b = settledNodes[cb][Math.floor(rnd() * settledNodes[cb].length)];
   sWeave.push({ a, b, o: R(0.08, 0.13) });
 }
-// ambient strays, kept out of the growth void
+// ambient strays, kept out of the growth void; each gets a faint edge to
+// its nearest settled doc (no orphan nodes, fixed opacity, zero PRNG draws)
 const strays = [];
 while (strays.length < 52) {
   const p = { x: f1(R(30, W - 30)), y: f1(R(30, CAP_Y - 16)), r: f1(R(1.2, 2.1)) };
   if (dist(p, NEW) < NEW.r + 55) continue;
   strays.push(p);
 }
+const allSettled = settledNodes.flat();
+const strayEdges = strays.map((st) => {
+  let best = allSettled[0], bd = Infinity;
+  for (const n of allSettled) {
+    const d = (n.x - st.x) ** 2 + (n.y - st.y) ** 2;
+    if (d < bd) { bd = d; best = n; }
+  }
+  return { a: st, b: best };
+});
 
 // ── the new cluster: nodes, waves, hubs, edges ──────────────────────────────
 const gNodes = blob({ ...NEW, n: NEW.n }).map((n) => ({ ...n, hub: false }));
@@ -209,6 +219,11 @@ kf(`rj0`, `0%,11%{transform:scale(0);opacity:0} 11.6%{transform:scale(1.25);opac
 cls(`rj0`, "transform-box: fill-box; transform-origin: center; ");
 kf(`rj1`, `0%,18%{transform:scale(0);opacity:0} 18.6%{transform:scale(1.25);opacity:.75} 19.1%{transform:scale(1)} 30%{transform:scale(1);opacity:.75} 33%,100%{transform:scale(1);opacity:0}`);
 cls(`rj1`, "transform-box: fill-box; transform-origin: center; ");
+// provisional links for sources under evaluation, culled with their nodes
+kf(`rjl0`, `0%,11.2%{opacity:0} 12%{opacity:.3} 30%{opacity:.3} 33%,100%{opacity:0}`);
+cls(`rjl0`);
+kf(`rjl1`, `0%,18.2%{opacity:0} 19%{opacity:.3} 30%{opacity:.3} 33%,100%{opacity:0}`);
+cls(`rjl1`);
 // hub promotion: ring + enlarged dot, staggered
 [27, 28.3, 29.6, 30.9].forEach((T, k) => {
   cls(`hb${k}`, "transform-box: fill-box; transform-origin: center; ");
@@ -274,6 +289,9 @@ s += `  </g>\n`;
 s += `  <g stroke="#9aa5b1" stroke-width="0.6">\n`;
 for (const e of sWeave) s += `    <line x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}" opacity="${e.o.toFixed(3)}"/>\n`;
 s += `  </g>\n`;
+s += `  <g stroke="#8b949e" stroke-width="0.5">\n`;
+for (const e of strayEdges) s += `    <line x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}" opacity="0.12"/>\n`;
+s += `  </g>\n`;
 s += `  <g fill="#6e7681" opacity="0.75">\n`;
 for (const p of strays) s += `    <circle cx="${p.x}" cy="${p.y}" r="${p.r}"/>\n`;
 s += `  </g>\n`;
@@ -293,7 +311,16 @@ settledNodes.forEach((ns, ci) => {
 s += `  <g stroke="${NEW.c}" stroke-width="0.6" fill="none">\n`;
 for (const e of gEdges) s += `    <line class="e${e.w}" pathLength="100" x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}"/>\n`;
 s += `  </g>\n`;
-for (const p of rejected) s += `  <circle class="rj${p.cls}" cx="${p.x}" cy="${p.y}" r="${p.r}" fill="#9aa5b1" style="animation-delay:${p.jit}s"/>\n`;
+for (const p of rejected) {
+  const early = gNodes.filter((n) => n.wave <= 2);
+  let best = early[0], bd = Infinity;
+  for (const n of early) {
+    const d = (n.x - p.x) ** 2 + (n.y - p.y) ** 2;
+    if (d < bd) { bd = d; best = n; }
+  }
+  s += `  <line class="rjl${p.cls}" x1="${p.x}" y1="${p.y}" x2="${best.x}" y2="${best.y}" stroke="#9aa5b1" stroke-width="0.5"/>\n`;
+  s += `  <circle class="rj${p.cls}" cx="${p.x}" cy="${p.y}" r="${p.r}" fill="#9aa5b1" style="animation-delay:${p.jit}s"/>\n`;
+}
 s += `  <g fill="${NEW.c}">\n`;
 for (const n of gNodes) s += `    <circle class="w${n.wave}" cx="${n.x}" cy="${n.y}" r="${n.r}" style="animation-delay:${n.jit}s"/>\n`;
 s += `  </g>\n`;

@@ -1,0 +1,43 @@
+name: Bug report
+description: Something is broken in the linters, the CLI, the template, or the bootstrap
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Rust CLI (engraven)
+        - vault-check.mjs
+        - validate-memory.sh
+        - Template / vault skeleton
+        - Bootstrap (BOOTSTRAP.md flow)
+        - Claude Code plugin
+        - Docs
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you run, what did you expect, what did you get instead?
+      placeholder: Include the exact command and the output.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: The smallest vault layout or config that triggers it. A file tree plus the relevant frontmatter is ideal.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: engraven --version, or the commit SHA
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      placeholder: macOS 15 arm64 / Ubuntu 24.04 / Windows 11
