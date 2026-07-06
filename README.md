@@ -73,10 +73,10 @@ Same trigger, same doc, every time. A bad retrieval is a bad row you can see and
 ## Four surfaces, two speeds
 
 <div align="center">
-<img src="assets/context-window.svg" width="880" alt="Animated demo of one session's memory economics. At session start the instructions and the router load into the context window, about five thousand tokens. A task arrives, a router row matches, and exactly one doc crosses from the vault into the window. Counters show 6.4k tokens loaded out of roughly three million known, and about 194k of the window stays free for the actual task.">
+<img src="assets/context-window.svg" width="880" alt="Animated demo of three sessions back to back, showing the two speeds. Every session the context window clears and reloads the same two thin surfaces, instructions and router, for about five thousand tokens flat. The vault, drawn as a small wiki-linked knowledge graph, and the session archive sit on the other side and never reset. In session one a router row fires and a payments doc crosses over for 1.4k more; in session two a different row pulls a rate-limiting doc from another KB for 1.1k; in session three no row fires and the vault costs nothing. Docs that were read keep a glowing ember.">
 </div>
 
-The demo is one session, end to end: the two thin surfaces load at start, a router row matches the task, and exactly one doc crosses over. Everything else stays on disk and costs nothing. That is the core token economics: what loads every session stays thin, and what is deep costs nothing until needed.
+The demo is three sessions back to back, with both speeds visible at once. The left side clears and reloads the same thin surfaces every session, about 5k tokens, flat. The right side never resets: session one pulls a payments doc (+1.4k), session two pulls a rate-limiting doc from a different KB (+1.1k), and session three needs nothing from the vault, so it pays nothing. That is the two-speed economics: the ambient layer is a flat tax, and the deep layer bills only when a row fires, which often it doesn't.
 
 | Surface | Where | Loaded | Holds |
 |---|---|---|---|
