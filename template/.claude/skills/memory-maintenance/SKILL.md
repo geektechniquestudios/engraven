@@ -9,8 +9,8 @@ argument-hint: "[optional focus: 'router' | 'vault' | 'staleness' | a KB name]"
 **Focus:** $ARGUMENTS (default: full sweep)
 
 Work through the phases; fix as you go; report what changed at the end.
-Full rationale: Engram's MAINTENANCE doc
-(https://github.com/geektechniquestudios/engram/blob/main/docs/MAINTENANCE.md).
+Full rationale: Engraven's MAINTENANCE doc
+(https://github.com/geektechniquestudios/engraven/blob/main/docs/MAINTENANCE.md).
 
 ## Phase 1 — Lint
 

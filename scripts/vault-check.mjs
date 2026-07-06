@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * vault-check.mjs — Engram vault integrity linter (zero dependencies).
+ * vault-check.mjs — Engraven vault integrity linter (zero dependencies).
  *
  * Checks:
  *   1.  Wiki-links resolve        [[Target]] / [[Target|alias]] / [[Target#h]]
@@ -22,7 +22,7 @@
  * Usage:
  *   node scripts/vault-check.mjs [--vault <dir>] [--strict] [--fix] [--allow-placeholders] [--quiet]
  *
- * Config: engram.config.json in the working directory (all keys optional):
+ * Config: engraven.config.json in the working directory (all keys optional):
  *   { "vaultDir": "docs/vault", "requireFrontmatter": ["tags","date"],
  *     "sessionArchiveDir": "Session-Archive", "countFiles": [] }
  *
@@ -70,11 +70,11 @@ for (let i = 0; i < args.length; i++) {
 
 // ── Config ────────────────────────────────────────────────────────────
 let config = {};
-if (existsSync("engram.config.json")) {
+if (existsSync("engraven.config.json")) {
   try {
-    config = JSON.parse(readFileSync("engram.config.json", "utf8"));
+    config = JSON.parse(readFileSync("engraven.config.json", "utf8"));
   } catch (e) {
-    console.error(`engram.config.json is not valid JSON: ${e.message}`);
+    console.error(`engraven.config.json is not valid JSON: ${e.message}`);
     process.exit(2);
   }
 }
@@ -85,7 +85,7 @@ const COUNT_FILES = config.countFiles ?? [];
 
 if (!existsSync(VAULT) || !statSync(VAULT).isDirectory()) {
   console.error(`Vault directory not found: ${VAULT}`);
-  console.error(`(set "vaultDir" in engram.config.json or pass --vault <dir>)`);
+  console.error(`(set "vaultDir" in engraven.config.json or pass --vault <dir>)`);
   process.exit(2);
 }
 
@@ -163,7 +163,7 @@ for (const [f, d] of docs) {
 for (const [title, list] of byTitle) {
   if (list.length > 1) {
     errors.push(
-      `duplicate title "${title}": ${list.map(rel).join(" · ")} — wiki-links resolve ambiguously`,
+      `duplicate title "${title}": ${list.map(rel).join(" · ")} (wiki-links resolve ambiguously)`,
     );
   }
 }
@@ -235,7 +235,7 @@ if (!allowPlaceholders) {
   for (const [f, d] of docs) {
     if (d.placeholders.length) {
       warnings.push(
-        `unresolved placeholders ${[...new Set(d.placeholders)].join(" ")}: ${rel(f)} — run the bootstrap's placeholder pass`,
+        `unresolved placeholders ${[...new Set(d.placeholders)].join(" ")}: ${rel(f)} (run the bootstrap's placeholder pass)`,
       );
     }
   }
@@ -325,13 +325,13 @@ if (archiveIndexes.length) {
 // 11. solitary docs — zero outgoing wiki-links (dead ends; every doc weaves into the graph)
 for (const [f, d] of docs) {
   if (d.links.size === 0) {
-    warnings.push(`solitary doc (no outgoing wiki-links — weave it into the graph): ${rel(f)}`);
+    warnings.push(`solitary doc (no outgoing wiki-links; weave it into the graph): ${rel(f)}`);
   }
 }
 
 // ── Report ────────────────────────────────────────────────────────────
 const say = (s) => !quiet && console.log(s);
-say(`engram vault-check · ${files.length} docs · ${VAULT}`);
+say(`engraven vault-check · ${files.length} docs · ${VAULT}`);
 if (fixedCounts) say(`✎ refreshed ${fixedCounts} count directive(s)`);
 if (errors.length) {
   say(`\n${errors.length} error(s):`);

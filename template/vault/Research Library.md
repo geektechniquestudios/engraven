@@ -18,7 +18,7 @@ date: {{DATE}}
 
 | KB                                        | Docs | Focus                                                        |
 | ----------------------------------------- | ---- | ------------------------------------------------------------ |
-| [[Engram Memory System - Meta-Analysis]]  | <!-- count:kb:Engram-Memory-System -->9<!-- /count --> | How this vault + agent memory system works, and why |
+| [[Engraven Memory System - Meta-Analysis]]  | <!-- count:kb:Engraven-Memory-System -->9<!-- /count --> | How this vault + agent memory system works, and why |
 
 <!-- bootstrap/new-kb: register additional research KBs above, one row each:
      meta-analysis link, doc count, one-line focus. Create a new domain

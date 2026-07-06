@@ -1,0 +1,10 @@
+engraven vault-check · 2 docs · __VAULT__
+
+5 warning(s):
+  ⚠ stale count "vault-docs" in 00-Index.md: 9 → 2 (run --fix)
+  ⚠ stale count "vault-docs" in 00-Index.md: 9 → 2 (run --fix)
+  ⚠ stale count "kbs" in 00-Index.md: 3 → 0 (run --fix)
+  ⚠ unknown count directive "count:mystery" in 00-Index.md
+  ⚠ stale count "vault-docs" in NOTES.md: 0 → 2 (run --fix)
+
+✓ no errors (5 warnings)

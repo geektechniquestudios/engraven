@@ -1,0 +1,6 @@
+{
+  "projectSlug": "engraven-fixture-slug",
+  "vaultDir": "vault",
+  "memoryBudget": 20,
+  "topicFileSoftCap": 20
+}

@@ -1,0 +1,7 @@
+{
+  "projectSlug": "vault-fix-fixture",
+  "vaultDir": "vault",
+  "requireFrontmatter": ["tags", "date"],
+  "sessionArchiveDir": "Session-Archive",
+  "countFiles": ["NOTES.md"]
+}

@@ -1,6 +1,6 @@
-# Engram Bootstrap — Agent Runbook
+# Engraven Bootstrap — Agent Runbook
 
-> **You are a coding agent installing Engram into a human's project.** Follow
+> **You are a coding agent installing Engraven into a human's project.** Follow
 > this runbook phase by phase, in order. It is written for you, not the human.
 >
 > Non-negotiables:
@@ -25,9 +25,9 @@ your explanations are grounded. Keep `docs/KB-GUIDE.md` at hand for Phase 5.
 ## Phase 0 — Preflight
 
 1. Confirm you're inside the human's project (a git repo). If the working
-   directory is the *Engram clone itself*, ask the human for the path to
+   directory is the *Engraven clone itself*, ask the human for the path to
    their project and operate there. Call the project root `$TARGET` below;
-   the Engram clone `$ENGRAM`.
+   the Engraven clone `$ENGRAVEN`.
 2. Detect the harness you're running in (Claude Code, Codex, Cursor, other).
    You almost certainly know what you are; if genuinely unsure, ask.
 3. Detect what already exists in `$TARGET` and report it before touching
@@ -62,22 +62,22 @@ routing will match against):
 
 ## Phase 2 — Install the skeleton
 
-Copy from `$ENGRAM/template/` into `$TARGET`:
+Copy from `$ENGRAVEN/template/` into `$TARGET`:
 
 1. `template/vault/` → `$TARGET/docs/vault/` (or the path chosen in Phase 0).
-   This ships with one real KB — **Engram-Memory-System**, the system
+   This ships with one real KB — **Engraven-Memory-System**, the system
    documenting itself — plus `00-Index.md`, `Research Library.md`, and
    `Session-Archive/`. Keep it: it's the working example of every structure,
    and the human can graph it in Obsidian immediately.
-2. `template/engram.config.json` → `$TARGET/engram.config.json`. Set
+2. `template/engraven.config.json` → `$TARGET/engraven.config.json`. Set
    `vaultDir` to the chosen path and `projectSlug` to the repo directory
    name.
-3. `$ENGRAM/scripts/vault-check.mjs` and `$ENGRAM/scripts/validate-memory.sh`
+3. `$ENGRAVEN/scripts/vault-check.mjs` and `$ENGRAVEN/scripts/validate-memory.sh`
    → `$TARGET/scripts/`. The target must be self-contained — no runtime
-   dependency on the Engram clone.
+   dependency on the Engraven clone.
 4. Claude Code only: `template/.claude/rules/` and `template/.claude/skills/`
    → `$TARGET/.claude/` (merge with any existing contents, never replace).
-5. Optionally (**ask**): `template/.github/workflows/engram-ci.yml` →
+5. Optionally (**ask**): `template/.github/workflows/engraven-ci.yml` →
    `$TARGET/.github/workflows/` so memory integrity runs in CI.
 6. Rewrite the `{{PLACEHOLDER}}` tokens in everything you copied
    (`{{PROJECT_NAME}}`, `{{VAULT_DIR}}`, dates) with real values.
@@ -107,7 +107,7 @@ discovers it by glob).
 
 - If no `MEMORY.md` exists: instantiate `template/MEMORY.template.md` there,
   placeholders filled from the interview.
-- If one exists: **merge** — add Engram's section structure around existing
+- If one exists: **merge** — add Engraven's section structure around existing
   content; delete nothing you didn't write.
 
 **Other harnesses:** the compact router is part of the `AGENTS-SECTION`
@@ -120,7 +120,7 @@ Populate from the interview:
   `feedback` topic file (with **why** and **how to apply**) plus a router
   row. Claude Code only — on repo-shared-only harnesses, put these in the
   instruction block instead.
-- **Vault router rows** ← one row for the Engram KB, plus rows for the KBs
+- **Vault router rows** ← one row for the Engraven KB, plus rows for the KBs
   you're about to seed in Phase 5.
 
 Run `bash scripts/validate-memory.sh` — must pass before Phase 5.
@@ -167,7 +167,7 @@ earns growth from real work, not speculation.
 Print a closing cheat sheet for the human, roughly:
 
 ```
-Engram is installed. What you now have:
+Engraven is installed. What you now have:
   docs/vault/           your project's long-term memory (open it in Obsidian!)
   <router>              a ≤200-line index auto-loaded into every session
   scripts/              two linters that keep memory honest (wired into CI: yes/no)
@@ -191,7 +191,7 @@ House rules:
 
 Then confirm both linters pass one final time, summarize what was installed
 in 3-4 sentences, and — if you changed files in a git repo — offer to commit
-the changes as an `engram-install` commit (let the human decide about
+the changes as an `engraven-install` commit (let the human decide about
 branching/PR per their own workflow).
 
 **Do not** leave the session with red linters, unfilled placeholders, or an

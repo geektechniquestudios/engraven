@@ -1,0 +1,7 @@
+{
+  "projectSlug": "vault-bad-fixture",
+  "vaultDir": "vault",
+  "requireFrontmatter": ["tags", "date"],
+  "sessionArchiveDir": "Session-Archive",
+  "countFiles": ["COUNTS.md", "missing-count-file.md"]
+}

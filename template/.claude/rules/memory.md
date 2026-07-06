@@ -2,7 +2,7 @@
 paths:
   - "scripts/validate-memory.sh"
   - "scripts/vault-check.mjs"
-  - "engram.config.json"
+  - "engraven.config.json"
 ---
 
 # Memory System Rules
@@ -14,7 +14,7 @@ the memory system's repo-side files.
 If you are editing `MEMORY.md` (the router):
 
 - Keep it within the auto-load budget (`memoryBudget` in
-  `engram.config.json`, default 200 lines) — lines past the budget are
+  `engraven.config.json`, default 200 lines) — lines past the budget are
   silently truncated at session start.
 - Routing tables stay near the top (primacy: models attend most to the top
   of loaded context). Session essentials above routers, routers above prose.

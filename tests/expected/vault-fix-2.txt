@@ -1,0 +1,7 @@
+engraven vault-check · 2 docs · __VAULT__
+✎ refreshed 4 count directive(s)
+
+1 warning(s):
+  ⚠ unknown count directive "count:mystery" in 00-Index.md
+
+✓ no errors (1 warnings)

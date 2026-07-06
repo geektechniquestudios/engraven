@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# validate-memory.sh — Engram router + topic-file linter (bash + coreutils only).
+# validate-memory.sh — Engraven router + topic-file linter (bash + coreutils only).
 #
 # Checks:
 #   1. MEMORY.md (the router) exists
@@ -17,7 +17,7 @@
 #   bash scripts/validate-memory.sh --self-test         # verify the linter itself
 #
 # Memory dir resolution order:
-#   --memory-dir flag → $ENGRAM_MEMORY_DIR → auto-discovery under
+#   --memory-dir flag → $ENGRAVEN_MEMORY_DIR → auto-discovery under
 #   ~/.claude/projects/*<projectSlug>*/memory (shortest path wins — worktree
 #   encodings strictly extend the main project's encoding).
 #
@@ -41,12 +41,12 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-# ── Config (engram.config.json in cwd; flat keys, defaults if absent) ──
+# ── Config (engraven.config.json in cwd; flat keys, defaults if absent) ──
 cfg() { # cfg <key> <default>
   local key="$1" default="$2"
-  if [[ -f engram.config.json ]] && command -v node >/dev/null 2>&1; then
+  if [[ -f engraven.config.json ]] && command -v node >/dev/null 2>&1; then
     node -e "
-      const c = JSON.parse(require('fs').readFileSync('engram.config.json','utf8'));
+      const c = JSON.parse(require('fs').readFileSync('engraven.config.json','utf8'));
       const v = c['$key'];
       if (v !== undefined && v !== null) process.stdout.write(String(v));
     " 2>/dev/null | grep . || echo "$default"
@@ -69,7 +69,7 @@ ok()   { echo "  ✓ $1"; }
 # ── Memory directory discovery ────────────────────────────────────────
 find_memory_dir() {
   if [[ -n "$MEMORY_DIR_ARG" ]]; then echo "$MEMORY_DIR_ARG"; return; fi
-  if [[ -n "${ENGRAM_MEMORY_DIR:-}" ]]; then echo "$ENGRAM_MEMORY_DIR"; return; fi
+  if [[ -n "${ENGRAVEN_MEMORY_DIR:-}" ]]; then echo "$ENGRAVEN_MEMORY_DIR"; return; fi
   local base="$HOME/.claude/projects"
   [[ -d "$base" ]] || { echo ""; return; }
   local best="" d
@@ -181,7 +181,7 @@ run_checks() {
     done
     (( refs_bad == 0 )) && ok "all vault_refs resolve"
   else
-    warn "vault dir '$VAULT_DIR' not found from $(pwd) — skipping vault_refs check"
+    warn "vault dir '$VAULT_DIR' not found from $(pwd) (skipping vault_refs check)"
   fi
 }
 
@@ -245,11 +245,11 @@ EOF
 MEMORY_DIR="$(find_memory_dir)"
 if [[ -z "$MEMORY_DIR" || ! -d "$MEMORY_DIR" ]]; then
   echo "No memory directory found for project '$PROJECT_SLUG' — skipping."
-  echo "(normal on CI runners; locally, pass --memory-dir or set ENGRAM_MEMORY_DIR)"
+  echo "(normal on CI runners; locally, pass --memory-dir or set ENGRAVEN_MEMORY_DIR)"
   exit 0
 fi
 
-echo "engram validate-memory · $MEMORY_DIR"
+echo "engraven validate-memory · $MEMORY_DIR"
 run_checks "$MEMORY_DIR"
 
 echo "=== Summary ==="

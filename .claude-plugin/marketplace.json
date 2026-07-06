@@ -1,0 +1,16 @@
+{
+  "name": "engraven",
+  "owner": {
+    "name": "Geektechnique Studios"
+  },
+  "description": "Engraven: compounding memory for coding agents.",
+  "plugins": [
+    {
+      "name": "engraven",
+      "source": "./",
+      "description": "Install and maintain an Engraven memory system: guided bootstrap into your project, plus a doctor that checks vault and router health.",
+      "category": "productivity",
+      "tags": ["memory", "knowledge-base", "obsidian", "agents"]
+    }
+  ]
+}

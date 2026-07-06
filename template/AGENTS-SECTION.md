@@ -1,9 +1,9 @@
 <!-- ══════════════════════════════════════════════════════════════════
-     ENGRAM MEMORY PROTOCOL — appended to AGENTS.md by the Engram bootstrap
-     https://github.com/geektechniquestudios/engram
+     ENGRAVEN MEMORY PROTOCOL — appended to AGENTS.md by the Engraven bootstrap
+     https://github.com/geektechniquestudios/engraven
      ══════════════════════════════════════════════════════════════════ -->
 
-## Memory System (Engram)
+## Memory System (Engraven)
 
 This project keeps its long-term knowledge in `{{VAULT_DIR}}/` — plain
 markdown, wiki-linked, navigable. **Lookup protocol:** scan the router below;
@@ -15,7 +15,7 @@ three-tier structure: meta-analysis (entry point) → section hub → doc.
 
 | Encounter...                                 | Read                                                      |
 | -------------------------------------------- | --------------------------------------------------------- |
-| How this memory system works; where facts go | `Engram-Memory-System/Engram Memory System - Meta-Analysis.md` |
+| How this memory system works; where facts go | `Engraven-Memory-System/Engraven Memory System - Meta-Analysis.md` |
 | {{ENCOUNTER_1}}                              | `{{ARCHITECTURE_KB_PATH}}`                                |
 | {{ENCOUNTER_2}}                              | `{{DECISIONS_KB_PATH}}`                                   |
 | What happened in a past session              | `Session-Archive/Session Archive Index.md`                |
@@ -35,4 +35,4 @@ code when stakes are high. After vault changes run
 `node scripts/vault-check.mjs`; treat red as a failing test. Never put
 secrets or personal data in memory files.
 
-<!-- ══════════════════ end Engram memory protocol ══════════════════ -->
+<!-- ══════════════════ end Engraven memory protocol ══════════════════ -->

@@ -1,0 +1,25 @@
+engraven vault-check · 13 docs · __VAULT__
+
+2 error(s):
+  ✗ broken link: [[Missing Doc]] in 00-Index.md
+  ✗ duplicate title "Alpha Doc": Alpha Doc.md · KB1/Alpha Doc.md (wiki-links resolve ambiguously)
+
+18 warning(s):
+  ⚠ missing frontmatter [tags, date]: Orphan Doc.md
+  ⚠ orphan doc (nothing links to it): KB2/Beta Uncovered.md
+  ⚠ orphan doc (nothing links to it): KB3/Gamma - Meta-Analysis.md
+  ⚠ orphan doc (nothing links to it): Orphan Doc.md
+  ⚠ KB "KB1" has no "* - Meta-Analysis.md" entry point
+  ⚠ not covered by its KB's hub/meta-analysis: KB1/Alpha Doc.md
+  ⚠ not covered by its KB's hub/meta-analysis: KB2/Beta Uncovered.md
+  ⚠ stub doc (2 non-empty lines): Orphan Doc.md
+  ⚠ stale count "kbs" in 00-Index.md: 99 → 3 (run --fix)
+  ⚠ stale count "archive-entries" in 00-Index.md: 0 → 2 (run --fix)
+  ⚠ stale count "kb:KB2" in 00-Index.md: 3 → 4 (run --fix)
+  ⚠ unknown count directive "count:unknown-name" in 00-Index.md
+  ⚠ stale count "vault-docs" in COUNTS.md: 999 → 13 (run --fix)
+  ⚠ unknown count directive "count:kb:Nope" in COUNTS.md
+  ⚠ KB "KB3" is not reachable from an entry point (00-Index / Research Library)
+  ⚠ archive entry not listed in the archive index: Session-Archive/2026-01-02 Session.md
+  ⚠ solitary doc (no outgoing wiki-links; weave it into the graph): Orphan Doc.md
+  ⚠ solitary doc (no outgoing wiki-links; weave it into the graph): Session-Archive/2026-01-02 Session.md

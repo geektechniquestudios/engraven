@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "engraven.config.json",
+  "description": "Configuration for the Engraven memory system's linters.",
+  "type": "object",
+  "properties": {
+    "projectSlug": {
+      "type": "string",
+      "description": "Substring used to discover the harness's memory directory for this project (defaults to the repo directory name)."
+    },
+    "vaultDir": {
+      "type": "string",
+      "default": "docs/vault",
+      "description": "Repo-relative path to the knowledge vault."
+    },
+    "memoryBudget": {
+      "type": "integer",
+      "default": 200,
+      "minimum": 20,
+      "description": "Hard line budget for the router (MEMORY.md). Claude Code auto-loads only the first 200 lines."
+    },
+    "topicFileSoftCap": {
+      "type": "integer",
+      "default": 150,
+      "minimum": 20,
+      "description": "Warning threshold for topic-file length; past it, promote deep content to the vault."
+    },
+    "requireFrontmatter": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": ["tags", "date"],
+      "description": "Frontmatter keys every vault doc must carry."
+    },
+    "sessionArchiveDir": {
+      "type": "string",
+      "default": "Session-Archive",
+      "description": "Vault subdirectory holding session archive entries (exempt from orphan/KB-structure checks)."
+    },
+    "countFiles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "description": "Repo-relative files outside the vault whose <!-- count:name --> directives vault-check should verify (and rewrite with --fix), e.g. [\"CLAUDE.md\", \"README.md\"]."
+    }
+  },
+  "additionalProperties": false
+}

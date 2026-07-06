@@ -1,0 +1,11 @@
+{
+  "name": "engraven",
+  "description": "Compounding memory for coding agents. An Obsidian-based knowledge graph that lints like code, with a research pipeline that grows it.",
+  "version": "0.2.0",
+  "author": {
+    "name": "Geektechnique Studios"
+  },
+  "homepage": "https://github.com/geektechniquestudios/engraven",
+  "repository": "https://github.com/geektechniquestudios/engraven",
+  "license": "MIT"
+}

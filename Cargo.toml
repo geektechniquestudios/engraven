@@ -1,0 +1,18 @@
+[package]
+name = "engraven"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT"
+description = "Linters for the Engraven memory system: vault integrity (engraven vault) and router/topic-file health (engraven memory)."
+repository = "https://github.com/geektechniquestudios/engraven"
+keywords = ["lint", "memory", "vault", "knowledge-base", "obsidian"]
+categories = ["command-line-utilities", "development-tools"]
+
+[dependencies]
+regex = "1"
+serde_json = "1"
+
+[profile.release]
+lto = "thin"
+strip = "symbols"

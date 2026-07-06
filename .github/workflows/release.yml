@@ -1,0 +1,42 @@
+name: Release binaries
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            name: engraven-x86_64-linux
+          - os: ubuntu-24.04-arm
+            name: engraven-aarch64-linux
+          - os: macos-13
+            name: engraven-x86_64-macos
+          - os: macos-latest
+            name: engraven-aarch64-macos
+          - os: windows-latest
+            name: engraven-x86_64-windows.exe
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release
+      - name: Stage binary
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            cp target/release/engraven.exe "${{ matrix.name }}"
+          else
+            cp target/release/engraven "${{ matrix.name }}"
+          fi
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.name }}

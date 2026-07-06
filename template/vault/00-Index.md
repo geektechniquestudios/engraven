@@ -18,7 +18,7 @@ date: {{DATE}}
 | **Ways of working**                             |                                                               |
 | <!-- bootstrap: Decisions KB rows go here -->   |                                                               |
 | **The memory system itself**                    |                                                               |
-| Understand how this vault + memory works        | [[Engram Memory System - Meta-Analysis]]                      |
+| Understand how this vault + memory works        | [[Engraven Memory System - Meta-Analysis]]                      |
 | Decide where a new piece of knowledge belongs   | [[What Goes Where]]                                           |
 | Fix a red memory linter / broken links          | [[Memory Hygiene and Verification]]                           |
 | See what happened in recent sessions            | [[Session Archive Index]]                                     |
@@ -37,4 +37,4 @@ No matching row → check [[Research Library]] for research KBs, then explore.
 
 ---
 
-_Maintained by the agents that work in this repo. Structure: [Engram](https://github.com/geektechniquestudios/engram)._
+_Maintained by the agents that work in this repo. Structure: [Engraven](https://github.com/geektechniquestudios/engraven)._

@@ -1,0 +1,7 @@
+{
+  "projectSlug": "vault-clean-fixture",
+  "vaultDir": "vault",
+  "requireFrontmatter": ["tags", "date"],
+  "sessionArchiveDir": "Session-Archive",
+  "countFiles": []
+}

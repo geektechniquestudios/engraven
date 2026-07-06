@@ -8,8 +8,8 @@ argument-hint: "<subject> (e.g. 'payments domain', 'deploy operations')"
 
 **Subject:** $ARGUMENTS
 
-Build a three-tier KB for the subject. The full reasoning lives in Engram's
-KB-GUIDE (https://github.com/geektechniquestudios/engram/blob/main/docs/KB-GUIDE.md);
+Build a three-tier KB for the subject. The full reasoning lives in Engraven's
+KB-GUIDE (https://github.com/geektechniquestudios/engraven/blob/main/docs/KB-GUIDE.md);
 this skill is the executable version.
 
 ## Step 0 — Gate

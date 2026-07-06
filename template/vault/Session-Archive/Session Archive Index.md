@@ -18,7 +18,7 @@ append-only; git merges them across branches and agents into one history.
 
 <!-- newest first; keep ~20 rows — older entries stay on disk, greppable.
      The archive-session skill maintains this table. The first entry is
-     written by the Engram bootstrap when it archives its own installation. -->
+     written by the Engraven bootstrap when it archives its own installation. -->
 
 ## Finding older sessions
 
