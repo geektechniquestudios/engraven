@@ -33,13 +33,13 @@ fn bad_memory_dir_fails_and_aborts_before_the_summary() {
 
     // The bad fixture covers every check the linter can fail.
     for needle in [
-        "MEMORY.md is 22 lines — lines past 20 are silently truncated at session start", // 2
+        "MEMORY.md is 22 lines (lines past 20 are silently truncated at session start)", // 2
         "router references missing topic file: aaa_gone.md",                             // 3
         "router references missing topic file: zzz_gone.md",                             // 3
         "orphan topic file (no router entry): topic_orphan.md",                          // 4
         "topic_bad.md missing frontmatter field: description (required: name, description, metadata.type)", // 5
         "topic_bad.md missing frontmatter field: type (required: name, description, metadata.type)", // 5
-        "topic_long.md is 22 lines — promote deep content to the vault, keep a pointer", // 6
+        "topic_long.md is 22 lines (promote deep content to the vault, keep a pointer)", // 6
         "topic_bad.md vault_ref does not resolve: \"Ghost Doc\" (no Ghost Doc.md under vault)", // 7
     ] {
         assert!(text.contains(needle), "missing: {needle}");
@@ -53,7 +53,7 @@ fn failing_run_without_vault_ref_errors_reaches_the_summary() {
     let text = stdout_of(&out);
     assert_eq!(text, golden("memory-bad2.txt", &[]));
     assert!(text.contains("=== Summary ==="));
-    assert!(text.ends_with("FAIL — fix memory errors before moving on\n"));
+    assert!(text.ends_with("FAIL: fix memory errors before moving on\n"));
     assert_eq!(code_of(&out), 1);
 }
 

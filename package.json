@@ -1,6 +1,6 @@
 {
   "name": "engraven",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Long-term memory for coding agents. An Obsidian-based knowledge graph that lints like code, with a research pipeline that grows it.",
   "type": "module",

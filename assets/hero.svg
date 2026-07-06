@@ -161,7 +161,7 @@
   </g>
 
   <text class="tiny m" x="591" y="270" text-anchor="middle">docs · deep content · leads with the answer</text>
-  <text class="tiny m" x="591" y="292" text-anchor="middle" fill="#6e7681">three tiers down, wiki-links across — a graph, not a tree</text>
+  <text class="tiny m" x="591" y="292" text-anchor="middle" fill="#6e7681">three tiers down, wiki-links across: a graph, not a tree</text>
 
   <!-- ══ SESSION ARCHIVE ══ -->
   <rect x="350" y="322" width="482" height="52" rx="10" fill="#101613" stroke="#2b4534"/>
@@ -189,7 +189,7 @@
 
   <!-- ══ cycling captions ══ -->
   <g class="cap">
-    <text class="m cap1" x="48" y="414" fill="#fbbf24" opacity="0">① drill-down · it never asks "what's dev-east?" — the row already routes: auth → tunnel → query</text>
+    <text class="m cap1" x="48" y="414" fill="#fbbf24" opacity="0">① drill-down · it never asks "what's dev-east?" · the row already routes: auth → tunnel → query</text>
     <text class="m cap2" x="48" y="414" fill="#67e8f9" opacity="0">② deep link · a trigger row can point straight at any doc: one hop</text>
     <text class="m cap3" x="48" y="414" fill="#a78bfa" opacity="0">③ synthesis · a wiki-link bridges two KBs mid-read</text>
     <text class="m cap4" x="48" y="414" fill="#3fb950" opacity="0">④ episodic · the session archive keeps what was tried, and why</text>

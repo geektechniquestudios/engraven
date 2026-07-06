@@ -1,2 +1,2 @@
-No memory directory found for project 'engraven-fixture-slug' — skipping.
+No memory directory found for project 'engraven-fixture-slug'; skipping.
 (normal on CI runners; locally, pass --memory-dir or set ENGRAVEN_MEMORY_DIR)

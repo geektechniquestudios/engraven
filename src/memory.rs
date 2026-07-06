@@ -113,7 +113,7 @@ pub fn run(args: &MemoryArgs, out: &mut dyn Write) -> i32 {
     if !usable {
         let _ = writeln!(
             out,
-            "No memory directory found for project '{}' — skipping.",
+            "No memory directory found for project '{}'; skipping.",
             cfg.project_slug
         );
         let _ = writeln!(
@@ -143,10 +143,10 @@ pub fn run(args: &MemoryArgs, out: &mut dyn Write) -> i32 {
     let _ = writeln!(out, "Errors:   {errors}");
     let _ = writeln!(out, "Warnings: {warnings}");
     if errors > 0 {
-        let _ = writeln!(out, "FAIL — fix memory errors before moving on");
+        let _ = writeln!(out, "FAIL: fix memory errors before moving on");
         return 1;
     }
-    let _ = writeln!(out, "PASS — memory system is healthy");
+    let _ = writeln!(out, "PASS: memory system is healthy");
     0
 }
 
@@ -239,7 +239,7 @@ fn run_checks(
     let lines = count_newlines(Path::new(&memory_md)).unwrap_or(0) as i64;
     if lines > cfg.budget {
         r.err(&format!(
-            "MEMORY.md is {lines} lines — lines past {} are silently truncated at session start",
+            "MEMORY.md is {lines} lines (lines past {} are silently truncated at session start)",
             cfg.budget
         ));
     } else {
@@ -305,7 +305,7 @@ fn run_checks(
         let lines = count_newlines(Path::new(&format!("{dir}/{name}"))).unwrap_or(0) as i64;
         if lines > cfg.soft_cap {
             r.warn(&format!(
-                "{name} is {lines} lines — promote deep content to the vault, keep a pointer"
+                "{name} is {lines} lines (promote deep content to the vault, keep a pointer)"
             ));
             oversize = true;
         }

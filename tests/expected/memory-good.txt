@@ -16,4 +16,4 @@ Checking vault_refs resolve...
 === Summary ===
 Errors:   0
 Warnings: 0
-PASS — memory system is healthy
+PASS: memory system is healthy
