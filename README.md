@@ -4,7 +4,7 @@
 
 **Long-term memory for coding agents: an Obsidian-based knowledge graph that lints like code, with a research pipeline that grows it.**
 
-*Engraven, as in engraved: a trace cut in deep enough to stay. This one lives in your repo.*
+*Engraven, as in engraved: the idea that what your agents learn is worth cutting in deep enough to stay. This repo is one working version of it, yours if you want it.*
 
 [![CI](https://github.com/geektechniquestudios/engraven/actions/workflows/ci.yml/badge.svg)](https://github.com/geektechniquestudios/engraven/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-3fb950)](LICENSE)
@@ -14,7 +14,7 @@
 
 <img src="assets/graph.svg" width="1000" alt="An Obsidian-style knowledge graph of a mature Engraven vault: hundreds of documents as dots, clustered and colored by knowledge base, densely cross-linked. Four lookups land four different ways: a three-hop drill-down ending at a dev-east access runbook, a one-hop deep link, a cross-KB wiki-link read, and an episodic read into the session archive, with each hop naming the doc it lands on while a few of its links glow violet. Then a new knowledge base forms while stale docs elsewhere are flagged red and repaired green.">
 
-*Every dot is a doc, every line is a `[[wiki-link]]`, every color is a knowledge base.<br>Engraven is the extracted skeleton of a real system that grew to 3,800+ docs, 29 research KBs, and 386 section hubs, still routed by one index under 200 lines.*
+*Every dot is a doc, every line is a `[[wiki-link]]`, every color is a knowledge base.<br>Engraven is the extracted skeleton of a real system that grew to roughly 3,800 docs, 29 research KBs, and 386 section hubs, still routed by one index under 200 lines.*
 
 </div>
 
@@ -54,7 +54,7 @@ Set up the Engraven memory system in this project.
 ### What it needs
 
 - **git and a repo.** That is the whole platform. No database, no embeddings, no service, and nothing phones home.
-- **One way to run the checks.** Either the `engraven` CLI, a single Rust binary (grab it from [Releases](https://github.com/geektechniquestudios/engraven/releases) or `cargo install --git https://github.com/geektechniquestudios/engraven`), or the bundled scripts: `vault-check.mjs` needs Node 18+ with zero packages, and `validate-memory.sh` needs bash. Same checks, same output, enforced by a parity gate in this repo's CI. The bootstrap wires your CI to run the `engraven` binary (a small static download on the runner) with the vendored scripts as the automatic fallback, so integrity is enforced by the same Rust tool this repo uses on itself. You never need a Rust toolchain unless you build from source.
+- **One way to run the checks.** Either the `engraven` CLI, a single Rust binary (grab it from [Releases](https://github.com/geektechniquestudios/engraven/releases) or `cargo install --git https://github.com/geektechniquestudios/engraven`), or the bundled scripts: `vault-check.mjs` needs Node 18+ with zero packages, and `validate-memory.sh` needs bash. Same checks, same output, verified by a parity gate in this repo's CI. The bootstrap wires your CI to prefer the binary (a small static download on the runner) with the vendored scripts as the automatic fallback, and you never need a Rust toolchain unless you build from source.
 - **Obsidian is optional.** The vault is an Obsidian vault by construction, but it is all plain markdown; the app just gives you the graph view of it.
 
 ## Four ways a lookup lands
@@ -65,7 +65,7 @@ Set up the Engraven memory system in this project.
 
 Retrieval is routing, not search, and the routes have shapes:
 
-1. **Drill-down.** Router row to meta-analysis to section hub to doc. Three hops is the worst case at any vault size; the three-tier structure is the search algorithm. In the demo, "how many namespaces are in dev-east?" never triggers "what is dev-east? how do I connect?". The row fires on your own shorthand and lands on the runbook: the AWS auth command, the SSM tunnel, then the query.
+1. **Drill-down.** Router row to meta-analysis to section hub to doc. Three hops is the worst case at any vault size; the three-tier structure is the search algorithm. In the demo, "how many namespaces are in dev-east?" never stalls on "what is dev-east? how do I connect?". The row fires on your own shorthand and lands on the runbook: the AWS auth command, the SSM tunnel, then the query.
 2. **Deep link.** Rows can point straight at a doc. Hot paths get flatter over time.
 3. **Cross-KB synthesis.** Wiki-links bridge knowledge bases, so one read joins what two domains each half-know.
 4. **Episodic.** "Didn't we try this before?" routes into the session archive, where the why behind past decisions survives the context window that produced it.

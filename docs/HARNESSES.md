@@ -52,7 +52,7 @@ other harnesses put everything in the vault.
 
 ## Cursor and rules-file harnesses
 
-Add a always-on rule (e.g. `.cursor/rules/engraven.mdc`) containing the same
+Add an always-on rule (e.g. `.cursor/rules/engraven.mdc`) containing the same
 lookup-protocol block and a pointer to `docs/vault/00-Index.md`. Path-scoped
 rules map naturally onto Cursor's glob-scoped rules.
 

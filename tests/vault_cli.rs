@@ -197,7 +197,10 @@ fn version_and_help_surface() {
     let dir = fixture("vault-clean");
 
     let version = run_in(&dir, &["--version"], &[]);
-    assert_eq!(stdout_of(&version), "engraven 0.2.0\n");
+    assert_eq!(
+        stdout_of(&version),
+        format!("engraven {}\n", env!("CARGO_PKG_VERSION"))
+    );
     assert_eq!(code_of(&version), 0);
 
     let help = run_in(&dir, &["--help"], &[]);
@@ -243,7 +246,7 @@ fn check_runs_vault_then_memory_and_combines_exit_codes() {
         &[("__VAULT__", &vault_path_of("vault-clean"))],
     );
     let expected = format!(
-        "{vault_part}No memory directory found for project 'vault-clean-fixture' — skipping.\n\
+        "{vault_part}No memory directory found for project 'vault-clean-fixture'; skipping.\n\
          (normal on CI runners; locally, pass --memory-dir or set ENGRAVEN_MEMORY_DIR)\n"
     );
     assert_eq!(stdout_of(&out), expected);

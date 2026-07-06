@@ -99,7 +99,7 @@ run_checks() {
   local lines
   lines=$(wc -l < "$memory_md" | tr -d ' ')
   if (( lines > BUDGET )); then
-    err "MEMORY.md is $lines lines — lines past $BUDGET are silently truncated at session start"
+    err "MEMORY.md is $lines lines (lines past $BUDGET are silently truncated at session start)"
   else
     ok "MEMORY.md is $lines/$BUDGET lines"
   fi
@@ -155,7 +155,7 @@ run_checks() {
     [[ "$name" == "MEMORY.md" ]] && continue
     lines=$(wc -l < "$f" | tr -d ' ')
     if (( lines > SOFT_CAP )); then
-      warn "$name is $lines lines — promote deep content to the vault, keep a pointer"
+      warn "$name is $lines lines (promote deep content to the vault, keep a pointer)"
       oversize=1
     fi
   done
@@ -244,7 +244,7 @@ EOF
 
 MEMORY_DIR="$(find_memory_dir)"
 if [[ -z "$MEMORY_DIR" || ! -d "$MEMORY_DIR" ]]; then
-  echo "No memory directory found for project '$PROJECT_SLUG' — skipping."
+  echo "No memory directory found for project '$PROJECT_SLUG'; skipping."
   echo "(normal on CI runners; locally, pass --memory-dir or set ENGRAVEN_MEMORY_DIR)"
   exit 0
 fi
@@ -256,7 +256,7 @@ echo "=== Summary ==="
 echo "Errors:   $ERRORS"
 echo "Warnings: $WARNINGS"
 if (( ERRORS > 0 )); then
-  echo "FAIL — fix memory errors before moving on"
+  echo "FAIL: fix memory errors before moving on"
   exit 1
 fi
-echo "PASS — memory system is healthy"
+echo "PASS: memory system is healthy"

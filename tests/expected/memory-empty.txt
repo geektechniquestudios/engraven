@@ -4,4 +4,4 @@ Checking router exists...
 === Summary ===
 Errors:   1
 Warnings: 0
-FAIL — fix memory errors before moving on
+FAIL: fix memory errors before moving on
