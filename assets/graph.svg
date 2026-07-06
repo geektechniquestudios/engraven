@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">
-  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Five lookups land five different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, an episodic archive read, and finally a read into a knowledge base that grew during the demo), each hop naming the doc it lands on while stale docs elsewhere are repaired.</title>
+  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Six lookups land six different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, an episodic archive read, a read into a knowledge base that grew during the demo, and a cross-KB read riding one of the synthesis links that welded the new KB to its neighbors), each hop naming the doc it lands on while stale docs elsewhere are repaired.</title>
   <style>
     .i1 { animation: i1 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
     @keyframes i1 { 0%,1%{transform:scale(.4);opacity:.9} 4.5%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
@@ -94,23 +94,55 @@
     .nkh { animation: nkh 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
     @keyframes nkh { 0%,60%{transform:scale(.4);opacity:0} 60.8%{opacity:.85} 64%{transform:scale(2.1);opacity:0} 100%{transform:scale(2.1);opacity:0} }
     .nkl { animation: nkl 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes nkl { 0%,61.5%{opacity:0} 62.5%{opacity:1} 91.6%{opacity:1} 93%,100%{opacity:0} }
+    @keyframes nkl { 0%,61.5%{opacity:0} 62.5%{opacity:1} 92.6%{opacity:1} 94%,100%{opacity:0} }
+    .nsp { animation: nsp 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes nsp { 0%,60.8%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 61%{opacity:.6;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 62.8%{stroke-dashoffset:0;opacity:.45} 65%{stroke-dashoffset:0;opacity:.3} 95.5%{stroke-dashoffset:0;opacity:.28} 99.2%,100%{opacity:0} }
+    .wd0 { animation: wd0 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes wd0 { 0%,61.5%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 61.75%{opacity:.85;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 64.3%{stroke-dashoffset:0;opacity:.7} 67.3%{stroke-dashoffset:0;opacity:.34} 95.5%{stroke-dashoffset:0;opacity:.3} 99.2%,100%{stroke-dashoffset:0;opacity:0} }
+    .cwd0 { animation: cwd0 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cwd0 { 0%,61.5%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 61.75%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 64.3%{stroke-dashoffset:7;opacity:.9} 65.9%,100%{stroke-dashoffset:7;opacity:0} }
+    .wd1 { animation: wd1 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes wd1 { 0%,62.7%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 62.95%{opacity:.85;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 65.2%{stroke-dashoffset:0;opacity:.7} 68.2%{stroke-dashoffset:0;opacity:.34} 95.5%{stroke-dashoffset:0;opacity:.3} 99.2%,100%{stroke-dashoffset:0;opacity:0} }
+    .cwd1 { animation: cwd1 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cwd1 { 0%,62.7%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 62.95%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 65.2%{stroke-dashoffset:7;opacity:.9} 66.8%,100%{stroke-dashoffset:7;opacity:0} }
+    .wd2 { animation: wd2 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes wd2 { 0%,63.9%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 64.15%{opacity:.85;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 66.2%{stroke-dashoffset:0;opacity:.7} 69.2%{stroke-dashoffset:0;opacity:.34} 95.5%{stroke-dashoffset:0;opacity:.3} 99.2%,100%{stroke-dashoffset:0;opacity:0} }
+    .cwd2 { animation: cwd2 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cwd2 { 0%,63.9%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 64.15%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 66.2%{stroke-dashoffset:7;opacity:.9} 67.8%,100%{stroke-dashoffset:7;opacity:0} }
     .i5 { animation: i5 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
     @keyframes i5 { 0%,66.5%{transform:scale(.4);opacity:.9} 70%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
     .l5a { animation: l5a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes l5a { 0%,67%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 67.25%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 70.5%{stroke-dashoffset:0;opacity:.88} 87.5%{stroke-dashoffset:0;opacity:.65} 90%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes l5a { 0%,67%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 67.25%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 69.8%{stroke-dashoffset:0;opacity:.88} 77.5%{stroke-dashoffset:0;opacity:.65} 80%,100%{stroke-dashoffset:0;opacity:0} }
     .cl5a { animation: cl5a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes cl5a { 0%,67%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 67.25%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 70.5%{stroke-dashoffset:7;opacity:.9} 72.1%,100%{stroke-dashoffset:7;opacity:0} }
+    @keyframes cl5a { 0%,67%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 67.25%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 69.8%{stroke-dashoffset:7;opacity:.9} 71.4%,100%{stroke-dashoffset:7;opacity:0} }
     .f5a { animation: f5a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes f5a { 0%,70.1%{opacity:0} 70.8%{opacity:.85} 72.3%{opacity:.65} 73.9%{opacity:0} 100%{opacity:0} }
+    @keyframes f5a { 0%,69.4%{opacity:0} 70.1%{opacity:.85} 71.6%{opacity:.65} 73.2%{opacity:0} 100%{opacity:0} }
     .l5b { animation: l5b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes l5b { 0%,71%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 71.25%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 73.8%{stroke-dashoffset:0;opacity:.88} 87.5%{stroke-dashoffset:0;opacity:.65} 90%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes l5b { 0%,70.3%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 70.55%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 72.8%{stroke-dashoffset:0;opacity:.88} 77.5%{stroke-dashoffset:0;opacity:.65} 80%,100%{stroke-dashoffset:0;opacity:0} }
     .cl5b { animation: cl5b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes cl5b { 0%,71%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 71.25%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 73.8%{stroke-dashoffset:7;opacity:.9} 75.4%,100%{stroke-dashoffset:7;opacity:0} }
+    @keyframes cl5b { 0%,70.3%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 70.55%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 72.8%{stroke-dashoffset:7;opacity:.9} 74.4%,100%{stroke-dashoffset:7;opacity:0} }
     .f5b { animation: f5b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes f5b { 0%,73.4%{opacity:0} 74.1%{opacity:.85} 75.6%{opacity:.65} 77.2%{opacity:0} 100%{opacity:0} }
+    @keyframes f5b { 0%,72.4%{opacity:0} 73.1%{opacity:.85} 74.6%{opacity:.65} 76.2%{opacity:0} 100%{opacity:0} }
     .t5b { animation: t5b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes t5b { 0%,73.8%{opacity:0} 74.8%{opacity:1} 88.6%{opacity:1} 90%,100%{opacity:0} }
+    @keyframes t5b { 0%,72.8%{opacity:0} 73.8%{opacity:1} 78.1%{opacity:1} 79.5%,100%{opacity:0} }
+    .i6 { animation: i6 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes i6 { 0%,80.5%{transform:scale(.4);opacity:.9} 84%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
+    .l6a { animation: l6a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l6a { 0%,81%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 81.25%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 83.4%{stroke-dashoffset:0;opacity:.88} 93.5%{stroke-dashoffset:0;opacity:.65} 96%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl6a { animation: cl6a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl6a { 0%,81%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 81.25%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 83.4%{stroke-dashoffset:7;opacity:.9} 85%,100%{stroke-dashoffset:7;opacity:0} }
+    .f6a { animation: f6a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f6a { 0%,83%{opacity:0} 83.7%{opacity:.85} 85.2%{opacity:.65} 86.8%{opacity:0} 100%{opacity:0} }
+    .t6a { animation: t6a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t6a { 0%,83.4%{opacity:0} 84.4%{opacity:1} 92.1%{opacity:1} 93.5%,100%{opacity:0} }
+    .l6x { animation: l6x 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l6x { 0%,83.9%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 84.15%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 87.3%{stroke-dashoffset:0;opacity:.88} 93.5%{stroke-dashoffset:0;opacity:.65} 96%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl6x { animation: cl6x 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl6x { 0%,83.9%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 84.15%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 87.3%{stroke-dashoffset:7;opacity:.9} 88.9%,100%{stroke-dashoffset:7;opacity:0} }
+    .f6b { animation: f6b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f6b { 0%,86.9%{opacity:0} 87.6%{opacity:.85} 89.1%{opacity:.65} 90.7%{opacity:0} 100%{opacity:0} }
+    .t6b { animation: t6b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t6b { 0%,87.3%{opacity:0} 88.3%{opacity:1} 92.6%{opacity:1} 94%,100%{opacity:0} }
     .rp0 { animation: rp0 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
     @keyframes rp0 { 0%,24%{transform:scale(.5);opacity:0;stroke:#f85149} 24.5%{opacity:.95;stroke:#f85149} 26%{transform:scale(1.5);stroke:#f85149;opacity:.7} 26.5%{stroke:#3fb950;opacity:.95} 29%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0} }
     .rp1 { animation: rp1 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
@@ -2607,10 +2639,15 @@
     <path class="cl5a" pathLength="100" d="M 598 428 Q 484.3 465.3 365 455" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
     <path class="l5b" pathLength="100" d="M 365 455 Q 383.6 461.6 390 442.9" stroke-width="1.2"/>
     <path class="cl5b" pathLength="100" d="M 365 455 Q 383.6 461.6 390 442.9" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <circle class="i6" cx="598" cy="428" r="8" stroke-width="1.5"/>
+    <path class="l6a" pathLength="100" d="M 598 428 Q 613.6 388.8 589.4 354.3" stroke-width="1.2"/>
+    <path class="cl6a" pathLength="100" d="M 598 428 Q 613.6 388.8 589.4 354.3" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
   </g>
   <g fill="none" stroke="#a78bfa">
     <path class="l3x" pathLength="100" d="M 348.8 363 Q 467.8 322.7 589.4 354.3" stroke-width="1.1"/>
     <path class="cl3x" pathLength="100" d="M 348.8 363 Q 467.8 322.7 589.4 354.3" stroke="#c4b5fd" stroke-width="1.7" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <path class="l6x" pathLength="100" d="M 589.4 354.3 Q 472.1 422.6 339.2 449.7" stroke-width="1.1"/>
+    <path class="cl6x" pathLength="100" d="M 589.4 354.3 Q 472.1 422.6 339.2 449.7" stroke="#c4b5fd" stroke-width="1.7" stroke-dasharray="7 93" stroke-linecap="round"/>
   </g>
   <g class="f1a" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
     <line x1="186.6" y1="188.5" x2="149.9" y2="206.1"/>
@@ -2662,7 +2699,17 @@
   <g class="f5a" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
   </g>
   <g class="f5b" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
-    <line x1="390" y1="442.9" x2="384" y2="446"/>
+    <line x1="390" y1="442.9" x2="382.7" y2="439"/>
+  </g>
+  <g class="f6a" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="581.8" y1="346.8" x2="589.4" y2="354.3"/>
+    <line x1="572" y1="350.9" x2="589.4" y2="354.3"/>
+    <line x1="609.2" y1="341.6" x2="589.4" y2="354.3"/>
+    <line x1="570.4" y1="327.7" x2="589.4" y2="354.3"/>
+    <line x1="553.4" y1="361" x2="589.4" y2="354.3"/>
+  </g>
+  <g class="f6b" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="343.9" y1="451.1" x2="339.2" y2="449.7"/>
   </g>
   <text class="t1a" x="186.6" y="208.5" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Infrastructure - Meta-Analysis</text>
   <text class="t1b" x="118" y="241" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">AWS Environments - Section Hub</text>
@@ -2686,6 +2733,29 @@
     <line class="ne2" pathLength="100" x1="382.7" y1="439" x2="384" y2="446"/>
     <line class="ne3" pathLength="100" x1="361.3" y1="458.7" x2="357.4" y2="449.5"/>
     <line class="ne3" pathLength="100" x1="390" y1="442.9" x2="384" y2="446"/>
+    <line class="ne1" pathLength="100" x1="339.2" y1="449.7" x2="346.5" y2="446.9"/>
+    <line class="ne1" pathLength="100" x1="343.9" y1="451.1" x2="346.5" y2="446.9"/>
+    <line class="ne1" pathLength="100" x1="360.8" y1="432.3" x2="346.5" y2="446.9"/>
+    <line class="ne2" pathLength="100" x1="385.7" y1="472.1" x2="384" y2="446"/>
+    <line class="ne2" pathLength="100" x1="406.1" y1="462.8" x2="384" y2="446"/>
+    <line class="ne2" pathLength="100" x1="372.3" y1="448.1" x2="382.7" y2="439"/>
+    <line class="ne3" pathLength="100" x1="361.3" y1="458.7" x2="372.3" y2="448.1"/>
+    <line class="ne3" pathLength="100" x1="390" y1="442.9" x2="382.7" y2="439"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="361.3" y2="458.7"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="357.4" y2="449.5"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="372.3" y2="448.1"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="346.5" y2="446.9"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="384" y2="446"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="343.9" y2="451.1"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="350" y2="470.4"/>
+  </g>
+  <g fill="none" stroke="#a78bfa" stroke-width="1">
+    <path class="wd0" pathLength="100" d="M 365 455 Q 491.1 435.7 589.4 354.3"/>
+    <path class="cwd0" pathLength="100" d="M 365 455 Q 491.1 435.7 589.4 354.3" stroke="#c4b5fd" stroke-width="1.6" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <path class="wd1" pathLength="100" d="M 365 455 Q 350.7 426.7 372 403.3"/>
+    <path class="cwd1" pathLength="100" d="M 365 455 Q 350.7 426.7 372 403.3" stroke="#c4b5fd" stroke-width="1.6" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <path class="wd2" pathLength="100" d="M 365 455 Q 370.5 484.1 399.3 491.2"/>
+    <path class="cwd2" pathLength="100" d="M 365 455 Q 370.5 484.1 399.3 491.2" stroke="#c4b5fd" stroke-width="1.6" stroke-dasharray="7 93" stroke-linecap="round"/>
   </g>
   <g fill="#fb7185">
     <circle class="nw0" cx="357.4" cy="449.5" r="2.6" style="animation-delay:0.01s"/>
@@ -2705,11 +2775,13 @@
   <circle class="nkh" cx="365" cy="455" r="10" fill="none" stroke="#fb7185" stroke-width="1.6"/>
   <circle class="nkm" cx="365" cy="455" r="5.5" fill="#fb7185"/>
   <text class="nkl" x="365" y="479" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Queue Backpressure - Meta-Analysis</text>
+  <text class="t6a" x="589.4" y="374.3" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Rate Limiting</text>
+  <text class="t6b" x="325.2" y="453.7" text-anchor="end" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Load Shedding Policy</text>
   <circle class="rp0" cx="618.8" cy="104.6" r="9.0" fill="none" stroke="#f85149" stroke-width="1.8"/>
   <circle class="rp1" cx="832.4" cy="279.6" r="9.0" fill="none" stroke="#f85149" stroke-width="1.8"/>
   <circle class="rp2" cx="678.2" cy="563.2" r="9.0" fill="none" stroke="#f85149" stroke-width="1.8"/>
   <circle class="idx" cx="598" cy="428" r="5.5" fill="#e6edf3"/>
   <text x="598" y="450" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">00-Index</text>
   <text x="600" y="766" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>
-  <text x="600" y="786" text-anchor="middle" font-size="11" fill="#6e7681">clusters emerge from links, not folders. open your vault in Obsidian and this is your agent's brain</text>
+  <text x="600" y="786" text-anchor="middle" font-size="11" fill="#6e7681">one day in the vault's life: six lookups, three repairs, and a new KB welded in as it grows</text>
 </svg>

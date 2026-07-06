@@ -4,8 +4,10 @@
 // life: four lookups land four different ways (3-hop drill-down, 1-hop deep
 // link, cross-KB wiki-link, episodic archive read) with node names appearing
 // at each hop, while a new KB quietly grows in the background and stale docs
-// get repaired. The finale is a fifth lookup routing into the newly grown
-// KB. Traces draw as eased curves with a comet head at the drawing tip.
+// get repaired. When the new KB matures, synthesis welds it into its
+// neighbor KBs with persistent violet links; a fifth lookup then routes
+// into it, and a sixth rides a weld across the seam. Traces draw as eased
+// curves with a comet head at the drawing tip.
 // Deterministic (seeded PRNG) so regeneration is reproducible.
 // Run from the repo root: node assets/gen-graph.mjs
 import { writeFileSync } from "node:fs";
@@ -113,6 +115,7 @@ const haloPicks = [0, 3, 7, 10, 13, 4].map((ci) => hubsOf[ci][0] || byCluster[ci
 
 // ── the animation cast (deterministic picks; no PRNG so layout is stable) ──
 const INDEX = { x: 598, y: 428 };
+const dist2 = (p, q) => (p.x - q.x) ** 2 + (p.y - q.y) ** 2;
 const far = (ns, from, skip = []) => {
   let best = null, bd = -1;
   for (const n of ns) {
@@ -177,10 +180,46 @@ const nkEdges = nkNodes.slice(1).map((n) => {
   }
   return { a: n, b: best, w: n.wave };
 });
+// a young KB isn't a bare tree: each later node also cross-links to its
+// second-nearest settled neighbor (deterministic, zero PRNG draws)
+{
+  const key = (p, q) => [nkNodes.indexOf(p), nkNodes.indexOf(q)].sort((a, b) => a - b).join(":");
+  const seen = new Set(nkEdges.map((e) => key(e.a, e.b)));
+  for (const n of nkNodes) {
+    if (n.wave === 0) continue;
+    const cands = nkNodes
+      .filter((m) => m !== n && m.wave <= n.wave)
+      .sort((p, q) => dist2(p, n) - dist2(q, n));
+    for (const m of cands.slice(0, 2)) {
+      if (seen.has(key(n, m))) continue;
+      seen.add(key(n, m));
+      nkEdges.push({ a: n, b: m, w: n.wave });
+      break;
+    }
+  }
+}
 // L5 · the payoff: a lookup routes into the KB that just grew; the doc is
 // picked north of the meta so its label clears the meta-analysis label
 const nkMeta = { x: NK.x, y: NK.y, r: 5.5 };
 const nkDoc = far(nkNodes.filter((n) => n.y <= NK.y - 6), nkMeta) || far(nkNodes, nkMeta);
+// L6 · a cross-KB read rides a synthesis weld into the new cluster; the doc
+// is the west-most node so its left-anchored label clears the meta's label
+const l6doc = nkNodes.filter((n) => n !== nkDoc).reduce((a, b) => (b.x < a.x ? b : a));
+// the meta-analysis wires itself to its nearest docs as it forms
+const nkSpokes = nkNodes
+  .slice()
+  .sort((m, n) => dist2(m, nkMeta) - dist2(n, nkMeta))
+  .slice(0, 7)
+  .map((n) => ({ a: nkMeta, b: n }));
+// synthesis welds: once the meta forms, the new KB is linked into its
+// neighbors (the rate-limiting hub the sixth lookup will ride, plus the
+// nearest docs of the two adjacent KBs). Welds persist: they are structure.
+const nearNK = (ns) => ns.reduce((a, b) => (dist2(b, NK) < dist2(a, NK) ? b : a));
+const welds = [
+  { a: nkMeta, b: l3b, bulge: 34 },
+  { a: nkMeta, b: nearNK(byCluster[6]), bulge: -18 },
+  { a: nkMeta, b: nearNK(byCluster[11]), bulge: 16 },
+];
 
 const arcPath = (a, b, bulge) => {
   const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
@@ -252,11 +291,27 @@ cls("nkm", "transform-box: fill-box; transform-origin: center; ");
 kf("nkm", `0%,60%{transform:scale(0);opacity:0} 60.8%{transform:scale(1.35);opacity:1} 61.5%{transform:scale(1)} 95.5%{transform:scale(1);opacity:1} 99.2%,100%{opacity:0}`);
 cls("nkh", "transform-box: fill-box; transform-origin: center; ");
 kf("nkh", `0%,60%{transform:scale(.4);opacity:0} 60.8%{opacity:.85} 64%{transform:scale(2.1);opacity:0} 100%{transform:scale(2.1);opacity:0}`);
-textKF("nkl", 61.5, 93);
-// L5 the finale: routing into the KB that grew during the demo (67%..90%)
+textKF("nkl", 61.5, 94);
+// the meta's spokes draw as it forms; then the synthesis welds reach out to
+// the neighbor KBs, draw once, and settle in as permanent structure
+cls("nsp");
+kf("nsp", `0%,60.8%{stroke-dashoffset:100;opacity:0;animation-timing-function:${EASE}} 61%{opacity:.6;animation-timing-function:${EASE}} 62.8%{stroke-dashoffset:0;opacity:.45} 65%{stroke-dashoffset:0;opacity:.3} 95.5%{stroke-dashoffset:0;opacity:.28} 99.2%,100%{opacity:0}`);
+const weldKF = (name, S, E) => {
+  cls(name);
+  kf(name, `0%,${S}%{stroke-dashoffset:100;opacity:0;animation-timing-function:${EASE}} ${f2(S + 0.25)}%{opacity:.85;animation-timing-function:${EASE}} ${E}%{stroke-dashoffset:0;opacity:.7} ${f2(E + 3)}%{stroke-dashoffset:0;opacity:.34} 95.5%{stroke-dashoffset:0;opacity:.3} 99.2%,100%{stroke-dashoffset:0;opacity:0}`);
+  cometKF(`c${name}`, S, E);
+};
+weldKF("wd0", 61.5, 64.3);
+weldKF("wd1", 62.7, 65.2);
+weldKF("wd2", 63.9, 66.2);
+// L5 the finale: routing into the KB that grew during the demo (67%..80%)
 pingKF("i5", 66.5);
-seg("l5a", 67, 70.5, 90); burstKF("f5a", 70.1);
-seg("l5b", 71, 73.8, 90); burstKF("f5b", 73.4); textKF("t5b", 73.8, 90);
+seg("l5a", 67, 69.8, 80); burstKF("f5a", 69.4);
+seg("l5b", 70.3, 72.8, 80); burstKF("f5b", 72.4); textKF("t5b", 72.8, 79.5);
+// L6: a cross-KB read rides a fresh weld into the new cluster (81%..96%)
+pingKF("i6", 80.5);
+seg("l6a", 81, 83.4, 96); burstKF("f6a", 83); textKF("t6a", 83.4, 93.5);
+seg("l6x", 83.9, 87.3, 96); burstKF("f6b", 86.9); textKF("t6b", 87.3, 94);
 // ...while stale docs get repaired: red pulse → green pulse → healthy
 [24, 40, 56].forEach((S, k) => {
   cls(`rp${k}`, "transform-box: fill-box; transform-origin: center; ");
@@ -270,7 +325,7 @@ kf("idxb", `0%,100%{opacity:.85} 50%{opacity:1}`);
 
 let s = "";
 s += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">\n`;
-s += `  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Five lookups land five different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, an episodic archive read, and finally a read into a knowledge base that grew during the demo), each hop naming the doc it lands on while stale docs elsewhere are repaired.</title>\n`;
+s += `  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Six lookups land six different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, an episodic archive read, a read into a knowledge base that grew during the demo, and a cross-KB read riding one of the synthesis links that welded the new KB to its neighbors), each hop naming the doc it lands on while stale docs elsewhere are repaired.</title>\n`;
 s += `  <style>\n${css}  </style>\n`;
 s += `  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" fill="#0d1117" stroke="#30363d"/>\n`;
 
@@ -346,9 +401,12 @@ s += trace("l4b", l4sai, l4doc, -16);
 s += `    <circle class="i5" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
 s += trace("l5a", INDEX, nkMeta, -24);
 s += trace("l5b", nkMeta, nkDoc, 14);
+s += `    <circle class="i6" cx="${INDEX.x}" cy="${INDEX.y}" r="8" stroke-width="1.5"/>\n`;
+s += trace("l6a", INDEX, l3b, 20);
 s += `  </g>\n`;
 s += `  <g fill="none" stroke="#a78bfa">\n`;
 s += trace("l3x", l3a, l3b, -36, 1.1).replace('stroke="#fde68a"', 'stroke="#c4b5fd"');
+s += trace("l6x", l3b, l6doc, -22, 1.1).replace('stroke="#fde68a"', 'stroke="#c4b5fd"');
 s += `  </g>\n`;
 
 s += flash("f1a", l1meta, 0) + flash("f1b", l1hub, 1) + flash("f1c", l1doc, 2);
@@ -356,6 +414,7 @@ s += flash("f2", l2doc, 3);
 s += flash("f3a", l3a, 4) + flash("f3b", l3b, 5);
 s += flash("f4a", l4sai, 6) + flash("f4b", l4doc, 7);
 s += flash("f5a", nkMeta, 8) + flash("f5b", nkDoc, 9);
+s += flash("f6a", l3b, 10) + flash("f6b", l6doc, 11);
 
 s += label("t1a", l1meta, "Infrastructure - Meta-Analysis");
 s += label("t1b", l1hub, "AWS Environments - Section Hub");
@@ -370,6 +429,14 @@ s += label("t5b", nkDoc, "Backpressure Thresholds", -12);
 // the new KB grows through the whole demo, then gets looked up
 s += `  <g stroke="${NK.c}" stroke-width="0.6" fill="none">\n`;
 for (const e of nkEdges) s += `    <line class="ne${e.w}" pathLength="100" x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}"/>\n`;
+for (const e of nkSpokes) s += `    <line class="nsp" pathLength="100" x1="${e.a.x}" y1="${e.a.y}" x2="${e.b.x}" y2="${e.b.y}"/>\n`;
+s += `  </g>\n`;
+s += `  <g fill="none" stroke="#a78bfa" stroke-width="1">\n`;
+welds.forEach((wl, k) => {
+  const d = arcPath(wl.a, wl.b, wl.bulge);
+  s += `    <path class="wd${k}" pathLength="100" d="${d}"/>\n`;
+  s += `    <path class="cwd${k}" pathLength="100" d="${d}" stroke="#c4b5fd" stroke-width="1.6" stroke-dasharray="7 93" stroke-linecap="round"/>\n`;
+});
 s += `  </g>\n`;
 s += `  <g fill="${NK.c}">\n`;
 for (const n of nkNodes) s += `    <circle class="nw${n.wave}" cx="${n.x}" cy="${n.y}" r="${n.r}" style="animation-delay:${n.jit}s"/>\n`;
@@ -377,6 +444,8 @@ s += `  </g>\n`;
 s += `  <circle class="nkh" cx="${NK.x}" cy="${NK.y}" r="10" fill="none" stroke="${NK.c}" stroke-width="1.6"/>\n`;
 s += `  <circle class="nkm" cx="${NK.x}" cy="${NK.y}" r="5.5" fill="${NK.c}"/>\n`;
 s += label("nkl", { x: NK.x, y: NK.y, r: 5.5 }, "Queue Backpressure - Meta-Analysis", 24);
+s += label("t6a", l3b, "Rate Limiting");
+s += label("t6b", l6doc, "Load Shedding Policy", 20, "left");
 repairs.forEach((n, k) => {
   s += `  <circle class="rp${k}" cx="${n.x}" cy="${n.y}" r="${(Math.max(+n.r, 3) + 6).toFixed(1)}" fill="none" stroke="#f85149" stroke-width="1.8"/>\n`;
 });
@@ -386,8 +455,8 @@ s += `  <circle class="idx" cx="${INDEX.x}" cy="${INDEX.y}" r="5.5" fill="#e6edf
 s += `  <text x="${INDEX.x}" y="${INDEX.y + 22}" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">00-Index</text>\n`;
 
 s += `  <text x="${W / 2}" y="766" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>\n`;
-s += `  <text x="${W / 2}" y="786" text-anchor="middle" font-size="11" fill="#6e7681">clusters emerge from links, not folders. open your vault in Obsidian and this is your agent's brain</text>\n`;
+s += `  <text x="${W / 2}" y="786" text-anchor="middle" font-size="11" fill="#6e7681">one day in the vault's life: six lookups, three repairs, and a new KB welded in as it grows</text>\n`;
 s += `</svg>\n`;
 
 writeFileSync(new URL("./graph.svg", import.meta.url).pathname, s);
-console.log(`graph.svg: ${nodes.length + nkNodes.length} nodes, ${intra.length + weave.length + highways.length + stragglerEdges.length + nkEdges.length} edges, 5 lookups, 3 repairs, ${(s.length / 1024).toFixed(0)} KB`);
+console.log(`graph.svg: ${nodes.length + nkNodes.length} nodes, ${intra.length + weave.length + highways.length + stragglerEdges.length + nkEdges.length + nkSpokes.length + welds.length} edges, 6 lookups, 3 welds, 3 repairs, ${(s.length / 1024).toFixed(0)} KB`);
