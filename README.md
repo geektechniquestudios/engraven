@@ -20,7 +20,9 @@
 
 Coding agents forget everything between sessions. The context window closes, and the architecture, the conventions, and the fix that took four hours are gone. Next week you explain them again.
 
-Engraven fixes that with files in your repo. A small router loads every session and says "when you hit X, go read Y". It points into a vault of wiki-linked markdown knowledge bases, so retrieval is deterministic, takes at most three hops, and needs no embeddings, no vector database, and no index server. A research skill grows the vault, synthesis welds new knowledge into what is already there, and two linters fail CI the moment memory rots. Because everything is plain markdown in git, memory is versioned, reviewable in PR diffs, and shared across machines, branches, agents, and teammates.
+Engraven fixes that with files in your repo. A small router loads every session and says "when you hit X, go read Y". It points into a vault of wiki-linked markdown knowledge bases, so retrieval is deterministic, takes at most three hops, and needs no embeddings, no vector database, and no index server.
+
+A research skill grows the vault, synthesis welds new knowledge into what is already there, and two linters fail CI the moment memory rots. Because everything is plain markdown in git, memory is versioned, reviewable in PR diffs, and shared across machines, branches, agents, and teammates.
 
 ## Install
 
@@ -52,7 +54,8 @@ Set up the Engraven memory system in this project.
 ### What it needs
 
 - **git and a repo.** That is the whole platform. No database, no embeddings, no service, and nothing phones home.
-- **One way to run the checks.** Either the `engraven` CLI, a single Rust binary (grab it from [Releases](https://github.com/geektechniquestudios/engraven/releases) or `cargo install --git https://github.com/geektechniquestudios/engraven`), or the bundled scripts: `vault-check.mjs` needs Node 18+ with zero packages, and `validate-memory.sh` needs bash. Same checks, same output, verified by a parity gate in this repo's CI. The bootstrap wires your CI to prefer the binary (a small static download on the runner) with the vendored scripts as the automatic fallback, and you never need a Rust toolchain unless you build from source.
+- **One way to run the checks.** Either the `engraven` CLI, a single Rust binary from [Releases](https://github.com/geektechniquestudios/engraven/releases) (or `cargo install --git https://github.com/geektechniquestudios/engraven`), or the bundled scripts: `vault-check.mjs` on Node 18+ with zero packages, `validate-memory.sh` on bash. Same checks, same output, verified by a parity gate in this repo's CI.
+- **No Rust toolchain needed.** The bootstrap wires your CI to prefer the binary (a small static download on the runner) and fall back to the vendored scripts automatically.
 - **Obsidian is optional.** The vault is an Obsidian vault by construction, but it is all plain markdown; the app just gives you the graph view of it.
 
 ## Four ways a lookup lands
@@ -106,7 +109,9 @@ Payments-Domain/
 - **Section hubs** cluster related docs and say what connects them.
 - **Docs** open with the answer, then the evidence.
 
-The tiers give you the three-hop guarantee; the **cross-links** give you the graph. The vault is Obsidian-compatible by construction: `[[wiki-links]]` are the edges, and the graph view at the top of this page is what a healthy one looks like, with per-KB clusters, hubs raying outward, and a dense web of links *between* clusters. The shape is enforced, not aspirational: the linter rejects orphan docs, solitary docs, and unreachable KBs, so the graph stays connected by contract. [`docs/KB-GUIDE.md`](docs/KB-GUIDE.md) covers what deserves a KB and how to grow one without it rotting.
+The tiers give you the three-hop guarantee; the **cross-links** give you the graph. The vault is Obsidian-compatible by construction: `[[wiki-links]]` are the edges, and the graph view at the top of this page is what a healthy one looks like, with per-KB clusters, hubs raying outward, and a dense web of links *between* clusters.
+
+The shape is enforced, not aspirational: the linter rejects orphan docs, solitary docs, and unreachable KBs, so the graph stays connected by contract. [`docs/KB-GUIDE.md`](docs/KB-GUIDE.md) covers what deserves a KB and how to grow one without it rotting.
 
 ## Memory that grows
 
@@ -128,7 +133,7 @@ And that is the same knowledge living day to day: routed reads heat exactly the 
 
 ## Memory that lints
 
-Trusting memory is the whole game, and trust needs verification. Engraven ships the checks two ways with one output contract: the **`engraven` CLI** (a fast single-binary Rust tool: `engraven vault`, `engraven memory`, `engraven check`) that your CI runs as the integrity gate, and **zero-dependency scripts** (`vault-check.mjs` on Node, `validate-memory.sh` on bash) vendored into your repo as the fallback and for local use anywhere. This repo's CI diffs both implementations on every push so they cannot drift.
+Trusting memory is the whole game, and trust needs verification. The checks ship two ways with one output contract: the **`engraven` CLI**, a single Rust binary your CI runs as the integrity gate (`engraven vault` · `engraven memory` · `engraven check`), and **zero-dependency scripts** vendored into your repo as the fallback. This repo's CI diffs the two implementations on every push so they cannot drift.
 
 ```console
 $ engraven vault
@@ -145,7 +150,9 @@ engraven vault-check · 214 docs · docs/vault
   ⚠ KB "Search-Infrastructure" is not reachable from an entry point (00-Index / Research Library)
 ```
 
-The vault side runs eleven checks: broken wiki-links, ambiguous titles, orphan docs, solitary docs, hub coverage, missing meta-analyses, entry-point reachability, archive-index coverage, stub docs, leftover placeholders, and stale count directives. Doc counts in your indexes are wrapped in `<!-- count:… -->` markers and verified against the filesystem; `--fix` rewrites them in place, so the numbers in your docs are checked facts, not aspirations. The memory side checks the *router*: line budget, dead pointers, orphan topic files, and the frontmatter contract. A memory edit that would strand your agent fails your PR, exactly like a broken test. The failure modes these guard against (and the monthly audit habit) are in [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md).
+The vault side runs eleven checks: broken wiki-links, ambiguous titles, orphan docs, solitary docs, hub coverage, missing meta-analyses, entry-point reachability, archive-index coverage, stub docs, leftover placeholders, and stale count directives. The memory side checks the *router*: line budget, dead pointers, orphan topic files, and the frontmatter contract.
+
+Doc counts in your indexes are wrapped in `<!-- count:… -->` markers and verified against the filesystem (`--fix` rewrites them in place), so the numbers in your docs are checked facts, not aspirations. A memory edit that would strand your agent fails your PR, exactly like a broken test. The failure modes these guard against, and the monthly audit habit, are in [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md).
 
 ## What lands in your repo
 
@@ -209,26 +216,54 @@ The vault and session archive are plain markdown in git, so they are shared acro
 
 ## FAQ
 
-**Why not embeddings / RAG?**
+<details>
+<summary><b>Why not embeddings / RAG?</b></summary>
+<br>
+
 Retrieval here is *routing*: a human-readable index consulted by the agent's own reasoning. It is deterministic (same trigger, same doc), debuggable (a bad retrieval is a bad row you can edit), versioned (memory changes show up in PR diffs), and it needs zero infrastructure. Attention over a good index beats similarity search over a doc soup at any scale a repo can reach.
+</details>
 
-**Do I need Obsidian?**
-No. The vault is an Obsidian vault by construction, but everything in it is plain markdown with `[[wiki-links]]`. Obsidian gives you a free graph view of your agent's brain, and it looks like the top of this page. You never need it to keep the vault healthy: orphan docs, solitary docs, and unreachable KBs are linter failures the `engraven` CLI catches in CI, not things a human has to spot by eye. Nothing depends on the app.
+<details>
+<summary><b>Do I need Obsidian?</b></summary>
+<br>
 
-**What do the tools require?**
+No. The vault is an Obsidian vault by construction, but everything in it is plain markdown with `[[wiki-links]]`. Obsidian gives you a free graph view of the vault, and it looks like the top of this page. You never need it to keep the vault healthy: orphan docs, solitary docs, and unreachable KBs are linter failures the `engraven` CLI catches in CI, not things a human has to spot by eye.
+</details>
+
+<details>
+<summary><b>What do the tools require?</b></summary>
+<br>
+
 The `engraven` CLI is a single static binary (Rust, prebuilt in Releases). The vendored scripts need only Node 18+ and bash, with zero packages. There is no Python, no database, and no build step in your repo.
+</details>
 
-**What does it cost per session?**
+<details>
+<summary><b>What does it cost per session?</b></summary>
+<br>
+
 Roughly 5k tokens ambient (instructions + router). The vault costs nothing until a row routes into it, and then you pay for exactly the docs the task needed. That is the point of the two-speed design: knowledge grows unbounded while the per-session tax stays flat.
+</details>
 
-**Does my data go anywhere?**
+<details>
+<summary><b>Does my data go anywhere?</b></summary>
+<br>
+
 It is files in your repo. Nothing phones home, nothing is uploaded, there is no service. The checks run locally, as a Rust binary or Node and bash scripts.
+</details>
 
-**How is this different from just writing a NOTES.md?**
+<details>
+<summary><b>How is this different from just writing a NOTES.md?</b></summary>
+<br>
+
 Structure and verification. A flat file has no retrieval story past a couple hundred lines and no defense against rot. Engraven gives knowledge a shape agents can navigate (router to meta-analysis to hub to doc), a pipeline that grows it (research, synthesis, doctrine), and linters that fail CI when memory lies.
+</details>
 
-**Where did this come from?**
+<details>
+<summary><b>Where did this come from?</b></summary>
+<br>
+
 Engraven is the extracted skeleton of the memory system running a real production venture-studio monorepo, where it grew to roughly 3,800 vault docs across 29 research KBs and 386 section hubs, maintained by multiple agents working parallel branches, while keeping the always-loaded footprint near 5k tokens. The patterns here are the ones that survived contact; [`docs/SPEC.md`](docs/SPEC.md) is the distillation.
+</details>
 
 ---
 
