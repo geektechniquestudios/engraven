@@ -4,8 +4,6 @@
 
 **Long-term memory for coding agents: an Obsidian-based knowledge graph that lints like code, with a research pipeline that grows it.**
 
-*Engraven, as in engraved: the idea that what your agents learn is worth cutting in deep enough to stay. This repo is one working version of it, yours if you want it.*
-
 [![CI](https://github.com/geektechniquestudios/engraven/actions/workflows/ci.yml/badge.svg)](https://github.com/geektechniquestudios/engraven/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-3fb950)](LICENSE)
 [![CLI: Rust](https://img.shields.io/badge/CLI-Rust-f97316)](src/)
