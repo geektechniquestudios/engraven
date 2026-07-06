@@ -2,7 +2,7 @@
   "name": "engraven",
   "version": "0.2.1",
   "private": true,
-  "description": "A self-correcting memory fabric for coding agents. An Obsidian-based knowledge graph that stays light in context, lints like code, and grows through research.",
+  "description": "Long-term memory for coding agents, stored as an Obsidian-based markdown vault in your repo. A small routing index retrieves it, linters verify it in CI, and a research pipeline grows it.",
   "type": "module",
   "scripts": {
     "check": "node scripts/vault-check.mjs --vault template/vault --strict --allow-placeholders",
