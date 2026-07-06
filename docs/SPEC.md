@@ -263,15 +263,19 @@ Engram ships two zero-dependency linters:
 
 **`scripts/vault-check.mjs`** — vault integrity:
 
-| Check                 | Catches                                                    |
-|-----------------------|------------------------------------------------------------|
-| link resolution       | `[[WikiLinks]]` pointing at docs that don't exist          |
-| duplicate titles      | two files with the same basename (ambiguous link targets)  |
-| orphan docs           | docs nothing links to (unroutable knowledge)               |
-| hub coverage          | KB docs not reachable from their hub or meta-analysis      |
-| missing meta-analysis | a KB directory with no Tier-1 entry point                  |
-| frontmatter           | docs missing `tags` / `date`                               |
-| stub docs             | near-empty files that pollute retrieval                    |
+| Check                    | Catches                                                    |
+|--------------------------|------------------------------------------------------------|
+| link resolution          | `[[WikiLinks]]` pointing at docs that don't exist          |
+| duplicate titles         | two files with the same basename (ambiguous link targets)  |
+| orphan docs              | docs nothing links to (unroutable knowledge)               |
+| solitary docs            | docs linking to nothing (dead ends in the graph)           |
+| hub coverage             | KB docs not reachable from their hub or meta-analysis      |
+| missing meta-analysis    | a KB directory with no Tier-1 entry point                  |
+| entry-point reachability | KBs no route reaches from `00-Index` / `Research Library`  |
+| archive index coverage   | session entries missing from the archive index             |
+| count directives         | stale `<!-- count:… -->` doc-counts (`--fix` rewrites them)|
+| frontmatter              | docs missing `tags` / `date`                               |
+| stub docs                | near-empty files that pollute retrieval                    |
 
 **`scripts/validate-memory.sh`** — router + topic-file integrity:
 

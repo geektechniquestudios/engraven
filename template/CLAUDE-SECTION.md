@@ -32,6 +32,8 @@ covers the situation.
   **How to apply:** lines.
 - **Decision, architecture, deep reference** → vault doc, cross-linked to
   its hub; router carries only a pointer.
+- **Topic that deserves a full KB** → run `/research <topic>`: gather →
+  three-tier KB → cross-synthesize with existing KBs → decision guidance.
 - **Session with real decisions/changes/failures** → run `/archive-session`
   before stopping (also before PRs and before context compaction).
 - **One home per fact.** Never restate a rule in a second surface — point
@@ -42,7 +44,7 @@ covers the situation.
 After any memory or vault change:
 
 ```bash
-node scripts/vault-check.mjs        # vault: links, orphans, hubs, dup titles
+node scripts/vault-check.mjs        # vault: links, orphans, hubs, counts, dup titles
 bash scripts/validate-memory.sh     # router: budget, dead rows, contract
 ```
 

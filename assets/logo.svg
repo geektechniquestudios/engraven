@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 120" font-family="-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="lt ld">
+  <title id="lt">engram</title>
+  <desc id="ld">Logo: a three-tier knowledge graph drawn as a neuron. An amber trace lights the route from meta-analysis to hub to doc, then a violet wiki-link arcs to a doc in the next cluster — a memory trace forming. Wordmark: engram, long-term memory for coding agents.</desc>
+  <style>
+    .m { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+    /* badge border breathes */
+    .bdg { animation: bdg 8s ease-in-out infinite; }
+    @keyframes bdg { 0%,100%{stroke-opacity:.5} 45%{stroke-opacity:1} }
+
+    /* the trace: drill-down draws, then the wiki-link arcs across */
+    .tr1 { stroke-dasharray:100; animation: tr1 8s infinite; }
+    @keyframes tr1 { 0%,6%{stroke-dashoffset:100;opacity:1} 26%{stroke-dashoffset:0} 84%{stroke-dashoffset:0;opacity:1} 94%,100%{stroke-dashoffset:0;opacity:0} }
+    .tr2 { stroke-dasharray:100; animation: tr2 8s infinite; }
+    @keyframes tr2 { 0%,28%{stroke-dashoffset:100;opacity:1} 44%{stroke-dashoffset:0} 84%{stroke-dashoffset:0;opacity:1} 94%,100%{stroke-dashoffset:0;opacity:0} }
+
+    /* nodes potentiate in route order, hold, release */
+    .n1 { animation: n1 8s infinite; } @keyframes n1 { 0%,5%{fill:#21262d;stroke:#484f58} 9%,84%{fill:#fbbf24;stroke:#fbbf24} 94%,100%{fill:#21262d;stroke:#484f58} }
+    .n2 { animation: n2 8s infinite; } @keyframes n2 { 0%,13%{fill:#21262d;stroke:#484f58} 17%,84%{fill:#3b2410;stroke:#f97316} 94%,100%{fill:#21262d;stroke:#484f58} }
+    .n3 { animation: n3 8s infinite; } @keyframes n3 { 0%,22%{fill:#21262d;stroke:#484f58} 26%,84%{fill:#fbbf24;stroke:#fbbf24} 94%,100%{fill:#21262d;stroke:#484f58} }
+    .n4 { animation: n4 8s infinite; } @keyframes n4 { 0%,42%{fill:#21262d;stroke:#484f58} 46%,84%{fill:#a78bfa;stroke:#a78bfa} 94%,100%{fill:#21262d;stroke:#484f58} }
+
+    /* soft halo pulses behind the lit doc */
+    .halo { animation: halo 8s infinite; }
+    @keyframes halo { 0%,24%{opacity:0} 32%{opacity:.35} 45%,84%{opacity:.18} 94%,100%{opacity:0} }
+
+    /* terminal cursor */
+    .cur { animation: cur 1.3s steps(1) infinite; }
+    @keyframes cur { 0%,55%{opacity:1} 56%,100%{opacity:0} }
+  </style>
+
+  <rect x="0.5" y="0.5" width="459" height="119" rx="14" fill="#0d1117" stroke="#30363d"/>
+
+  <!-- ══ mark: the memory trace ══ -->
+  <rect class="bdg" x="12" y="12" width="96" height="96" rx="24" fill="#161b22" stroke="#30363d"/>
+
+  <!-- static graph: tree edges + the wiki-link arc -->
+  <g stroke="#2d333b" stroke-width="1.6" fill="none">
+    <path d="M 60 36 L 40 62"/><path d="M 60 36 L 80 62"/>
+    <path d="M 40 62 L 28 88"/><path d="M 40 62 L 50 88"/>
+    <path d="M 80 62 L 70 88"/><path d="M 80 62 L 92 88"/>
+  </g>
+  <path d="M 50 92 C 55 102, 65 102, 70 92" stroke="#3a424d" stroke-width="1.6" fill="none" stroke-dasharray="3 3"/>
+
+  <!-- the trace lights the route -->
+  <g fill="none" stroke-width="2.2" stroke-linecap="round">
+    <path class="tr1" pathLength="100" d="M 60 36 L 40 62 L 50 88" stroke="#fbbf24"/>
+    <path class="tr2" pathLength="100" d="M 50 92 C 55 102, 65 102, 70 92" stroke="#a78bfa"/>
+  </g>
+
+  <circle class="halo" cx="50" cy="88" r="10" fill="#fbbf24" opacity="0"/>
+
+  <!-- nodes: meta · hubs · docs -->
+  <circle class="n1" cx="60" cy="36" r="6.5" fill="#21262d" stroke="#484f58" stroke-width="1.6"/>
+  <circle class="n2" cx="40" cy="62" r="5" fill="#21262d" stroke="#484f58" stroke-width="1.6"/>
+  <circle cx="80" cy="62" r="5" fill="#21262d" stroke="#484f58" stroke-width="1.6"/>
+  <circle class="n3" cx="50" cy="88" r="4.5" fill="#21262d" stroke="#484f58" stroke-width="1.6"/>
+  <circle cx="28" cy="88" r="4.5" fill="#21262d" stroke="#484f58" stroke-width="1.6"/>
+  <circle class="n4" cx="70" cy="88" r="4.5" fill="#21262d" stroke="#484f58" stroke-width="1.6"/>
+  <circle cx="92" cy="88" r="4.5" fill="#21262d" stroke="#484f58" stroke-width="1.6"/>
+
+  <!-- ══ wordmark ══ -->
+  <text class="m" x="132" y="72" font-size="46" font-weight="700" fill="#e6edf3" letter-spacing="-.02em">engram</text>
+  <rect class="cur" x="302" y="40" width="13" height="34" fill="#fbbf24"/>
+
+  <text class="m" x="133" y="98" font-size="12.5" fill="#8b949e">long-term memory for coding agents</text>
+</svg>

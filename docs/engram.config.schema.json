@@ -35,6 +35,12 @@
       "type": "string",
       "default": "Session-Archive",
       "description": "Vault subdirectory holding session archive entries (exempt from orphan/KB-structure checks)."
+    },
+    "countFiles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "description": "Repo-relative files outside the vault whose <!-- count:name --> directives vault-check should verify (and rewrite with --fix), e.g. [\"CLAUDE.md\", \"README.md\"]."
     }
   },
   "additionalProperties": false

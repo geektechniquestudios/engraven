@@ -20,7 +20,7 @@ directly:
 | **`/memory`**         | inspect/edit what the harness is treating as memory              |
 | **`CLAUDE.md`**       | gets the Engram protocol block (lookup-first, what-goes-where)   |
 | **`.claude/rules/*.md`** with `paths:` frontmatter                 | path-scoped guardrails                      |
-| **`.claude/skills/`** | `archive-session`, `new-kb`, `memory-maintenance` install here   |
+| **`.claude/skills/`** | `archive-session`, `new-kb`, `research`, `memory-maintenance` install here |
 
 Notes:
 

@@ -16,6 +16,9 @@
 | **Orphaned memory**    | topic files or vault docs nothing routes to             | both linters                      |
 | **Broken links**       | `[[WikiLinks]]` to renamed/deleted docs                 | `vault-check.mjs`                 |
 | **Ambiguous titles**   | two docs share a basename; links resolve unpredictably  | `vault-check.mjs`                 |
+| **Count drift**        | "12 docs" claims in indexes/READMEs no longer match reality | `vault-check.mjs` (`--fix` rewrites) |
+| **Unreachable KBs**    | a KB exists but no entry point routes to it; archive entries missing from the index | `vault-check.mjs` |
+| **Solitary docs**      | a doc links to nothing — a dead end in the graph        | `vault-check.mjs`                 |
 | **Stale facts**        | a doc still says what *used* to be true                 | `last_validated` staleness + habit §3 |
 | **Description drift**  | router row says one thing, the file says another        | review habit §3                   |
 | **Dump creep**         | the router accretes prose until it's a second vault     | budget + review habit §3          |
@@ -27,10 +30,18 @@
 Run after **any** memory change; wire into CI (template ships a workflow).
 
 ```bash
-node scripts/vault-check.mjs            # vault: links, orphans, hubs, frontmatter, dup titles
+node scripts/vault-check.mjs            # vault: links, orphans, hubs, counts, reachability, solitary docs
 node scripts/vault-check.mjs --strict   # warnings become failures (use in CI)
+node scripts/vault-check.mjs --fix      # rewrite stale <!-- count:… --> directives in place
 bash scripts/validate-memory.sh         # router: budget, dead rows, orphans, frontmatter contract
 ```
+
+Doc counts in indexes and READMEs are wrapped in count directives —
+`<!-- count:kb:Payments-Domain -->12<!-- /count -->` — so they are *checked*
+numbers, not aspirations. `--fix` refreshes them after docs are added or
+removed; files outside the vault join the sweep via `countFiles` in
+`engram.config.json`. Vocabulary: `vault-docs`, `kbs`, `hubs`,
+`meta-analyses`, `archive-entries`, `kb:<KB-Dir-Name>`.
 
 Treat a red memory check exactly like a red test: fix it before shipping.
 Both linters are zero-dependency (Node ≥18, bash) and configured via

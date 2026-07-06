@@ -3,31 +3,40 @@
  * vault-check.mjs — Engram vault integrity linter (zero dependencies).
  *
  * Checks:
- *   1. Wiki-links resolve         [[Target]] / [[Target|alias]] / [[Target#h]]
- *   2. Duplicate titles           two files sharing a basename (ambiguous links)
- *   3. Frontmatter contract       required keys present (config: requireFrontmatter)
- *   4. Orphan docs                docs with no inbound links (entry points exempt)
- *   5. KB structure               each KB dir has a meta-analysis; docs covered by hub/meta
- *   6. Stub docs                  near-empty files that pollute retrieval
- *   7. Unresolved placeholders    leftover {{TOKENS}} from the bootstrap
+ *   1.  Wiki-links resolve        [[Target]] / [[Target|alias]] / [[Target#h]]
+ *   2.  Duplicate titles          two files sharing a basename (ambiguous links)
+ *   3.  Frontmatter contract      required keys present (config: requireFrontmatter)
+ *   4.  Orphan docs               docs with no inbound links (entry points exempt)
+ *   5.  KB structure              each KB dir has a meta-analysis; docs covered by hub/meta
+ *   6.  Stub docs                 near-empty files that pollute retrieval
+ *   7.  Unresolved placeholders   leftover {{TOKENS}} from the bootstrap
+ *   8.  Count directives          <!-- count:name -->N<!-- /count --> stale values (--fix rewrites)
+ *   9.  Entry-point reachability  every KB's meta-analysis linked from 00-Index / Research Library
+ *   10. Archive index coverage    every session archive entry listed in the archive index
+ *   11. Solitary docs             docs with zero outgoing wiki-links (dead ends in the graph)
+ *
+ * Count vocabulary (check 8): vault-docs, kbs, hubs, meta-analyses,
+ * archive-entries, kb:<KB-Dir-Name>. Counts are also scanned in any repo
+ * files listed in config "countFiles" (e.g. ["CLAUDE.md", "README.md"]).
  *
  * Usage:
- *   node scripts/vault-check.mjs [--vault <dir>] [--strict] [--allow-placeholders] [--quiet]
+ *   node scripts/vault-check.mjs [--vault <dir>] [--strict] [--fix] [--allow-placeholders] [--quiet]
  *
  * Config: engram.config.json in the working directory (all keys optional):
  *   { "vaultDir": "docs/vault", "requireFrontmatter": ["tags","date"],
- *     "sessionArchiveDir": "Session-Archive" }
+ *     "sessionArchiveDir": "Session-Archive", "countFiles": [] }
  *
  * Exit code: 0 clean · 1 errors (or warnings with --strict) · 2 usage error
  */
 
-import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, relative, basename, resolve } from "node:path";
 
 // ── Arguments ─────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
 let vaultArg = null;
 let strict = false;
+let fix = false;
 let allowPlaceholders = false;
 let quiet = false;
 for (let i = 0; i < args.length; i++) {
@@ -38,6 +47,9 @@ for (let i = 0; i < args.length; i++) {
     case "--strict":
       strict = true;
       break;
+    case "--fix":
+      fix = true;
+      break;
     case "--allow-placeholders":
       allowPlaceholders = true;
       break;
@@ -47,7 +59,7 @@ for (let i = 0; i < args.length; i++) {
     case "-h":
     case "--help":
       console.log(
-        "Usage: node scripts/vault-check.mjs [--vault <dir>] [--strict] [--allow-placeholders] [--quiet]",
+        "Usage: node scripts/vault-check.mjs [--vault <dir>] [--strict] [--fix] [--allow-placeholders] [--quiet]",
       );
       process.exit(0);
     default:
@@ -69,6 +81,7 @@ if (existsSync("engram.config.json")) {
 const VAULT = resolve(vaultArg ?? config.vaultDir ?? "docs/vault");
 const REQUIRED_FM = config.requireFrontmatter ?? ["tags", "date"];
 const ARCHIVE_DIR = config.sessionArchiveDir ?? "Session-Archive";
+const COUNT_FILES = config.countFiles ?? [];
 
 if (!existsSync(VAULT) || !statSync(VAULT).isDirectory()) {
   console.error(`Vault directory not found: ${VAULT}`);
@@ -228,9 +241,98 @@ if (!allowPlaceholders) {
   }
 }
 
+// 8. count directives — <!-- count:name -->N<!-- /count -->
+const COUNT_RE = /<!-- count:([A-Za-z0-9:_-]+) -->\s*([^<]*?)\s*<!-- \/count -->/g;
+const isMetaFile = (f) => basename(f, ".md").endsWith("Meta-Analysis");
+const isHubFile = (f) => basename(f, ".md").endsWith("Section Hub");
+const inArchiveDir = (f) =>
+  rel(f).startsWith(ARCHIVE_DIR + "/") || rel(f).startsWith(ARCHIVE_DIR + "\\");
+const inKbDir = (f, kb) => rel(f).startsWith(kb + "/") || rel(f).startsWith(kb + "\\");
+const archiveEntries = files.filter(
+  (f) => inArchiveDir(f) && !basename(f, ".md").includes("Index"),
+);
+function countValue(name) {
+  if (name === "vault-docs") return files.length;
+  if (name === "kbs") return kbDirs.length;
+  if (name === "hubs") return files.filter(isHubFile).length;
+  if (name === "meta-analyses") return files.filter(isMetaFile).length;
+  if (name === "archive-entries") return archiveEntries.length;
+  if (name.startsWith("kb:")) {
+    const kb = name.slice(3);
+    return kbDirs.includes(kb) ? files.filter((f) => inKbDir(f, kb)).length : null;
+  }
+  return null;
+}
+const countTargets = [
+  ...new Set([...files, ...COUNT_FILES.map((p) => resolve(p)).filter((p) => existsSync(p))]),
+];
+let fixedCounts = 0;
+for (const f of countTargets) {
+  const raw = readFileSync(f, "utf8");
+  let updated = raw;
+  const where = f.startsWith(VAULT) ? rel(f) : relative(process.cwd(), f);
+  for (const m of raw.matchAll(COUNT_RE)) {
+    const [directive, name, found] = m;
+    const expected = countValue(name);
+    if (expected === null) {
+      warnings.push(`unknown count directive "count:${name}" in ${where}`);
+      continue;
+    }
+    if (found.trim() !== String(expected)) {
+      if (fix) {
+        updated = updated.replace(directive, `<!-- count:${name} -->${expected}<!-- /count -->`);
+        fixedCounts++;
+      } else {
+        warnings.push(
+          `stale count "${name}" in ${where}: ${found.trim() || "(empty)"} → ${expected} (run --fix)`,
+        );
+      }
+    }
+  }
+  if (updated !== raw) writeFileSync(f, updated);
+}
+
+// 9. entry-point reachability — each KB's meta-analysis linked from 00-Index / Research Library
+const entryLinks = new Set();
+for (const title of ["00-Index", "Research Library"]) {
+  for (const f of byTitle.get(title) ?? []) {
+    for (const l of docs.get(f).links) entryLinks.add(l);
+  }
+}
+if (entryLinks.size) {
+  for (const kb of kbDirs) {
+    const metas = files.filter((f) => inKbDir(f, kb) && isMetaFile(f));
+    if (metas.length && !metas.some((f) => entryLinks.has(basename(f, ".md")))) {
+      warnings.push(
+        `KB "${kb}" is not reachable from an entry point (00-Index / Research Library)`,
+      );
+    }
+  }
+}
+
+// 10. archive index coverage — every entry listed in the archive index
+const archiveIndexes = files.filter((f) => inArchiveDir(f) && basename(f, ".md").includes("Index"));
+if (archiveIndexes.length) {
+  const indexed = new Set();
+  for (const f of archiveIndexes) for (const l of docs.get(f).links) indexed.add(l);
+  for (const f of archiveEntries) {
+    if (!indexed.has(basename(f, ".md"))) {
+      warnings.push(`archive entry not listed in the archive index: ${rel(f)}`);
+    }
+  }
+}
+
+// 11. solitary docs — zero outgoing wiki-links (dead ends; every doc weaves into the graph)
+for (const [f, d] of docs) {
+  if (d.links.size === 0) {
+    warnings.push(`solitary doc (no outgoing wiki-links — weave it into the graph): ${rel(f)}`);
+  }
+}
+
 // ── Report ────────────────────────────────────────────────────────────
 const say = (s) => !quiet && console.log(s);
 say(`engram vault-check · ${files.length} docs · ${VAULT}`);
+if (fixedCounts) say(`✎ refreshed ${fixedCounts} count directive(s)`);
 if (errors.length) {
   say(`\n${errors.length} error(s):`);
   for (const e of errors) say(`  ✗ ${e}`);

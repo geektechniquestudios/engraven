@@ -5,7 +5,8 @@
   "description": "A verified, file-based memory system for coding agents — thin router, deep knowledge vault, and a linter that keeps both honest.",
   "type": "module",
   "scripts": {
-    "check": "node scripts/vault-check.mjs --vault template/vault --strict",
+    "check": "node scripts/vault-check.mjs --vault template/vault --strict --allow-placeholders",
+    "check:fix": "node scripts/vault-check.mjs --vault template/vault --fix --allow-placeholders",
     "check:memory": "bash scripts/validate-memory.sh --self-test"
   },
   "engines": {

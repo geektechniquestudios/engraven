@@ -5,9 +5,10 @@ date: {{DATE}}
 
 # Core Design - Section Hub
 
-> Section hub for [[Engram Memory System - Meta-Analysis]] — 3 documents
+> Section hub for [[Engram Memory System - Meta-Analysis]] — 4 documents
 > covering the architecture: how memory is split across loading speeds, how
-> retrieval works without search infrastructure, and how to file knowledge.
+> retrieval works without search infrastructure, how to file knowledge, and
+> how the vault grows through research and synthesis.
 
 ---
 
@@ -32,6 +33,13 @@ deterministically, with no embeddings or index server.
 new piece of knowledge, the topic-file frontmatter schema, and the
 single-home rule that prevents drift.
 
+## Growing Things
+
+[[The Knowledge Pipeline]] covers how the vault compounds: the `research`
+skill produces a KB, cross-synthesis links it into what the vault already
+knows, and abstraction rolls the synthesis up into decision guidance with an
+expiry condition.
+
 ---
 
 ## Connections to Other Sections
@@ -44,10 +52,11 @@ single-home rule that prevents drift.
 
 ## Reading Guide
 
-**Start here**: [[Two-Speed Memory]] → [[Routing Over Search]] → [[What Goes Where]]
+**Start here**: [[Two-Speed Memory]] → [[Routing Over Search]] → [[What Goes Where]] → [[The Knowledge Pipeline]]
 
 | Cluster        | Docs                                       |
 | -------------- | ------------------------------------------ |
 | The Split      | [[Two-Speed Memory]]                       |
 | Finding Things | [[Routing Over Search]]                    |
 | Filing Things  | [[What Goes Where]]                        |
+| Growing Things | [[The Knowledge Pipeline]]                 |

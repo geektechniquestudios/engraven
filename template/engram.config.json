@@ -5,5 +5,6 @@
   "memoryBudget": 200,
   "topicFileSoftCap": 150,
   "requireFrontmatter": ["tags", "date"],
-  "sessionArchiveDir": "Session-Archive"
+  "sessionArchiveDir": "Session-Archive",
+  "countFiles": []
 }

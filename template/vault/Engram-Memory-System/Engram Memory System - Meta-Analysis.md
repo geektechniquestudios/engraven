@@ -8,8 +8,9 @@ date: {{DATE}}
 > Index hub: [[00-Index]]
 
 > How this project's memory system works: the four surfaces, the routing
-> model, and the hygiene that keeps it trustworthy.
-> **8 documents | 5 topical docs + 2 section hubs + this meta-analysis | 2 sections**
+> model, the pipeline that grows the vault, and the hygiene that keeps it
+> trustworthy.
+> **<!-- count:kb:Engram-Memory-System -->9<!-- /count --> documents | 6 topical docs + 2 section hubs + this meta-analysis | 2 sections**
 
 This KB is self-referential by design: it documents the memory system it
 lives inside, and doubles as the worked example of every structure it
@@ -33,6 +34,9 @@ these shapes.
    silently. The linters make rot loud. See [[Memory Hygiene and Verification]].
 5. **History is memory too.** Session archives capture the *why* behind
    changes; six months later they're the only witness. See [[Session Archiving]].
+6. **Knowledge compounds through a pipeline.** Research produces KBs,
+   cross-synthesis links them, abstraction turns the links into decision
+   guidance with an expiry condition. See [[The Knowledge Pipeline]].
 
 ## Trust Boundary
 
@@ -54,20 +58,22 @@ of which this KB is the operational digest).
 | How do agents find docs without search?            | [[Routing Over Search]]             | [[What Goes Where]]                     |
 | The linter is red — what now?                      | [[Memory Hygiene and Verification]] | [[Session Archiving]]                   |
 | What did we decide last month, and why?            | [[Session Archiving]]               | [[Session Archive Index]]               |
+| How do I research a topic into a new KB?           | [[The Knowledge Pipeline]]          | [[Research Library]]                    |
 
 ## Topic Map
 
-### 01 — Core Design (3 documents)
+### 01 — Core Design (4 documents)
 
-The architecture: two-speed loading, deterministic routing, and the
-what-goes-where contract.
+The architecture: two-speed loading, deterministic routing, the
+what-goes-where contract, and the pipeline that grows the vault.
 → [[Core Design - Section Hub]]
 
-| Document               | Focus                                                        |
-| ---------------------- | ------------------------------------------------------------ |
-| [[Two-Speed Memory]]   | The thin-router / deep-vault split and its token economics   |
-| [[Routing Over Search]]| Trigger tables and three-tier navigation vs. semantic search |
-| [[What Goes Where]]    | The decision table for filing any new piece of knowledge     |
+| Document                  | Focus                                                        |
+| ------------------------- | ------------------------------------------------------------ |
+| [[Two-Speed Memory]]      | The thin-router / deep-vault split and its token economics   |
+| [[Routing Over Search]]   | Trigger tables and three-tier navigation vs. semantic search |
+| [[What Goes Where]]       | The decision table for filing any new piece of knowledge     |
+| [[The Knowledge Pipeline]]| Research → cross-synthesis → abstraction into doctrine       |
 
 ### 02 — Operations (2 documents)
 

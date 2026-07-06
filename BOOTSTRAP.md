@@ -171,7 +171,7 @@ Engram is installed. What you now have:
   docs/vault/           your project's long-term memory (open it in Obsidian!)
   <router>              a ≤200-line index auto-loaded into every session
   scripts/              two linters that keep memory honest (wired into CI: yes/no)
-  .claude/skills/       archive-session · new-kb · memory-maintenance
+  .claude/skills/       archive-session · new-kb · research · memory-maintenance
 
 How to use it day to day:
   - Just work. I read the router at session start and route into the vault
@@ -179,6 +179,8 @@ How to use it day to day:
   - Correct me out loud — corrections become feedback memories with a "why".
   - Say "archive this session" before we stop after significant work.
   - Say "new KB about X" when a subject outgrows single docs.
+  - Say "research X" for the full pipeline: gather → KB → cross-synthesis
+    with existing KBs → decision guidance.
   - Monthly: say "run memory maintenance".
 
 House rules:
