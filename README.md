@@ -54,7 +54,7 @@ Set up the Engraven memory system in this project.
 ### What it needs
 
 - **git and a repo.** That is the whole platform. No database, no embeddings, no service, and nothing phones home.
-- **One way to run the checks.** Either the `engraven` CLI, a single Rust binary (grab it from [Releases](https://github.com/geektechniquestudios/engraven/releases) or `cargo install --git https://github.com/geektechniquestudios/engraven`), or the bundled scripts: `vault-check.mjs` needs Node 18+ with zero packages, and `validate-memory.sh` needs bash. Same checks, same output, enforced by a parity gate in this repo's CI. The bootstrap wires the scripts into your CI because runners already have Node; you never need a Rust toolchain unless you build from source.
+- **One way to run the checks.** Either the `engraven` CLI, a single Rust binary (grab it from [Releases](https://github.com/geektechniquestudios/engraven/releases) or `cargo install --git https://github.com/geektechniquestudios/engraven`), or the bundled scripts: `vault-check.mjs` needs Node 18+ with zero packages, and `validate-memory.sh` needs bash. Same checks, same output, enforced by a parity gate in this repo's CI. The bootstrap wires your CI to run the `engraven` binary (a small static download on the runner) with the vendored scripts as the automatic fallback, so integrity is enforced by the same Rust tool this repo uses on itself. You never need a Rust toolchain unless you build from source.
 - **Obsidian is optional.** The vault is an Obsidian vault by construction, but it is all plain markdown; the app just gives you the graph view of it.
 
 ## Four ways a lookup lands
@@ -130,7 +130,7 @@ And that is the same knowledge living day to day: routed reads heat exactly the 
 
 ## Memory that lints
 
-Trusting memory is the whole game, and trust needs verification. Engraven ships the checks two ways with one output contract: the **`engraven` CLI** (a fast single-binary Rust tool: `engraven vault`, `engraven memory`, `engraven check`) and **zero-dependency scripts** (`vault-check.mjs` on Node, `validate-memory.sh` on bash) that the bootstrap wires into your CI. This repo's CI diffs both implementations on every push so they cannot drift.
+Trusting memory is the whole game, and trust needs verification. Engraven ships the checks two ways with one output contract: the **`engraven` CLI** (a fast single-binary Rust tool: `engraven vault`, `engraven memory`, `engraven check`) that your CI runs as the integrity gate, and **zero-dependency scripts** (`vault-check.mjs` on Node, `validate-memory.sh` on bash) vendored into your repo as the fallback and for local use anywhere. This repo's CI diffs both implementations on every push so they cannot drift.
 
 ```console
 $ engraven vault
@@ -169,7 +169,7 @@ your-project/
     └── skills/                      ← /archive-session · /new-kb · /research · /memory-maintenance
 ```
 
-Plus, on the harness side, a `MEMORY.md` router installed into your agent's auto-loaded memory. The vault ships with one real KB, **Engraven documenting Engraven**, so you always have a live example of every structure, three tiers and all. Your project vendors the scripts so nothing depends on this repo or the plugin staying installed; the `engraven` CLI is a faster drop-in for local use.
+Plus, on the harness side, a `MEMORY.md` router installed into your agent's auto-loaded memory. The vault ships with one real KB, **Engraven documenting Engraven**, so you always have a live example of every structure, three tiers and all. Your CI runs the `engraven` binary as the integrity gate; the vendored scripts mean nothing hard-depends on this repo or the plugin staying installed, and any machine with Node can run the same checks.
 
 Day-to-day, the loop is: work normally → the agent hits something worth keeping → it writes a doc and a router row → `/research` when a topic deserves a whole KB → `/archive-session` captures the why before the context dies → CI keeps every link honest.
 
@@ -215,7 +215,7 @@ The vault and session archive are plain markdown in git, so they are shared acro
 Retrieval here is *routing*: a human-readable index consulted by the agent's own reasoning. It is deterministic (same trigger, same doc), debuggable (a bad retrieval is a bad row you can edit), versioned (memory changes show up in PR diffs), and it needs zero infrastructure. Attention over a good index beats similarity search over a doc soup at any scale a repo can reach.
 
 **Do I need Obsidian?**
-No. The vault is an Obsidian vault by construction, but everything in it is plain markdown with `[[wiki-links]]`. Obsidian gives you a free graph view of your agent's brain, genuinely useful for spotting orphan clusters and thin spots, and it looks like the top of this page. Nothing depends on the app.
+No. The vault is an Obsidian vault by construction, but everything in it is plain markdown with `[[wiki-links]]`. Obsidian gives you a free graph view of your agent's brain, and it looks like the top of this page. You never need it to keep the vault healthy: orphan docs, solitary docs, and unreachable KBs are linter failures the `engraven` CLI catches in CI, not things a human has to spot by eye. Nothing depends on the app.
 
 **What do the tools require?**
 The `engraven` CLI is a single static binary (Rust, prebuilt in Releases). The vendored scripts need only Node 18+ and bash, with zero packages. There is no Python, no database, and no build step in your repo.
