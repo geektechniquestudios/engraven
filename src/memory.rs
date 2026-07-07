@@ -1,4 +1,4 @@
-//! `engraven memory` — router + topic-file linter.
+//! `hyphasma memory` — router + topic-file linter.
 //!
 //! A faithful port of `scripts/validate-memory.sh`. Verdict lines, check
 //! semantics, and exit codes are contractually identical to the script; when
@@ -118,13 +118,13 @@ pub fn run(args: &MemoryArgs, out: &mut dyn Write) -> i32 {
         );
         let _ = writeln!(
             out,
-            "(normal on CI runners; locally, pass --memory-dir or set ENGRAVEN_MEMORY_DIR)"
+            "(normal on CI runners; locally, pass --memory-dir or set HYPHASMA_MEMORY_DIR)"
         );
         return 0;
     }
     let memory_dir = memory_dir.unwrap_or_default();
 
-    let _ = writeln!(out, "engraven validate-memory · {memory_dir}");
+    let _ = writeln!(out, "hyphasma validate-memory · {memory_dir}");
     let mut r = Reporter::new(out);
     let status = run_checks(
         &memory_dir,
@@ -150,7 +150,7 @@ pub fn run(args: &MemoryArgs, out: &mut dyn Write) -> i32 {
     0
 }
 
-/// Memory dir resolution order: `--memory-dir` flag → `$ENGRAVEN_MEMORY_DIR`
+/// Memory dir resolution order: `--memory-dir` flag → `$HYPHASMA_MEMORY_DIR`
 /// → auto-discovery under `~/.claude/projects/*<projectSlug>*/memory`
 /// (shortest path wins; ties break lexicographically).
 fn find_memory_dir(flag: Option<&str>, project_slug: &str) -> Option<String> {
@@ -159,7 +159,7 @@ fn find_memory_dir(flag: Option<&str>, project_slug: &str) -> Option<String> {
             return Some(d.to_string());
         }
     }
-    if let Ok(env_dir) = std::env::var("ENGRAVEN_MEMORY_DIR") {
+    if let Ok(env_dir) = std::env::var("HYPHASMA_MEMORY_DIR") {
         if !env_dir.is_empty() {
             return Some(env_dir);
         }
@@ -496,7 +496,7 @@ fn self_test(cfg: &MemoryConfig, cwd: &Path, out: &mut dyn Write) -> i32 {
         .map(|d| d.as_nanos())
         .unwrap_or(0);
     let tmp =
-        std::env::temp_dir().join(format!("engraven-selftest-{}-{nanos}", std::process::id()));
+        std::env::temp_dir().join(format!("hyphasma-selftest-{}-{nanos}", std::process::id()));
     let scratch = ScratchDir { path: tmp.clone() };
 
     let pass_dir = tmp.join("pass").join("memory");

@@ -40,12 +40,12 @@ Doc counts in indexes and READMEs are wrapped in count directives —
 `<!-- count:kb:Payments-Domain -->12<!-- /count -->` — so they are *checked*
 numbers, not aspirations. `--fix` refreshes them after docs are added or
 removed; files outside the vault join the sweep via `countFiles` in
-`engraven.config.json`. Vocabulary: `vault-docs`, `kbs`, `hubs`,
+`hyphasma.config.json`. Vocabulary: `vault-docs`, `kbs`, `hubs`,
 `meta-analyses`, `archive-entries`, `kb:<KB-Dir-Name>`.
 
 Treat a red memory check exactly like a red test: fix it before shipping.
 Both linters are zero-dependency (Node ≥18, bash) and configured via
-`engraven.config.json`.
+`hyphasma.config.json`.
 
 ---
 

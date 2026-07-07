@@ -1,4 +1,4 @@
-//! `engraven vault` — vault integrity linter.
+//! `hyphasma vault` — vault integrity linter.
 //!
 //! A line-for-line port of `scripts/vault-check.mjs`. The stdout report, the
 //! wording and ordering of every error/warning, the `--fix` rewrite behavior,
@@ -209,7 +209,7 @@ pub fn run(args: &VaultArgs, out: &mut dyn Write) -> i32 {
         .unwrap_or(false)
     {
         eprintln!("Vault directory not found: {vault}");
-        eprintln!("(set \"vaultDir\" in engraven.config.json or pass --vault <dir>)");
+        eprintln!("(set \"vaultDir\" in hyphasma.config.json or pass --vault <dir>)");
         return 2;
     }
 
@@ -509,7 +509,7 @@ pub fn run(args: &VaultArgs, out: &mut dyn Write) -> i32 {
         }
     };
     say(&format!(
-        "engraven vault-check · {} docs · {vault}",
+        "hyphasma vault-check · {} docs · {vault}",
         files.len()
     ));
     if fixed_counts > 0 {

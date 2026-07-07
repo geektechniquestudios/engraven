@@ -1,21 +1,21 @@
 ---
-description: Check the health of an Engraven memory system (vault integrity, router freshness, link rot). Use when the user asks whether their agent memory is healthy, why routing feels stale, or wants the vault linted.
+description: Check the health of an Hyphasma memory system (vault integrity, router freshness, link rot). Use when the user asks whether their agent memory is healthy, why routing feels stale, or wants the vault linted.
 ---
 
-# Engraven doctor
+# Hyphasma doctor
 
 Diagnose the memory system in the current project without installing
 anything.
 
-1. Locate the vault: read `engraven.config.json` at the project root if it
-   exists; otherwise try `docs/vault/`. If neither exists, say Engraven is
-   not installed here and offer `/engraven:bootstrap`.
-2. Run the vault check, preferring the Rust CLI: if `command -v engraven`
-   succeeds, run `engraven vault --vault <vault-path>`. Otherwise use the
+1. Locate the vault: read `hyphasma.config.json` at the project root if it
+   exists; otherwise try `docs/vault/`. If neither exists, say Hyphasma is
+   not installed here and offer `/hyphasma:bootstrap`.
+2. Run the vault check, preferring the Rust CLI: if `command -v hyphasma`
+   succeeds, run `hyphasma vault --vault <vault-path>`. Otherwise use the
    project's own `scripts/vault-check.mjs`, and as a last resort
    `node ${CLAUDE_PLUGIN_ROOT}/scripts/vault-check.mjs --vault <vault-path>`.
    All three run the same checks with the same output.
-3. Run the router check the same way: `engraven memory` if the CLI is on
+3. Run the router check the same way: `hyphasma memory` if the CLI is on
    PATH, else the project's `scripts/validate-memory.sh`, else
    `bash ${CLAUDE_PLUGIN_ROOT}/scripts/validate-memory.sh`.
 4. Report plainly: errors first, then warnings, then what is healthy. For

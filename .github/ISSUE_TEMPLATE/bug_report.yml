@@ -7,7 +7,7 @@ body:
     attributes:
       label: Area
       options:
-        - Rust CLI (engraven)
+        - Rust CLI (hyphasma)
         - vault-check.mjs
         - validate-memory.sh
         - Template / vault skeleton
@@ -33,7 +33,7 @@ body:
     id: version
     attributes:
       label: Version
-      placeholder: engraven --version, or the commit SHA
+      placeholder: hyphasma --version, or the commit SHA
     validations:
       required: true
   - type: input

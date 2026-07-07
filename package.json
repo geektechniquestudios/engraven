@@ -1,6 +1,6 @@
 {
-  "name": "engraven",
-  "version": "0.2.1",
+  "name": "hyphasma",
+  "version": "0.3.0",
   "private": true,
   "description": "A knowledge network for coding agents, checked into your repo as a wiki-linked Obsidian vault. Any doc in 3 hops or less, new knowledge bases researched and welded in as you work, and linters that fail CI when anything rots.",
   "type": "module",

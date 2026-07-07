@@ -1,8 +1,8 @@
-//! Integration tests for `engraven memory`.
+//! Integration tests for `hyphasma memory`.
 //!
 //! Golden outputs were generated from `scripts/validate-memory.sh` — the
 //! parity oracle. The `memory-project` fixture supplies the config (budget
-//! 20, soft cap 20, vaultDir "vault", projectSlug "engraven-fixture-slug"),
+//! 20, soft cap 20, vaultDir "vault", projectSlug "hyphasma-fixture-slug"),
 //! a vault for vault_refs resolution, and good/bad memory directories.
 
 mod common;
@@ -97,7 +97,7 @@ fn nonexistent_memory_dir_skips_cleanly() {
 #[test]
 fn env_var_supplies_the_memory_dir_and_the_flag_beats_it() {
     let dir = fixture("memory-project");
-    let via_env = run_in(&dir, &["memory"], &[("ENGRAVEN_MEMORY_DIR", "memory-good")]);
+    let via_env = run_in(&dir, &["memory"], &[("HYPHASMA_MEMORY_DIR", "memory-good")]);
     assert_eq!(stdout_of(&via_env), golden("memory-good.txt", &[]));
     assert_eq!(code_of(&via_env), 0);
 
@@ -105,7 +105,7 @@ fn env_var_supplies_the_memory_dir_and_the_flag_beats_it() {
     let flag_wins = run_in(
         &dir,
         &["memory", "--memory-dir", "memory-good"],
-        &[("ENGRAVEN_MEMORY_DIR", "memory-bad2")],
+        &[("HYPHASMA_MEMORY_DIR", "memory-bad2")],
     );
     assert_eq!(stdout_of(&flag_wins), golden("memory-good.txt", &[]));
 
@@ -116,7 +116,7 @@ fn env_var_supplies_the_memory_dir_and_the_flag_beats_it() {
     let empty_env = run_in(
         &dir,
         &["memory"],
-        &[("ENGRAVEN_MEMORY_DIR", ""), ("HOME", home_str.as_str())],
+        &[("HYPHASMA_MEMORY_DIR", ""), ("HOME", home_str.as_str())],
     );
     assert_eq!(stdout_of(&empty_env), golden("memory-skip.txt", &[]));
     assert_eq!(code_of(&empty_env), 0);
@@ -126,8 +126,8 @@ fn env_var_supplies_the_memory_dir_and_the_flag_beats_it() {
 fn discovery_picks_the_shortest_matching_path() {
     let home = TestDir::new("fake-home");
     let projects = home.path().join(".claude/projects");
-    let short = projects.join("x-engraven-fixture-slug/memory");
-    let long = projects.join("x-engraven-fixture-slug-worktree/memory");
+    let short = projects.join("x-hyphasma-fixture-slug/memory");
+    let long = projects.join("x-hyphasma-fixture-slug-worktree/memory");
     fs::create_dir_all(&short).unwrap();
     fs::create_dir_all(&long).unwrap();
     // Non-matching depth-1 "memory" dir must be ignored.
@@ -145,7 +145,7 @@ fn discovery_picks_the_shortest_matching_path() {
     let text = stdout_of(&out);
     assert!(
         text.starts_with(&format!(
-            "engraven validate-memory · {home_str}/.claude/projects/x-engraven-fixture-slug/memory\n"
+            "hyphasma validate-memory · {home_str}/.claude/projects/x-hyphasma-fixture-slug/memory\n"
         )),
         "unexpected header: {text}"
     );

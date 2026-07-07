@@ -340,7 +340,7 @@ kf("idxb", `0%,100%{opacity:.85} 50%{opacity:1}`);
 
 let s = "";
 s += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">\n`;
-s += `  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Six lookups land six different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, an episodic archive read, a read into a knowledge base that grew during the demo, and a cross-KB read riding one of the synthesis links that welded the new KB to its neighbors). A toast above the graph shows the short question that prompts each lookup, each hop names the doc it lands on, and stale docs elsewhere are repaired.</title>\n`;
+s += `  <title>A mature Hyphasma vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Six lookups land six different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, an episodic archive read, a read into a knowledge base that grew during the demo, and a cross-KB read riding one of the synthesis links that welded the new KB to its neighbors). A toast above the graph shows the short question that prompts each lookup, each hop names the doc it lands on, and stale docs elsewhere are repaired.</title>\n`;
 s += `  <style>\n${css}  </style>\n`;
 s += `  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" fill="#0d1117" stroke="#30363d"/>\n`;
 

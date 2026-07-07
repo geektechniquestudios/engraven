@@ -1,4 +1,4 @@
-engraven validate-memory · memory-empty
+hyphasma validate-memory · memory-empty
 Checking router exists...
   ✗ MEMORY.md not found in memory-empty
 === Summary ===

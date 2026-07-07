@@ -1,11 +1,11 @@
 {
-  "name": "engraven",
+  "name": "hyphasma",
   "description": "A knowledge network for coding agents, checked into your repo as a wiki-linked Obsidian vault. Any doc in 3 hops or less, new knowledge bases researched and welded in as you work, and linters that fail CI when anything rots.",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "author": {
     "name": "Geektechnique Studios"
   },
-  "homepage": "https://github.com/geektechniquestudios/engraven",
-  "repository": "https://github.com/geektechniquestudios/engraven",
+  "homepage": "https://github.com/geektechniquestudios/hyphasma",
+  "repository": "https://github.com/geektechniquestudios/hyphasma",
   "license": "MIT"
 }

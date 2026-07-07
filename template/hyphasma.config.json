@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/geektechniquestudios/engraven/main/docs/engraven.config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/geektechniquestudios/hyphasma/main/docs/hyphasma.config.schema.json",
   "projectSlug": "{{PROJECT_SLUG}}",
   "vaultDir": "docs/vault",
   "memoryBudget": 200,

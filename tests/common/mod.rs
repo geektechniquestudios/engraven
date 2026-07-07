@@ -1,6 +1,6 @@
 //! Shared helpers for the CLI integration tests.
 //!
-//! Tests run the compiled `engraven` binary against fixture trees under
+//! Tests run the compiled `hyphasma` binary against fixture trees under
 //! `tests/fixtures/` and compare full stdout against golden files under
 //! `tests/expected/`, which were generated from the original scripts
 //! (`scripts/vault-check.mjs`, `scripts/validate-memory.sh`) — the scripts
@@ -14,7 +14,7 @@ use std::process::{Command, Output};
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 pub fn bin() -> &'static str {
-    env!("CARGO_BIN_EXE_engraven")
+    env!("CARGO_BIN_EXE_hyphasma")
 }
 
 /// Canonicalized fixture directory (canonical so it matches the child
@@ -41,17 +41,17 @@ pub fn golden(name: &str, substitutions: &[(&str, &str)]) -> String {
     text
 }
 
-/// Run the binary with a controlled environment: `ENGRAVEN_MEMORY_DIR` is
+/// Run the binary with a controlled environment: `HYPHASMA_MEMORY_DIR` is
 /// always cleared; extra vars come from `envs`.
 pub fn run_in(cwd: &Path, args: &[&str], envs: &[(&str, &str)]) -> Output {
     let mut cmd = Command::new(bin());
     cmd.args(args)
         .current_dir(cwd)
-        .env_remove("ENGRAVEN_MEMORY_DIR");
+        .env_remove("HYPHASMA_MEMORY_DIR");
     for (k, v) in envs {
         cmd.env(k, v);
     }
-    cmd.output().expect("failed to run engraven binary")
+    cmd.output().expect("failed to run hyphasma binary")
 }
 
 pub fn stdout_of(output: &Output) -> String {
@@ -76,7 +76,7 @@ impl TestDir {
         static COUNTER: AtomicUsize = AtomicUsize::new(0);
         let n = COUNTER.fetch_add(1, Ordering::Relaxed);
         let path =
-            std::env::temp_dir().join(format!("engraven-test-{label}-{}-{n}", std::process::id()));
+            std::env::temp_dir().join(format!("hyphasma-test-{label}-{}-{n}", std::process::id()));
         fs::create_dir_all(&path).expect("create test dir");
         let path = path.canonicalize().expect("canonicalize test dir");
         TestDir { path }

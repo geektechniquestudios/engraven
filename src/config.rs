@@ -1,4 +1,4 @@
-//! `engraven.config.json` loading.
+//! `hyphasma.config.json` loading.
 //!
 //! Both linters read the config from the *current working directory*, exactly
 //! like the scripts they replace. They differ in how they treat a broken
@@ -14,9 +14,9 @@ use std::path::Path;
 
 use serde_json::Value;
 
-pub const CONFIG_FILE: &str = "engraven.config.json";
+pub const CONFIG_FILE: &str = "hyphasma.config.json";
 
-/// Config keys consumed by `engraven vault` (`vault-check.mjs` parity).
+/// Config keys consumed by `hyphasma vault` (`vault-check.mjs` parity).
 #[derive(Debug, Default)]
 pub struct VaultConfig {
     pub vault_dir: Option<String>,
@@ -25,7 +25,7 @@ pub struct VaultConfig {
     pub count_files: Vec<String>,
 }
 
-/// Config keys consumed by `engraven memory` (`validate-memory.sh` parity).
+/// Config keys consumed by `hyphasma memory` (`validate-memory.sh` parity).
 #[derive(Debug)]
 pub struct MemoryConfig {
     pub budget: i64,
@@ -67,7 +67,7 @@ pub fn memory_config(cwd: &Path) -> MemoryConfig {
     }
 }
 
-/// Read and parse `engraven.config.json` from the working directory.
+/// Read and parse `hyphasma.config.json` from the working directory.
 /// `Ok(None)` means the file does not exist; `Err` carries the exit-2 message.
 fn read_config_value() -> Result<Option<Value>, String> {
     let path = Path::new(CONFIG_FILE);

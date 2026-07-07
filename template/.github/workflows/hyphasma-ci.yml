@@ -1,6 +1,6 @@
-# Engraven memory integrity in CI — copied into your repo by the bootstrap.
+# Hyphasma memory integrity in CI — copied into your repo by the bootstrap.
 # The vault is repo-shared, so it lints on every PR. Integrity is enforced
-# by the engraven CLI (a single static Rust binary); the vendored Node
+# by the hyphasma CLI (a single static Rust binary); the vendored Node
 # script is the automatic fallback, and parity between the two is enforced
 # upstream. Harness-local memory (the router + topic files) lives outside
 # the repo; validate-memory.sh skips cleanly on runners and is run locally
@@ -11,7 +11,7 @@ on:
   pull_request:
     paths:
       - "docs/vault/**"
-      - "engraven.config.json"
+      - "hyphasma.config.json"
       - "scripts/vault-check.mjs"
   push:
     branches: [main]
@@ -23,17 +23,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch the engraven CLI
+      - name: Fetch the hyphasma CLI
         id: cli
         continue-on-error: true
         # pin a tag instead of latest if you want fully reproducible CI
         run: |
-          curl -fsSL --retry 3 -o engraven \
-            https://github.com/geektechniquestudios/engraven/releases/latest/download/engraven-x86_64-linux
-          chmod +x engraven
-      - name: Vault integrity (engraven CLI)
+          curl -fsSL --retry 3 -o hyphasma \
+            https://github.com/geektechniquestudios/hyphasma/releases/latest/download/hyphasma-x86_64-linux
+          chmod +x hyphasma
+      - name: Vault integrity (hyphasma CLI)
         if: steps.cli.outcome == 'success'
-        run: ./engraven vault --strict
+        run: ./hyphasma vault --strict
       - uses: actions/setup-node@v4
         if: steps.cli.outcome != 'success'
         with:

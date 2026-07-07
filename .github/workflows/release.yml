@@ -21,16 +21,16 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            name: engraven-x86_64-linux
+            name: hyphasma-x86_64-linux
           - os: ubuntu-24.04-arm
-            name: engraven-aarch64-linux
+            name: hyphasma-aarch64-linux
           - os: macos-latest
-            name: engraven-x86_64-macos
+            name: hyphasma-x86_64-macos
             target: x86_64-apple-darwin
           - os: macos-latest
-            name: engraven-aarch64-macos
+            name: hyphasma-aarch64-macos
           - os: windows-latest
-            name: engraven-x86_64-windows.exe
+            name: hyphasma-x86_64-windows.exe
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -50,9 +50,9 @@ jobs:
           dir="target/release"
           if [ -n "${{ matrix.target }}" ]; then dir="target/${{ matrix.target }}/release"; fi
           if [ "${{ runner.os }}" = "Windows" ]; then
-            cp "$dir/engraven.exe" "${{ matrix.name }}"
+            cp "$dir/hyphasma.exe" "${{ matrix.name }}"
           else
-            cp "$dir/engraven" "${{ matrix.name }}"
+            cp "$dir/hyphasma" "${{ matrix.name }}"
           fi
       - uses: actions/upload-artifact@v4
         with:

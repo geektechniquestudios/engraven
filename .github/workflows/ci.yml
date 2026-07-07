@@ -33,8 +33,8 @@ jobs:
       - run: cargo build --release
       - uses: actions/upload-artifact@v4
         with:
-          name: engraven-linux-x86_64
-          path: target/release/engraven
+          name: hyphasma-linux-x86_64
+          path: target/release/hyphasma
 
   parity:
     name: CLI and scripts cannot drift
@@ -47,16 +47,16 @@ jobs:
           node-version: 20
       - uses: actions/download-artifact@v4
         with:
-          name: engraven-linux-x86_64
+          name: hyphasma-linux-x86_64
           path: bin
-      - run: chmod +x bin/engraven
+      - run: chmod +x bin/hyphasma
       # Vault check: byte-identical stdout and exit code on the template vault.
       - run: |
           node scripts/vault-check.mjs --vault template/vault --strict --allow-placeholders > /tmp/vault-node.txt
-          bin/engraven vault --vault template/vault --strict --allow-placeholders > /tmp/vault-rust.txt
+          bin/hyphasma vault --vault template/vault --strict --allow-placeholders > /tmp/vault-rust.txt
           diff -u /tmp/vault-node.txt /tmp/vault-rust.txt
       # Memory check: verdict lines must match (paths and shell noise may differ).
       - run: |
           bash scripts/validate-memory.sh --self-test | grep -E "✓|⚠|✕|PASS|FAIL|self-test" > /tmp/mem-sh.txt
-          bin/engraven memory --self-test | grep -E "✓|⚠|✕|PASS|FAIL|self-test" > /tmp/mem-rust.txt
+          bin/hyphasma memory --self-test | grep -E "✓|⚠|✕|PASS|FAIL|self-test" > /tmp/mem-rust.txt
           diff -u /tmp/mem-sh.txt /tmp/mem-rust.txt
