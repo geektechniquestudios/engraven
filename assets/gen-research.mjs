@@ -279,6 +279,12 @@ kf(`idxb`, `0%,100%{opacity:.85} 50%{opacity:1}`);
 let s = "";
 s += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">\n`;
 s += `  <title>One /research run in timelapse: findings land as a new wiki-linked cluster, hubs and a meta-analysis form, synthesis links weld it into neighboring knowledge bases, and one router row indexes it at 00-Index.</title>\n`;
+// accessibility + performance: reduced-motion viewers get the finished KB
+// as a static poster — the grown cluster, hubs, meta, synthesis links, and
+// the index registration — with arc-heads, culled sources, decorative
+// halos, and the overlapping cycling captions hidden.
+css += `    @media (prefers-reduced-motion: reduce) { * { animation: none !important; }\n`;
+css += `      [class^="af"], [class^="rj"], [class^="rv"], .ih, .halo, .c1, .c2, .c3, .c4 { opacity: 0 !important; } }\n`;
 s += `  <style>\n${css}  </style>\n`;
 s += `  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" fill="#0d1117" stroke="#30363d"/>\n`;
 

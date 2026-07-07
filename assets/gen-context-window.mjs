@@ -167,6 +167,11 @@ const arc = (ax, ay, bx, by, bulge) => {
 let s = "";
 s += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 470" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">\n`;
 s += `  <title>Four surfaces, two speeds, shown as three sessions back to back. Every session the context window clears and reloads the same two thin surfaces, instructions and router, for about five thousand tokens flat. The vault, drawn as a small knowledge graph, and the session archive sit on the other side and never reset. In session one a router row fires and one payments doc crosses over for 1.4k more; in session two a different row pulls a rate-limiting doc for 1.1k; in session three no row fires and the deep side costs nothing. Read docs keep a burnt ember, and the counters track each session's total.</title>\n`;
+// accessibility + performance: reduced-motion viewers get one coherent
+// static frame (session 1, loaded) instead of the animated sequence.
+css += `    @media (prefers-reduced-motion: reduce) { * { animation: none !important; }\n`;
+css += `      .tk0, .tk1, .tk2, .c5, .c61, .v0, .v1b, .dc1, .noro, .pl1, .pl2, .pg0, .pg1, .fl0, .fl1, .ht0, .ht1 { opacity: 0 !important; }\n`;
+css += `      .b1, .b2, .dc0, .free, .c60, .v1a, .pl0 { opacity: 1 !important; transform: none !important; } }\n`;
 s += `  <style>\n${css}  </style>\n`;
 s += `  <rect x="0.5" y="0.5" width="879" height="469" rx="12" fill="#0d1117" stroke="#30363d"/>\n`;
 
