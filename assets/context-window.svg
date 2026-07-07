@@ -61,6 +61,9 @@
     @keyframes pl1 { 0%,46.83%{opacity:0} 47.93%{opacity:1} 63.13%{opacity:1} 64.33%{opacity:0} 100%{opacity:0} }
     .pl2 { animation: pl2 24s linear infinite; animation-fill-mode: backwards; }
     @keyframes pl2 { 0%,76.67%{opacity:0} 77.77%{opacity:1} 96.47%{opacity:1} 97.67%{opacity:0} 100%{opacity:0} }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; }
+      .tk0, .tk1, .tk2, .c5, .c61, .v0, .v1b, .dc1, .noro, .pl1, .pl2, .pg0, .pg1, .fl0, .fl1, .ht0, .ht1 { opacity: 0 !important; }
+      .b1, .b2, .dc0, .free, .c60, .v1a, .pl0 { opacity: 1 !important; transform: none !important; } }
   </style>
   <rect x="0.5" y="0.5" width="879" height="469" rx="12" fill="#0d1117" stroke="#30363d"/>
   <g class="tk0">

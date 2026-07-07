@@ -61,6 +61,9 @@
     .tx4 { animation: tx4 36s infinite; } @keyframes tx4 { 0%,81.5%{fill:#8b949e} 83%,96%{fill:#3fb950} 98.5%,100%{fill:#8b949e} }
     .a4 { animation: a4 36s infinite; } @keyframes a4 { 0%,83.5%{opacity:0} 85%,97.5%{opacity:1} 99.5%,100%{opacity:0} }
     .cap4 { animation: cap4 36s infinite; } @keyframes cap4 { 0%,76.2%{opacity:0} 77.6%,97.5%{opacity:1} 99.5%,100%{opacity:0} }
+
+    /* accessibility + performance: honor reduced-motion with a clean still — the labeled router/vault/archive anatomy, with the animated query chips, answer chips, and routed paths hidden */
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } [class^="q"], [class^="a"], [class^="p"] { opacity: 0 !important; } }
   </style>
 
   <rect x="0.5" y="0.5" width="879" height="439" rx="12" fill="#0d1117" stroke="#30363d"/>
