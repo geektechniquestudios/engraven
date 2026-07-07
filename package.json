@@ -2,7 +2,7 @@
   "name": "engraven",
   "version": "0.2.1",
   "private": true,
-  "description": "Long-term memory for coding agents, stored as an Obsidian-based markdown vault in your repo. A small routing index retrieves it, linters verify it in CI, and a research pipeline grows it.",
+  "description": "A knowledge network for coding agents, checked into your repo as a wiki-linked Obsidian vault. Any doc in 3 hops or less, new knowledge bases researched and welded in as you work, and linters that fail CI when anything rots.",
   "type": "module",
   "scripts": {
     "check": "node scripts/vault-check.mjs --vault template/vault --strict --allow-placeholders",
