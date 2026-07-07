@@ -1,9 +1,9 @@
-//! engraven — linters for the Engraven memory system.
+//! hyphasma — linters for the Hyphasma memory system.
 //!
 //! Subcommands:
-//! - `engraven vault`  — vault integrity linter (port of `scripts/vault-check.mjs`)
-//! - `engraven memory` — router + topic-file linter (port of `scripts/validate-memory.sh`)
-//! - `engraven check`  — both in sequence, vault first
+//! - `hyphasma vault`  — vault integrity linter (port of `scripts/vault-check.mjs`)
+//! - `hyphasma memory` — router + topic-file linter (port of `scripts/validate-memory.sh`)
+//! - `hyphasma check`  — both in sequence, vault first
 //!
 //! The two linters are exact-output ports: report lines, orderings, and exit
 //! codes match the original scripts. Flag parsing therefore also mirrors the
@@ -23,13 +23,13 @@ use vault::VaultArgs;
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 const ROOT_HELP: &str = "\
-engraven — vault + memory linters for the Engraven memory system
+hyphasma — vault + memory linters for the Hyphasma memory system
 
 Usage:
-  engraven vault [--vault <dir>] [--strict] [--fix] [--allow-placeholders] [--quiet]
-  engraven memory [--budget-only|--ci] [--memory-dir <dir>] [--self-test]
-  engraven check
-  engraven --version
+  hyphasma vault [--vault <dir>] [--strict] [--fix] [--allow-placeholders] [--quiet]
+  hyphasma memory [--budget-only|--ci] [--memory-dir <dir>] [--self-test]
+  hyphasma check
+  hyphasma --version
 
 Commands:
   vault    Vault integrity linter (11 checks; --fix refreshes count directives)
@@ -40,13 +40,13 @@ Options:
   -h, --help       Show this help
   -V, --version    Show the version
 
-Configuration is read from engraven.config.json in the working directory.
-Run 'engraven <command> --help' for command details.";
+Configuration is read from hyphasma.config.json in the working directory.
+Run 'hyphasma <command> --help' for command details.";
 
 const VAULT_HELP: &str = "\
-engraven vault — vault integrity linter
+hyphasma vault — vault integrity linter
 
-Usage: engraven vault [--vault <dir>] [--strict] [--fix] [--allow-placeholders] [--quiet]
+Usage: hyphasma vault [--vault <dir>] [--strict] [--fix] [--allow-placeholders] [--quiet]
 
 Checks:
   1.  Wiki-links resolve        [[Target]] / [[Target|alias]] / [[Target#h]]
@@ -66,7 +66,7 @@ archive-entries, kb:<KB-Dir-Name>. Counts are also scanned in any repo
 files listed in config \"countFiles\" (e.g. [\"CLAUDE.md\", \"README.md\"]).
 
 Options:
-  --vault <dir>          Vault directory (default: \"vaultDir\" from engraven.config.json,
+  --vault <dir>          Vault directory (default: \"vaultDir\" from hyphasma.config.json,
                          else docs/vault)
   --strict               Exit 1 on warnings, not only on errors
   --fix                  Rewrite stale count directives in place
@@ -74,16 +74,16 @@ Options:
   --quiet                Suppress the report; exit code only
   -h, --help             Show this help
 
-Config: engraven.config.json in the working directory (all keys optional):
+Config: hyphasma.config.json in the working directory (all keys optional):
   { \"vaultDir\": \"docs/vault\", \"requireFrontmatter\": [\"tags\",\"date\"],
     \"sessionArchiveDir\": \"Session-Archive\", \"countFiles\": [] }
 
 Exit code: 0 clean · 1 errors (or warnings with --strict) · 2 usage error";
 
 const MEMORY_HELP: &str = "\
-engraven memory — router + topic-file linter
+hyphasma memory — router + topic-file linter
 
-Usage: engraven memory [--budget-only|--ci] [--memory-dir <dir>] [--self-test]
+Usage: hyphasma memory [--budget-only|--ci] [--memory-dir <dir>] [--self-test]
 
 Checks:
   1. MEMORY.md (the router) exists
@@ -101,7 +101,7 @@ Options:
   -h, --help             Show this help
 
 Memory dir resolution order:
-  --memory-dir flag → $ENGRAVEN_MEMORY_DIR → auto-discovery under
+  --memory-dir flag → $HYPHASMA_MEMORY_DIR → auto-discovery under
   ~/.claude/projects/*<projectSlug>*/memory (shortest path wins — worktree
   encodings strictly extend the main project's encoding).
 
@@ -111,11 +111,11 @@ harness-local memory is per-machine and never committed.
 Exit code: 0 clean/skipped · 1 errors · 2 usage error";
 
 const CHECK_HELP: &str = "\
-engraven check — run the vault linter, then the memory linter
+hyphasma check — run the vault linter, then the memory linter
 
-Usage: engraven check
+Usage: hyphasma check
 
-Runs 'engraven vault' followed by 'engraven memory', both with default
+Runs 'hyphasma vault' followed by 'hyphasma memory', both with default
 options, and exits with the worst of the two exit codes.";
 
 fn main() {
@@ -131,7 +131,7 @@ fn dispatch(args: &[String]) -> i32 {
     };
     match command.as_str() {
         "-V" | "--version" => {
-            let _ = writeln!(stdout, "engraven {VERSION}");
+            let _ = writeln!(stdout, "hyphasma {VERSION}");
             0
         }
         "-h" | "--help" => {
@@ -160,7 +160,7 @@ fn dispatch(args: &[String]) -> i32 {
         },
         other => {
             eprintln!("Unknown command: {other}");
-            eprintln!("Run 'engraven --help' for usage.");
+            eprintln!("Run 'hyphasma --help' for usage.");
             2
         }
     }

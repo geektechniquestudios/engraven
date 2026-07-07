@@ -1,0 +1,43 @@
+# Hyphasma memory integrity in CI — copied into your repo by the bootstrap.
+# The vault is repo-shared, so it lints on every PR. Integrity is enforced
+# by the hyphasma CLI (a single static Rust binary); the vendored Node
+# script is the automatic fallback, and parity between the two is enforced
+# upstream. Harness-local memory (the router + topic files) lives outside
+# the repo; validate-memory.sh skips cleanly on runners and is run locally
+# / by the agent instead.
+name: Memory Integrity
+
+on:
+  pull_request:
+    paths:
+      - "docs/vault/**"
+      - "hyphasma.config.json"
+      - "scripts/vault-check.mjs"
+  push:
+    branches: [main]
+    paths:
+      - "docs/vault/**"
+
+jobs:
+  vault-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch the hyphasma CLI
+        id: cli
+        continue-on-error: true
+        # pin a tag instead of latest if you want fully reproducible CI
+        run: |
+          curl -fsSL --retry 3 -o hyphasma \
+            https://github.com/geektechniquestudios/hyphasma/releases/latest/download/hyphasma-x86_64-linux
+          chmod +x hyphasma
+      - name: Vault integrity (hyphasma CLI)
+        if: steps.cli.outcome == 'success'
+        run: ./hyphasma vault --strict
+      - uses: actions/setup-node@v4
+        if: steps.cli.outcome != 'success'
+        with:
+          node-version: 20
+      - name: Vault integrity (script fallback)
+        if: steps.cli.outcome != 'success'
+        run: node scripts/vault-check.mjs --strict

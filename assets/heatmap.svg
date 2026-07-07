@@ -4,8 +4,6 @@
     .m { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
     .kbl { fill: #8b949e; font-size: 11px; }
     /* phase A — retrieval (0-30%) */
-    .arc { stroke-dasharray:100; animation: arc 15s infinite; }
-    @keyframes arc { 0%,4%{stroke-dashoffset:100;opacity:1} 11%{stroke-dashoffset:0;opacity:1} 26%{stroke-dashoffset:0;opacity:1} 30%,100%{stroke-dashoffset:0;opacity:0} }
     .idx { animation: idx 15s infinite; }
     @keyframes idx { 0%{fill:#1d1530;stroke:#4c3a75} 3%,26%{fill:#2c1f4d;stroke:#a78bfa} 30%,50%{fill:#1d1530;stroke:#4c3a75} 53%,60%{fill:#2c1f4d;stroke:#a78bfa} 64%,100%{fill:#1d1530;stroke:#4c3a75} }
     .hot { animation: hot 15s infinite; }
@@ -13,19 +11,17 @@
     .warm { animation: warm 15s infinite; }
     @keyframes warm { 0%,12%{fill:#1a2028;stroke:#2a313b} 15%,24%{fill:#7c2d12;stroke:#f97316} 29%,95%{fill:#2a1c10;stroke:#4a3a20} 98%,100%{fill:#1a2028;stroke:#2a313b} }
     /* phase B — synthesis (33-60%) */
-    .sw1 { animation: sw1 15s infinite; } .sw2 { animation: sw2 15s infinite; }
-    @keyframes sw1 { 0%,33%{fill:#1a2028;stroke:#2a313b} 36%,57%{fill:#7c2d12;stroke:#f97316} 61%,100%{fill:#1a2028;stroke:#2a313b} }
-    @keyframes sw2 { 0%,34%{fill:#1a2028;stroke:#2a313b} 37%,57%{fill:#7c2d12;stroke:#f97316} 61%,100%{fill:#1a2028;stroke:#2a313b} }
     .syn1 { stroke-dasharray:100; animation: syn1 15s infinite; }
     .syn2 { stroke-dasharray:100; animation: syn2 15s infinite; }
     @keyframes syn1 { 0%,36%{stroke-dashoffset:100;opacity:1} 43%{stroke-dashoffset:0} 57%{stroke-dashoffset:0;opacity:1} 62%,95%{stroke-dashoffset:0;opacity:.35} 98%,100%{stroke-dashoffset:0;opacity:0} }
     @keyframes syn2 { 0%,38%{stroke-dashoffset:100;opacity:1} 45%{stroke-dashoffset:0} 57%{stroke-dashoffset:0;opacity:1} 62%,95%{stroke-dashoffset:0;opacity:.35} 98%,100%{stroke-dashoffset:0;opacity:0} }
+    .sw1 { animation: sw1 15s infinite; } .sw2 { animation: sw2 15s infinite; }
+    @keyframes sw1 { 0%,33%{fill:#1a2028;stroke:#2a313b} 36%,57%{fill:#7c2d12;stroke:#f97316} 61%,100%{fill:#1a2028;stroke:#2a313b} }
+    @keyframes sw2 { 0%,34%{fill:#1a2028;stroke:#2a313b} 37%,57%{fill:#7c2d12;stroke:#f97316} 61%,100%{fill:#1a2028;stroke:#2a313b} }
     .synnode { animation: synnode 15s infinite; }
     @keyframes synnode { 0%,44%{opacity:0;fill:#1a2028;stroke:#2a313b} 48%,57%{opacity:1;fill:#fbbf24;stroke:#fbbf24} 62%,95%{opacity:1;fill:#2a1f10;stroke:#f97316} 98%,100%{opacity:0;fill:#1a2028;stroke:#2a313b} }
     .synlbl { animation: synlbl 15s infinite; }
     @keyframes synlbl { 0%,46%{opacity:0} 50%,58%{opacity:1} 62%,100%{opacity:0} }
-    .idxline { stroke-dasharray:100; animation: idxline 15s infinite; }
-    @keyframes idxline { 0%,50%{stroke-dashoffset:100;opacity:0} 51%{opacity:.85} 55%{stroke-dashoffset:0;opacity:.8} 62%,95%{stroke-dashoffset:0;opacity:.45} 98%,100%{stroke-dashoffset:0;opacity:0} }
     .plusrow { animation: plusrow 15s infinite; }
     @keyframes plusrow { 0%,53%{opacity:0} 55%,95%{opacity:1} 98%,100%{opacity:0} }
     /* phase C — lint (63-97%) */
@@ -45,6 +41,9 @@
     @keyframes capA { 0%,1%{opacity:0} 4%,27%{opacity:1} 31%,100%{opacity:0} }
     @keyframes capB { 0%,33%{opacity:0} 37%,57%{opacity:1} 61%,100%{opacity:0} }
     @keyframes capC { 0%,63%{opacity:0} 67%,94%{opacity:1} 98%,100%{opacity:0} }
+
+    /* accessibility + performance: honor reduced-motion with a clean still (grids at rest, retrieval caption shown) */
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } .syn1, .syn2, .synnode { opacity: 0 !important; } .capA { opacity: 1 !important; } }
   </style>
 
   <rect x="0.5" y="0.5" width="879" height="429" rx="12" fill="#0d1117" stroke="#30363d"/>
@@ -56,7 +55,6 @@
   <!-- index -->
   <rect class="idx" x="80" y="44" width="120" height="30" rx="8" fill="#1d1530" stroke="#4c3a75"/>
   <text class="m" x="140" y="63" font-size="11.5" fill="#a78bfa" text-anchor="middle">00-Index</text>
-  <path class="arc" pathLength="100" d="M 160 76 C 240 110, 330 138, 392 168" fill="none" stroke="#fbbf24" stroke-width="1.8"/>
 
   <!-- KB clusters -->
   <g stroke="#242b34" fill="none">
@@ -92,7 +90,6 @@
   <use class="sw2" href="#c" x="698" y="208" fill="#1a2028" stroke="#2a313b"/>
   <path class="syn1" pathLength="100" d="M 195 236 C 250 300, 340 330, 420 332" fill="none" stroke="#f97316" stroke-width="1.6"/>
   <path class="syn2" pathLength="100" d="M 715 236 C 660 300, 560 330, 462 332" fill="none" stroke="#f97316" stroke-width="1.6"/>
-  <path class="idxline" pathLength="100" d="M 428 322 C 340 240, 240 140, 172 82" fill="none" stroke="#f97316" stroke-width="1.4"/>
   <text class="m plusrow" x="210" y="64" font-size="11" fill="#fbbf24" opacity="0">+1 row</text>
   <g transform="translate(441 332) rotate(45)">
     <rect class="synnode" x="-13" y="-13" width="26" height="26" rx="5" fill="#1a2028" stroke="#2a313b"/>

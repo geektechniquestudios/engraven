@@ -1,94 +1,172 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">
-  <title>A mature Engraven vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Four lookups land four different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, and an episodic archive read), each hop naming the doc it lands on. Then a new KB forms while stale docs elsewhere are repaired.</title>
+  <title>A mature Hyphasma vault as a graph: every dot a doc, every line a wiki-link, every color a knowledge base. Six lookups land six different ways (a three-hop drill-down to the dev-east runbook, a one-hop deep link, a cross-KB wiki-link read, an episodic archive read, a read into a knowledge base that grew during the demo, and a cross-KB read riding one of the synthesis links that welded the new KB to its neighbors). A toast above the graph shows the short question that prompts each lookup, each hop names the doc it lands on, and stale docs elsewhere are repaired.</title>
   <style>
+    .q1 { animation: q1 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes q1 { 0%,0.8%{opacity:0;transform:translateY(-10px)} 1.8%{opacity:1;transform:translateY(0)} 18.3%{opacity:1;transform:translateY(0)} 19.5%,100%{opacity:0;transform:translateY(0)} }
+    .q2 { animation: q2 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes q2 { 0%,22.2%{opacity:0;transform:translateY(-10px)} 23.2%{opacity:1;transform:translateY(0)} 29.8%{opacity:1;transform:translateY(0)} 31%,100%{opacity:0;transform:translateY(0)} }
+    .q3 { animation: q3 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes q3 { 0%,34.2%{opacity:0;transform:translateY(-10px)} 35.2%{opacity:1;transform:translateY(0)} 43.8%{opacity:1;transform:translateY(0)} 45%,100%{opacity:0;transform:translateY(0)} }
+    .q4 { animation: q4 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes q4 { 0%,48.2%{opacity:0;transform:translateY(-10px)} 49.2%{opacity:1;transform:translateY(0)} 57.8%{opacity:1;transform:translateY(0)} 59%,100%{opacity:0;transform:translateY(0)} }
+    .q5 { animation: q5 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes q5 { 0%,66.2%{opacity:0;transform:translateY(-10px)} 67.2%{opacity:1;transform:translateY(0)} 77.8%{opacity:1;transform:translateY(0)} 79%,100%{opacity:0;transform:translateY(0)} }
+    .q6 { animation: q6 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes q6 { 0%,80.3%{opacity:0;transform:translateY(-10px)} 81.3%{opacity:1;transform:translateY(0)} 92.3%{opacity:1;transform:translateY(0)} 93.5%,100%{opacity:0;transform:translateY(0)} }
     .i1 { animation: i1 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
     @keyframes i1 { 0%,1%{transform:scale(.4);opacity:.9} 4.5%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
     .l1a { animation: l1a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes l1a { 0%,1.5%{stroke-dashoffset:100;opacity:0} 1.8%{opacity:.95} 4.5%{stroke-dashoffset:0;opacity:.9} 21%{stroke-dashoffset:0;opacity:.7} 23%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes l1a { 0%,1.5%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 1.75%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 5%{stroke-dashoffset:0;opacity:.88} 18.5%{stroke-dashoffset:0;opacity:.65} 21%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl1a { animation: cl1a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl1a { 0%,1.5%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 1.75%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 5%{stroke-dashoffset:7;opacity:.9} 6.6%,100%{stroke-dashoffset:7;opacity:0} }
     .f1a { animation: f1a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes f1a { 0%,4.2%{opacity:0} 4.7%{opacity:.85} 6%{opacity:.7} 7.4%{opacity:0} 100%{opacity:0} }
+    @keyframes f1a { 0%,4.6%{opacity:0} 5.3%{opacity:.85} 6.8%{opacity:.65} 8.4%{opacity:0} 100%{opacity:0} }
     .t1a { animation: t1a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes t1a { 0%,4.5%{opacity:0} 5.3%{opacity:1} 20.8%{opacity:1} 22%,100%{opacity:0} }
+    @keyframes t1a { 0%,5%{opacity:0} 6%{opacity:1} 18.6%{opacity:1} 20%,100%{opacity:0} }
     .l1b { animation: l1b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes l1b { 0%,5%{stroke-dashoffset:100;opacity:0} 5.3%{opacity:.95} 8%{stroke-dashoffset:0;opacity:.9} 21%{stroke-dashoffset:0;opacity:.7} 23%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes l1b { 0%,5.5%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 5.75%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 8.2%{stroke-dashoffset:0;opacity:.88} 18.5%{stroke-dashoffset:0;opacity:.65} 21%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl1b { animation: cl1b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl1b { 0%,5.5%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 5.75%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 8.2%{stroke-dashoffset:7;opacity:.9} 9.8%,100%{stroke-dashoffset:7;opacity:0} }
     .f1b { animation: f1b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes f1b { 0%,7.7%{opacity:0} 8.2%{opacity:.85} 9.5%{opacity:.7} 10.9%{opacity:0} 100%{opacity:0} }
+    @keyframes f1b { 0%,7.8%{opacity:0} 8.5%{opacity:.85} 10%{opacity:.65} 11.6%{opacity:0} 100%{opacity:0} }
     .t1b { animation: t1b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes t1b { 0%,8%{opacity:0} 8.8%{opacity:1} 20.8%{opacity:1} 22%,100%{opacity:0} }
+    @keyframes t1b { 0%,8.2%{opacity:0} 9.2%{opacity:1} 18.6%{opacity:1} 20%,100%{opacity:0} }
     .l1c { animation: l1c 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes l1c { 0%,8.5%{stroke-dashoffset:100;opacity:0} 8.8%{opacity:.95} 11.5%{stroke-dashoffset:0;opacity:.9} 21%{stroke-dashoffset:0;opacity:.7} 23%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes l1c { 0%,8.7%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 8.95%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 11.4%{stroke-dashoffset:0;opacity:.88} 18.5%{stroke-dashoffset:0;opacity:.65} 21%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl1c { animation: cl1c 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl1c { 0%,8.7%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 8.95%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 11.4%{stroke-dashoffset:7;opacity:.9} 13%,100%{stroke-dashoffset:7;opacity:0} }
     .f1c { animation: f1c 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes f1c { 0%,11.2%{opacity:0} 11.7%{opacity:.85} 13%{opacity:.7} 14.4%{opacity:0} 100%{opacity:0} }
+    @keyframes f1c { 0%,11%{opacity:0} 11.7%{opacity:.85} 13.2%{opacity:.65} 14.8%{opacity:0} 100%{opacity:0} }
     .t1c { animation: t1c 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes t1c { 0%,11.5%{opacity:0} 12.3%{opacity:1} 20.8%{opacity:1} 22%,100%{opacity:0} }
+    @keyframes t1c { 0%,11.4%{opacity:0} 12.4%{opacity:1} 18.6%{opacity:1} 20%,100%{opacity:0} }
     .i2 { animation: i2 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes i2 { 0%,25.5%{transform:scale(.4);opacity:.9} 29%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
+    @keyframes i2 { 0%,22.5%{transform:scale(.4);opacity:.9} 26%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
     .l2 { animation: l2 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes l2 { 0%,26%{stroke-dashoffset:100;opacity:0} 26.3%{opacity:.95} 29.5%{stroke-dashoffset:0;opacity:.9} 36%{stroke-dashoffset:0;opacity:.7} 38%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes l2 { 0%,23%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 23.25%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 26.5%{stroke-dashoffset:0;opacity:.88} 30.5%{stroke-dashoffset:0;opacity:.65} 33%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl2 { animation: cl2 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl2 { 0%,23%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 23.25%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 26.5%{stroke-dashoffset:7;opacity:.9} 28.1%,100%{stroke-dashoffset:7;opacity:0} }
     .f2 { animation: f2 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes f2 { 0%,29.2%{opacity:0} 29.7%{opacity:.85} 31%{opacity:.7} 32.4%{opacity:0} 100%{opacity:0} }
+    @keyframes f2 { 0%,26.1%{opacity:0} 26.8%{opacity:.85} 28.3%{opacity:.65} 29.9%{opacity:0} 100%{opacity:0} }
     .t2 { animation: t2 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes t2 { 0%,29.5%{opacity:0} 30.3%{opacity:1} 35.8%{opacity:1} 37%,100%{opacity:0} }
+    @keyframes t2 { 0%,26.5%{opacity:0} 27.5%{opacity:1} 30.6%{opacity:1} 32%,100%{opacity:0} }
     .i3 { animation: i3 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes i3 { 0%,40.5%{transform:scale(.4);opacity:.9} 44%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
+    @keyframes i3 { 0%,34.5%{transform:scale(.4);opacity:.9} 38%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
     .l3a { animation: l3a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes l3a { 0%,41%{stroke-dashoffset:100;opacity:0} 41.3%{opacity:.95} 44%{stroke-dashoffset:0;opacity:.9} 55%{stroke-dashoffset:0;opacity:.7} 57%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes l3a { 0%,35%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 35.25%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 38%{stroke-dashoffset:0;opacity:.88} 44.5%{stroke-dashoffset:0;opacity:.65} 47%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl3a { animation: cl3a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl3a { 0%,35%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 35.25%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 38%{stroke-dashoffset:7;opacity:.9} 39.6%,100%{stroke-dashoffset:7;opacity:0} }
     .f3a { animation: f3a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes f3a { 0%,43.7%{opacity:0} 44.2%{opacity:.85} 45.5%{opacity:.7} 46.9%{opacity:0} 100%{opacity:0} }
+    @keyframes f3a { 0%,37.6%{opacity:0} 38.3%{opacity:.85} 39.8%{opacity:.65} 41.4%{opacity:0} 100%{opacity:0} }
     .t3a { animation: t3a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes t3a { 0%,44%{opacity:0} 44.8%{opacity:1} 53.8%{opacity:1} 55%,100%{opacity:0} }
+    @keyframes t3a { 0%,38%{opacity:0} 39%{opacity:1} 44.1%{opacity:1} 45.5%,100%{opacity:0} }
     .l3x { animation: l3x 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes l3x { 0%,44.5%{stroke-dashoffset:100;opacity:0} 44.8%{opacity:.95} 47.5%{stroke-dashoffset:0;opacity:.9} 55%{stroke-dashoffset:0;opacity:.7} 57%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes l3x { 0%,38.5%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 38.75%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 41.5%{stroke-dashoffset:0;opacity:.88} 44.5%{stroke-dashoffset:0;opacity:.65} 47%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl3x { animation: cl3x 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl3x { 0%,38.5%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 38.75%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 41.5%{stroke-dashoffset:7;opacity:.9} 43.1%,100%{stroke-dashoffset:7;opacity:0} }
     .f3b { animation: f3b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes f3b { 0%,47.2%{opacity:0} 47.7%{opacity:.85} 49%{opacity:.7} 50.4%{opacity:0} 100%{opacity:0} }
+    @keyframes f3b { 0%,41.1%{opacity:0} 41.8%{opacity:.85} 43.3%{opacity:.65} 44.9%{opacity:0} 100%{opacity:0} }
     .t3b { animation: t3b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes t3b { 0%,47.5%{opacity:0} 48.3%{opacity:1} 53.8%{opacity:1} 55%,100%{opacity:0} }
+    @keyframes t3b { 0%,41.5%{opacity:0} 42.5%{opacity:1} 44.1%{opacity:1} 45.5%,100%{opacity:0} }
     .i4 { animation: i4 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes i4 { 0%,59.5%{transform:scale(.4);opacity:.9} 63%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
+    @keyframes i4 { 0%,48.5%{transform:scale(.4);opacity:.9} 52%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
     .l4a { animation: l4a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes l4a { 0%,60%{stroke-dashoffset:100;opacity:0} 60.3%{opacity:.95} 63%{stroke-dashoffset:0;opacity:.9} 74%{stroke-dashoffset:0;opacity:.7} 76%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes l4a { 0%,49%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 49.25%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 52%{stroke-dashoffset:0;opacity:.88} 58.5%{stroke-dashoffset:0;opacity:.65} 61%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl4a { animation: cl4a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl4a { 0%,49%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 49.25%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 52%{stroke-dashoffset:7;opacity:.9} 53.6%,100%{stroke-dashoffset:7;opacity:0} }
     .f4a { animation: f4a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes f4a { 0%,62.7%{opacity:0} 63.2%{opacity:.85} 64.5%{opacity:.7} 65.9%{opacity:0} 100%{opacity:0} }
+    @keyframes f4a { 0%,51.6%{opacity:0} 52.3%{opacity:.85} 53.8%{opacity:.65} 55.4%{opacity:0} 100%{opacity:0} }
     .t4a { animation: t4a 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes t4a { 0%,63%{opacity:0} 63.8%{opacity:1} 72.8%{opacity:1} 74%,100%{opacity:0} }
+    @keyframes t4a { 0%,52%{opacity:0} 53%{opacity:1} 58.1%{opacity:1} 59.5%,100%{opacity:0} }
     .l4b { animation: l4b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes l4b { 0%,63.5%{stroke-dashoffset:100;opacity:0} 63.8%{opacity:.95} 66.5%{stroke-dashoffset:0;opacity:.9} 74%{stroke-dashoffset:0;opacity:.7} 76%,100%{stroke-dashoffset:0;opacity:0} }
+    @keyframes l4b { 0%,52.5%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 52.75%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 55.5%{stroke-dashoffset:0;opacity:.88} 58.5%{stroke-dashoffset:0;opacity:.65} 61%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl4b { animation: cl4b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl4b { 0%,52.5%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 52.75%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 55.5%{stroke-dashoffset:7;opacity:.9} 57.1%,100%{stroke-dashoffset:7;opacity:0} }
     .f4b { animation: f4b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes f4b { 0%,66.2%{opacity:0} 66.7%{opacity:.85} 68%{opacity:.7} 69.4%{opacity:0} 100%{opacity:0} }
+    @keyframes f4b { 0%,55.1%{opacity:0} 55.8%{opacity:.85} 57.3%{opacity:.65} 58.9%{opacity:0} 100%{opacity:0} }
     .t4b { animation: t4b 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes t4b { 0%,66.5%{opacity:0} 67.3%{opacity:1} 72.8%{opacity:1} 74%,100%{opacity:0} }
+    @keyframes t4b { 0%,55.5%{opacity:0} 56.5%{opacity:1} 58.1%{opacity:1} 59.5%,100%{opacity:0} }
     .nw0 { animation: nw0 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes nw0 { 0%,78%{transform:scale(0);opacity:0} 78.6%{transform:scale(1.3);opacity:1} 79.1%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{transform:scale(1);opacity:0} }
+    @keyframes nw0 { 0%,8%{transform:scale(0);opacity:0} 8.7%{transform:scale(1.3);opacity:1} 9.3%{transform:scale(1)} 95.5%{transform:scale(1);opacity:1} 99.2%,100%{transform:scale(1);opacity:0} }
     .ne0 { animation: ne0 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes ne0 { 0%,78.8%{stroke-dashoffset:100;opacity:0} 79%{opacity:.5} 80.2%{stroke-dashoffset:0;opacity:.3} 96%{stroke-dashoffset:0;opacity:.25} 98.5%,100%{opacity:0} }
+    @keyframes ne0 { 0%,9%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 9.2%{opacity:.5} 10.6%{stroke-dashoffset:0;opacity:.3} 95.5%{stroke-dashoffset:0;opacity:.25} 99.2%,100%{opacity:0} }
     .nw1 { animation: nw1 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes nw1 { 0%,80.5%{transform:scale(0);opacity:0} 81.1%{transform:scale(1.3);opacity:1} 81.6%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{transform:scale(1);opacity:0} }
+    @keyframes nw1 { 0%,22%{transform:scale(0);opacity:0} 22.7%{transform:scale(1.3);opacity:1} 23.3%{transform:scale(1)} 95.5%{transform:scale(1);opacity:1} 99.2%,100%{transform:scale(1);opacity:0} }
     .ne1 { animation: ne1 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes ne1 { 0%,81.3%{stroke-dashoffset:100;opacity:0} 81.5%{opacity:.5} 82.7%{stroke-dashoffset:0;opacity:.3} 96%{stroke-dashoffset:0;opacity:.25} 98.5%,100%{opacity:0} }
+    @keyframes ne1 { 0%,23%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 23.2%{opacity:.5} 24.6%{stroke-dashoffset:0;opacity:.3} 95.5%{stroke-dashoffset:0;opacity:.25} 99.2%,100%{opacity:0} }
     .nw2 { animation: nw2 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes nw2 { 0%,83%{transform:scale(0);opacity:0} 83.6%{transform:scale(1.3);opacity:1} 84.1%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{transform:scale(1);opacity:0} }
+    @keyframes nw2 { 0%,36%{transform:scale(0);opacity:0} 36.7%{transform:scale(1.3);opacity:1} 37.3%{transform:scale(1)} 95.5%{transform:scale(1);opacity:1} 99.2%,100%{transform:scale(1);opacity:0} }
     .ne2 { animation: ne2 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes ne2 { 0%,83.8%{stroke-dashoffset:100;opacity:0} 84%{opacity:.5} 85.2%{stroke-dashoffset:0;opacity:.3} 96%{stroke-dashoffset:0;opacity:.25} 98.5%,100%{opacity:0} }
+    @keyframes ne2 { 0%,37%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 37.2%{opacity:.5} 38.6%{stroke-dashoffset:0;opacity:.3} 95.5%{stroke-dashoffset:0;opacity:.25} 99.2%,100%{opacity:0} }
     .nw3 { animation: nw3 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes nw3 { 0%,85.5%{transform:scale(0);opacity:0} 86.1%{transform:scale(1.3);opacity:1} 86.6%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{transform:scale(1);opacity:0} }
+    @keyframes nw3 { 0%,50%{transform:scale(0);opacity:0} 50.7%{transform:scale(1.3);opacity:1} 51.3%{transform:scale(1)} 95.5%{transform:scale(1);opacity:1} 99.2%,100%{transform:scale(1);opacity:0} }
     .ne3 { animation: ne3 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes ne3 { 0%,86.3%{stroke-dashoffset:100;opacity:0} 86.5%{opacity:.5} 87.7%{stroke-dashoffset:0;opacity:.3} 96%{stroke-dashoffset:0;opacity:.25} 98.5%,100%{opacity:0} }
+    @keyframes ne3 { 0%,51%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 51.2%{opacity:.5} 52.6%{stroke-dashoffset:0;opacity:.3} 95.5%{stroke-dashoffset:0;opacity:.25} 99.2%,100%{opacity:0} }
     .nkm { animation: nkm 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes nkm { 0%,88%{transform:scale(0);opacity:0} 88.8%{transform:scale(1.35);opacity:1} 89.5%{transform:scale(1)} 96%{transform:scale(1);opacity:1} 98.5%,100%{opacity:0} }
-    .nkh { animation: nkh 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes nkh { 0%,88%{opacity:0} 88.5%{opacity:.85} 89.8%{opacity:.7} 91.2%{opacity:0} 100%{opacity:0} }
+    @keyframes nkm { 0%,60%{transform:scale(0);opacity:0} 60.8%{transform:scale(1.35);opacity:1} 61.5%{transform:scale(1)} 95.5%{transform:scale(1);opacity:1} 99.2%,100%{opacity:0} }
+    .nkh { animation: nkh 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes nkh { 0%,60%{transform:scale(.4);opacity:0} 60.8%{opacity:.85} 64%{transform:scale(2.1);opacity:0} 100%{transform:scale(2.1);opacity:0} }
     .nkl { animation: nkl 32s linear infinite; animation-fill-mode: backwards; }
-    @keyframes nkl { 0%,89%{opacity:0} 89.8%{opacity:1} 94.8%{opacity:1} 96%,100%{opacity:0} }
+    @keyframes nkl { 0%,61.5%{opacity:0} 62.5%{opacity:1} 65.2%{opacity:1} 66.4%{opacity:0} 70.3%{opacity:0} 71.3%{opacity:1} 78.1%{opacity:1} 79.5%,100%{opacity:0} }
+    .nsp { animation: nsp 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes nsp { 0%,60.8%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 61%{opacity:.6;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 62.8%{stroke-dashoffset:0;opacity:.45} 65%{stroke-dashoffset:0;opacity:.3} 95.5%{stroke-dashoffset:0;opacity:.28} 99.2%,100%{opacity:0} }
+    .wd0 { animation: wd0 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes wd0 { 0%,61.5%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 61.75%{opacity:.85;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 64.3%{stroke-dashoffset:0;opacity:.7} 67.3%{stroke-dashoffset:0;opacity:.34} 95.5%{stroke-dashoffset:0;opacity:.3} 99.2%,100%{stroke-dashoffset:0;opacity:0} }
+    .cwd0 { animation: cwd0 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cwd0 { 0%,61.5%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 61.75%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 64.3%{stroke-dashoffset:7;opacity:.9} 65.9%,100%{stroke-dashoffset:7;opacity:0} }
+    .wd1 { animation: wd1 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes wd1 { 0%,62.7%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 62.95%{opacity:.85;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 65.2%{stroke-dashoffset:0;opacity:.7} 68.2%{stroke-dashoffset:0;opacity:.34} 95.5%{stroke-dashoffset:0;opacity:.3} 99.2%,100%{stroke-dashoffset:0;opacity:0} }
+    .cwd1 { animation: cwd1 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cwd1 { 0%,62.7%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 62.95%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 65.2%{stroke-dashoffset:7;opacity:.9} 66.8%,100%{stroke-dashoffset:7;opacity:0} }
+    .wd2 { animation: wd2 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes wd2 { 0%,63.9%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 64.15%{opacity:.85;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 66.2%{stroke-dashoffset:0;opacity:.7} 69.2%{stroke-dashoffset:0;opacity:.34} 95.5%{stroke-dashoffset:0;opacity:.3} 99.2%,100%{stroke-dashoffset:0;opacity:0} }
+    .cwd2 { animation: cwd2 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cwd2 { 0%,63.9%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 64.15%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 66.2%{stroke-dashoffset:7;opacity:.9} 67.8%,100%{stroke-dashoffset:7;opacity:0} }
+    .i5 { animation: i5 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes i5 { 0%,66.5%{transform:scale(.4);opacity:.9} 70%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
+    .l5a { animation: l5a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l5a { 0%,67%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 67.25%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 69.8%{stroke-dashoffset:0;opacity:.88} 77.5%{stroke-dashoffset:0;opacity:.65} 80%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl5a { animation: cl5a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl5a { 0%,67%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 67.25%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 69.8%{stroke-dashoffset:7;opacity:.9} 71.4%,100%{stroke-dashoffset:7;opacity:0} }
+    .f5a { animation: f5a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f5a { 0%,69.4%{opacity:0} 70.1%{opacity:.85} 71.6%{opacity:.65} 73.2%{opacity:0} 100%{opacity:0} }
+    .l5b { animation: l5b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l5b { 0%,70.3%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 70.55%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 72.8%{stroke-dashoffset:0;opacity:.88} 77.5%{stroke-dashoffset:0;opacity:.65} 80%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl5b { animation: cl5b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl5b { 0%,70.3%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 70.55%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 72.8%{stroke-dashoffset:7;opacity:.9} 74.4%,100%{stroke-dashoffset:7;opacity:0} }
+    .f5b { animation: f5b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f5b { 0%,72.4%{opacity:0} 73.1%{opacity:.85} 74.6%{opacity:.65} 76.2%{opacity:0} 100%{opacity:0} }
+    .t5b { animation: t5b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t5b { 0%,72.8%{opacity:0} 73.8%{opacity:1} 78.1%{opacity:1} 79.5%,100%{opacity:0} }
+    .i6 { animation: i6 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
+    @keyframes i6 { 0%,80.5%{transform:scale(.4);opacity:.9} 84%{transform:scale(2.4);opacity:0} 100%{transform:scale(2.4);opacity:0} }
+    .l6a { animation: l6a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l6a { 0%,81%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 81.25%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 83.4%{stroke-dashoffset:0;opacity:.88} 93.5%{stroke-dashoffset:0;opacity:.65} 96%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl6a { animation: cl6a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl6a { 0%,81%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 81.25%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 83.4%{stroke-dashoffset:7;opacity:.9} 85%,100%{stroke-dashoffset:7;opacity:0} }
+    .f6a { animation: f6a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f6a { 0%,83%{opacity:0} 83.7%{opacity:.85} 85.2%{opacity:.65} 86.8%{opacity:0} 100%{opacity:0} }
+    .t6a { animation: t6a 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t6a { 0%,83.4%{opacity:0} 84.4%{opacity:1} 92.1%{opacity:1} 93.5%,100%{opacity:0} }
+    .l6x { animation: l6x 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes l6x { 0%,83.9%{stroke-dashoffset:100;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 84.15%{opacity:.9;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 87.3%{stroke-dashoffset:0;opacity:.88} 93.5%{stroke-dashoffset:0;opacity:.65} 96%,100%{stroke-dashoffset:0;opacity:0} }
+    .cl6x { animation: cl6x 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes cl6x { 0%,83.9%{stroke-dashoffset:107;opacity:0;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 84.15%{opacity:.95;animation-timing-function:cubic-bezier(.33,.09,.22,1)} 87.3%{stroke-dashoffset:7;opacity:.9} 88.9%,100%{stroke-dashoffset:7;opacity:0} }
+    .f6b { animation: f6b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes f6b { 0%,86.9%{opacity:0} 87.6%{opacity:.85} 89.1%{opacity:.65} 90.7%{opacity:0} 100%{opacity:0} }
+    .t6b { animation: t6b 32s linear infinite; animation-fill-mode: backwards; }
+    @keyframes t6b { 0%,87.3%{opacity:0} 88.3%{opacity:1} 92.6%{opacity:1} 94%,100%{opacity:0} }
     .rp0 { animation: rp0 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes rp0 { 0%,78%{transform:scale(.5);opacity:0;stroke:#f85149} 78.5%{opacity:.95;stroke:#f85149} 80%{transform:scale(1.5);stroke:#f85149;opacity:.7} 80.5%{stroke:#3fb950;opacity:.95} 83%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0} }
+    @keyframes rp0 { 0%,24%{transform:scale(.5);opacity:0;stroke:#f85149} 24.5%{opacity:.95;stroke:#f85149} 26%{transform:scale(1.5);stroke:#f85149;opacity:.7} 26.5%{stroke:#3fb950;opacity:.95} 29%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0} }
     .rp1 { animation: rp1 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes rp1 { 0%,82%{transform:scale(.5);opacity:0;stroke:#f85149} 82.5%{opacity:.95;stroke:#f85149} 84%{transform:scale(1.5);stroke:#f85149;opacity:.7} 84.5%{stroke:#3fb950;opacity:.95} 87%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0} }
+    @keyframes rp1 { 0%,40%{transform:scale(.5);opacity:0;stroke:#f85149} 40.5%{opacity:.95;stroke:#f85149} 42%{transform:scale(1.5);stroke:#f85149;opacity:.7} 42.5%{stroke:#3fb950;opacity:.95} 45%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0} }
     .rp2 { animation: rp2 32s linear infinite; animation-fill-mode: backwards; transform-box: fill-box; transform-origin: center; }
-    @keyframes rp2 { 0%,86%{transform:scale(.5);opacity:0;stroke:#f85149} 86.5%{opacity:.95;stroke:#f85149} 88%{transform:scale(1.5);stroke:#f85149;opacity:.7} 88.5%{stroke:#3fb950;opacity:.95} 91%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0} }
+    @keyframes rp2 { 0%,56%{transform:scale(.5);opacity:0;stroke:#f85149} 56.5%{opacity:.95;stroke:#f85149} 58%{transform:scale(1.5);stroke:#f85149;opacity:.7} 58.5%{stroke:#3fb950;opacity:.95} 61%{transform:scale(2.1);stroke:#3fb950;opacity:0} 100%{transform:scale(2.1);opacity:0} }
     .halo { transform-box: fill-box; transform-origin: center; animation: halo 7s infinite; }
     @keyframes halo { 0%{transform:scale(.5);opacity:.8} 60%{transform:scale(2.6);opacity:0} 100%{transform:scale(2.6);opacity:0} }
     .idx { animation: idxb 6s ease-in-out infinite; }
     @keyframes idxb { 0%,100%{opacity:.85} 50%{opacity:1} }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; }
+      [class^="l"], [class^="cl"], [class^="f"], [class^="t"], [class^="q"], [class^="rp"], [class^="cwd"], .i1, .i2, .i3, .i4, .i5, .i6, .nkh, .nkl, .halo { opacity: 0 !important; } }
   </style>
   <rect x="0.5" y="0.5" width="1199" height="799" rx="14" fill="#0d1117" stroke="#30363d"/>
   <g stroke="#8b949e" stroke-width="0.5">
@@ -2553,18 +2631,38 @@
   <circle class="halo" cx="1097.6" cy="254.2" r="9" fill="none" stroke="#3a86ff" stroke-width="1.6" style="animation-delay:5.75s"/>
   <g fill="none" stroke="#fbbf24">
     <circle class="i1" cx="598" cy="428" r="8" stroke-width="1.5"/>
-    <line class="l1a" pathLength="100" x1="598" y1="428" x2="186.6" y2="188.5" stroke-width="1.2"/>
-    <line class="l1b" pathLength="100" x1="186.6" y1="188.5" x2="145.2" y2="153.1" stroke-width="1.2"/>
-    <line class="l1c" pathLength="100" x1="145.2" y1="153.1" x2="103.1" y2="121.3" stroke-width="1.2"/>
+    <path class="l1a" pathLength="100" d="M 598 428 Q 405.4 285.8 186.6 188.5" stroke-width="1.2"/>
+    <path class="cl1a" pathLength="100" d="M 598 428 Q 405.4 285.8 186.6 188.5" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <path class="l1b" pathLength="100" d="M 186.6 188.5 Q 159.0 223.0 114.9 221" stroke-width="1.2"/>
+    <path class="cl1b" pathLength="100" d="M 186.6 188.5 Q 159.0 223.0 114.9 221" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <path class="l1c" pathLength="100" d="M 114.9 221 Q 124.9 169.3 103.1 121.3" stroke-width="1.2"/>
+    <path class="cl1c" pathLength="100" d="M 114.9 221 Q 124.9 169.3 103.1 121.3" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
     <circle class="i2" cx="598" cy="428" r="8" stroke-width="1.5"/>
-    <line class="l2" pathLength="100" x1="598" y1="428" x2="1030.2" y2="409.8" stroke-width="1.2"/>
+    <path class="l2" pathLength="100" d="M 598 428 Q 815.4 448.9 1030.2 409.8" stroke-width="1.2"/>
+    <path class="cl2" pathLength="100" d="M 598 428 Q 815.4 448.9 1030.2 409.8" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
     <circle class="i3" cx="598" cy="428" r="8" stroke-width="1.5"/>
-    <line class="l3a" pathLength="100" x1="598" y1="428" x2="348.8" y2="363" stroke-width="1.2"/>
+    <path class="l3a" pathLength="100" d="M 598 428 Q 467.3 418.7 348.8 363" stroke-width="1.2"/>
+    <path class="cl3a" pathLength="100" d="M 598 428 Q 467.3 418.7 348.8 363" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
     <circle class="i4" cx="598" cy="428" r="8" stroke-width="1.5"/>
-    <line class="l4a" pathLength="100" x1="598" y1="428" x2="560.2" y2="682.7" stroke-width="1.2"/>
-    <line class="l4b" pathLength="100" x1="560.2" y1="682.7" x2="480" y2="724" stroke-width="1.2"/>
+    <path class="l4a" pathLength="100" d="M 598 428 Q 557.3 552.1 560.2 682.7" stroke-width="1.2"/>
+    <path class="cl4a" pathLength="100" d="M 598 428 Q 557.3 552.1 560.2 682.7" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <path class="l4b" pathLength="100" d="M 560.2 682.7 Q 527.4 717.6 480 724" stroke-width="1.2"/>
+    <path class="cl4b" pathLength="100" d="M 560.2 682.7 Q 527.4 717.6 480 724" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <circle class="i5" cx="598" cy="428" r="8" stroke-width="1.5"/>
+    <path class="l5a" pathLength="100" d="M 598 428 Q 484.3 465.3 365 455" stroke-width="1.2"/>
+    <path class="cl5a" pathLength="100" d="M 598 428 Q 484.3 465.3 365 455" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <path class="l5b" pathLength="100" d="M 365 455 Q 383.6 461.6 390 442.9" stroke-width="1.2"/>
+    <path class="cl5b" pathLength="100" d="M 365 455 Q 383.6 461.6 390 442.9" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <circle class="i6" cx="598" cy="428" r="8" stroke-width="1.5"/>
+    <path class="l6a" pathLength="100" d="M 598 428 Q 613.6 388.8 589.4 354.3" stroke-width="1.2"/>
+    <path class="cl6a" pathLength="100" d="M 598 428 Q 613.6 388.8 589.4 354.3" stroke="#fde68a" stroke-width="1.8" stroke-dasharray="7 93" stroke-linecap="round"/>
   </g>
-  <path class="l3x" pathLength="100" d="M 348.8 363 Q 467.8 322.7 589.4 354.3" fill="none" stroke="#a78bfa" stroke-width="1.2"/>
+  <g fill="none" stroke="#a78bfa">
+    <path class="l3x" pathLength="100" d="M 348.8 363 Q 467.8 322.7 589.4 354.3" stroke-width="1.1"/>
+    <path class="cl3x" pathLength="100" d="M 348.8 363 Q 467.8 322.7 589.4 354.3" stroke="#c4b5fd" stroke-width="1.7" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <path class="l6x" pathLength="100" d="M 589.4 354.3 Q 472.1 422.6 339.2 449.7" stroke-width="1.1"/>
+    <path class="cl6x" pathLength="100" d="M 589.4 354.3 Q 472.1 422.6 339.2 449.7" stroke="#c4b5fd" stroke-width="1.7" stroke-dasharray="7 93" stroke-linecap="round"/>
+  </g>
   <g class="f1a" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
     <line x1="186.6" y1="188.5" x2="149.9" y2="206.1"/>
     <line x1="163.9" y1="224.4" x2="186.6" y2="188.5"/>
@@ -2573,7 +2671,11 @@
     <line x1="154.3" y1="120.5" x2="186.6" y2="188.5"/>
   </g>
   <g class="f1b" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
-    <line x1="145.2" y1="153.1" x2="186.6" y2="188.5"/>
+    <line x1="114.9" y1="221" x2="149.9" y2="206.1"/>
+    <line x1="155.2" y1="191.3" x2="114.9" y2="221"/>
+    <line x1="155.6" y1="178.6" x2="114.9" y2="221"/>
+    <line x1="114.9" y1="221" x2="137.7" y2="151.5"/>
+    <line x1="186.6" y1="188.5" x2="114.9" y2="221"/>
   </g>
   <g class="f1c" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
     <line x1="74.7" y1="103.6" x2="103.1" y2="121.3"/>
@@ -2608,14 +2710,30 @@
   <g class="f4b" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
     <line x1="566.9" y1="668.8" x2="480" y2="724"/>
   </g>
+  <g class="f5a" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+  </g>
+  <g class="f5b" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="390" y1="442.9" x2="382.7" y2="439"/>
+  </g>
+  <g class="f6a" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="581.8" y1="346.8" x2="589.4" y2="354.3"/>
+    <line x1="572" y1="350.9" x2="589.4" y2="354.3"/>
+    <line x1="609.2" y1="341.6" x2="589.4" y2="354.3"/>
+    <line x1="570.4" y1="327.7" x2="589.4" y2="354.3"/>
+    <line x1="553.4" y1="361" x2="589.4" y2="354.3"/>
+  </g>
+  <g class="f6b" stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0">
+    <line x1="343.9" y1="451.1" x2="339.2" y2="449.7"/>
+  </g>
   <text class="t1a" x="186.6" y="208.5" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Infrastructure - Meta-Analysis</text>
-  <text class="t1b" x="145.2" y="173.1" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">AWS Environments - Section Hub</text>
+  <text class="t1b" x="118" y="241" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">AWS Environments - Section Hub</text>
   <text class="t1c" x="118" y="141.3" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">dev-east Access Runbook</text>
   <text class="t2" x="1030.2" y="429.8" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Deploy Freeze Checklist</text>
   <text class="t3a" x="348.8" y="383" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Caching Strategy</text>
   <text class="t3b" x="589.4" y="374.3" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Rate Limiting</text>
   <text class="t4a" x="560.2" y="702.7" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Session Archive Index</text>
   <text class="t4b" x="466.0" y="728.0" text-anchor="end" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">2026-05-12 Incident Review</text>
+  <text class="t5b" x="390" y="430.9" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Backpressure Thresholds</text>
   <g stroke="#fb7185" stroke-width="0.6" fill="none">
     <line class="ne0" pathLength="100" x1="384" y1="446" x2="357.4" y2="449.5"/>
     <line class="ne0" pathLength="100" x1="350" y1="470.4" x2="357.4" y2="449.5"/>
@@ -2629,6 +2747,29 @@
     <line class="ne2" pathLength="100" x1="382.7" y1="439" x2="384" y2="446"/>
     <line class="ne3" pathLength="100" x1="361.3" y1="458.7" x2="357.4" y2="449.5"/>
     <line class="ne3" pathLength="100" x1="390" y1="442.9" x2="384" y2="446"/>
+    <line class="ne1" pathLength="100" x1="339.2" y1="449.7" x2="346.5" y2="446.9"/>
+    <line class="ne1" pathLength="100" x1="343.9" y1="451.1" x2="346.5" y2="446.9"/>
+    <line class="ne1" pathLength="100" x1="360.8" y1="432.3" x2="346.5" y2="446.9"/>
+    <line class="ne2" pathLength="100" x1="385.7" y1="472.1" x2="384" y2="446"/>
+    <line class="ne2" pathLength="100" x1="406.1" y1="462.8" x2="384" y2="446"/>
+    <line class="ne2" pathLength="100" x1="372.3" y1="448.1" x2="382.7" y2="439"/>
+    <line class="ne3" pathLength="100" x1="361.3" y1="458.7" x2="372.3" y2="448.1"/>
+    <line class="ne3" pathLength="100" x1="390" y1="442.9" x2="382.7" y2="439"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="361.3" y2="458.7"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="357.4" y2="449.5"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="372.3" y2="448.1"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="346.5" y2="446.9"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="384" y2="446"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="343.9" y2="451.1"/>
+    <line class="nsp" pathLength="100" x1="365" y1="455" x2="350" y2="470.4"/>
+  </g>
+  <g fill="none" stroke="#a78bfa" stroke-width="1">
+    <path class="wd0" pathLength="100" d="M 365 455 Q 491.1 435.7 589.4 354.3"/>
+    <path class="cwd0" pathLength="100" d="M 365 455 Q 491.1 435.7 589.4 354.3" stroke="#c4b5fd" stroke-width="1.6" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <path class="wd1" pathLength="100" d="M 365 455 Q 350.7 426.7 372 403.3"/>
+    <path class="cwd1" pathLength="100" d="M 365 455 Q 350.7 426.7 372 403.3" stroke="#c4b5fd" stroke-width="1.6" stroke-dasharray="7 93" stroke-linecap="round"/>
+    <path class="wd2" pathLength="100" d="M 365 455 Q 370.5 484.1 399.3 491.2"/>
+    <path class="cwd2" pathLength="100" d="M 365 455 Q 370.5 484.1 399.3 491.2" stroke="#c4b5fd" stroke-width="1.6" stroke-dasharray="7 93" stroke-linecap="round"/>
   </g>
   <g fill="#fb7185">
     <circle class="nw0" cx="357.4" cy="449.5" r="2.6" style="animation-delay:0.01s"/>
@@ -2648,11 +2789,42 @@
   <circle class="nkh" cx="365" cy="455" r="10" fill="none" stroke="#fb7185" stroke-width="1.6"/>
   <circle class="nkm" cx="365" cy="455" r="5.5" fill="#fb7185"/>
   <text class="nkl" x="365" y="479" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Queue Backpressure - Meta-Analysis</text>
+  <text class="t6a" x="589.4" y="374.3" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Rate Limiting</text>
+  <text class="t6b" x="325.2" y="453.7" text-anchor="end" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">Load Shedding Policy</text>
   <circle class="rp0" cx="618.8" cy="104.6" r="9.0" fill="none" stroke="#f85149" stroke-width="1.8"/>
   <circle class="rp1" cx="832.4" cy="279.6" r="9.0" fill="none" stroke="#f85149" stroke-width="1.8"/>
   <circle class="rp2" cx="678.2" cy="563.2" r="9.0" fill="none" stroke="#f85149" stroke-width="1.8"/>
   <circle class="idx" cx="598" cy="428" r="5.5" fill="#e6edf3"/>
   <text x="598" y="450" text-anchor="middle" font-size="11.5" fill="#dbe2ea" stroke="#0d1117" stroke-width="3.5" paint-order="stroke">00-Index</text>
-  <text x="600" y="766" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>
-  <text x="600" y="786" text-anchor="middle" font-size="11" fill="#6e7681">clusters emerge from links, not folders. open your vault in Obsidian and this is your agent's brain</text>
+  <g class="q1">
+    <rect x="425" y="22" width="351" height="38" rx="19" fill="#161b22" stroke="#30363d"/>
+    <circle cx="448" cy="41" r="3.6" fill="#fbbf24"/>
+    <text x="463" y="46" font-size="14" fill="#e6edf3">"how many namespaces in dev-east?"</text>
+  </g>
+  <g class="q2">
+    <rect x="476" y="22" width="249" height="38" rx="19" fill="#161b22" stroke="#30363d"/>
+    <circle cx="499" cy="41" r="3.6" fill="#fbbf24"/>
+    <text x="514" y="46" font-size="14" fill="#e6edf3">"can we deploy today?"</text>
+  </g>
+  <g class="q3">
+    <rect x="408" y="22" width="385" height="38" rx="19" fill="#161b22" stroke="#30363d"/>
+    <circle cx="431" cy="41" r="3.6" fill="#fbbf24"/>
+    <text x="446" y="46" font-size="14" fill="#e6edf3">"does caching change our rate limits?"</text>
+  </g>
+  <g class="q4">
+    <rect x="450" y="22" width="300" height="38" rx="19" fill="#161b22" stroke="#30363d"/>
+    <circle cx="473" cy="41" r="3.6" fill="#fbbf24"/>
+    <text x="488" y="46" font-size="14" fill="#e6edf3">"didn't we try this before?"</text>
+  </g>
+  <g class="q5">
+    <rect x="403" y="22" width="394" height="38" rx="19" fill="#161b22" stroke="#30363d"/>
+    <circle cx="426" cy="41" r="3.6" fill="#fbbf24"/>
+    <text x="441" y="46" font-size="14" fill="#e6edf3">"what's a safe backpressure threshold?"</text>
+  </g>
+  <g class="q6">
+    <rect x="454" y="22" width="292" height="38" rx="19" fill="#161b22" stroke="#30363d"/>
+    <circle cx="477" cy="41" r="3.6" fill="#fbbf24"/>
+    <text x="492" y="46" font-size="14" fill="#e6edf3">"when should we shed load?"</text>
+  </g>
+  <text x="600" y="773" text-anchor="middle" font-size="13" fill="#8b949e">every dot a doc · every line a [[wiki-link]] · every color a KB</text>
 </svg>

@@ -1,4 +1,4 @@
-//! Integration tests for `engraven vault` (and the shared CLI surface).
+//! Integration tests for `hyphasma vault` (and the shared CLI surface).
 //!
 //! Golden outputs were generated from `scripts/vault-check.mjs` — the parity
 //! oracle. The fixtures exercise all 11 checks; `vault-bad` triggers every
@@ -166,7 +166,7 @@ fn missing_vault_dir_exits_2_with_guidance() {
     let err = stderr_of(&out);
     assert!(err.contains("Vault directory not found: "), "stderr: {err}");
     assert!(
-        err.contains("(set \"vaultDir\" in engraven.config.json or pass --vault <dir>)"),
+        err.contains("(set \"vaultDir\" in hyphasma.config.json or pass --vault <dir>)"),
         "stderr: {err}"
     );
 }
@@ -186,7 +186,7 @@ fn invalid_config_json_exits_2() {
     let out = run_in(&dir, &["vault"], &[]);
     assert_eq!(code_of(&out), 2);
     assert!(
-        stderr_of(&out).starts_with("engraven.config.json is not valid JSON:"),
+        stderr_of(&out).starts_with("hyphasma.config.json is not valid JSON:"),
         "stderr: {}",
         stderr_of(&out)
     );
@@ -197,7 +197,10 @@ fn version_and_help_surface() {
     let dir = fixture("vault-clean");
 
     let version = run_in(&dir, &["--version"], &[]);
-    assert_eq!(stdout_of(&version), "engraven 0.2.0\n");
+    assert_eq!(
+        stdout_of(&version),
+        format!("hyphasma {}\n", env!("CARGO_PKG_VERSION"))
+    );
     assert_eq!(code_of(&version), 0);
 
     let help = run_in(&dir, &["--help"], &[]);
@@ -208,18 +211,18 @@ fn version_and_help_surface() {
     assert_eq!(code_of(&vault_help), 0);
     let text = stdout_of(&vault_help);
     assert!(text.contains(
-        "Usage: engraven vault [--vault <dir>] [--strict] [--fix] [--allow-placeholders] [--quiet]"
+        "Usage: hyphasma vault [--vault <dir>] [--strict] [--fix] [--allow-placeholders] [--quiet]"
     ));
 
     let memory_help = run_in(&dir, &["memory", "--help"], &[]);
     assert_eq!(code_of(&memory_help), 0);
     assert!(stdout_of(&memory_help).contains(
-        "Usage: engraven memory [--budget-only|--ci] [--memory-dir <dir>] [--self-test]"
+        "Usage: hyphasma memory [--budget-only|--ci] [--memory-dir <dir>] [--self-test]"
     ));
 
     let check_help = run_in(&dir, &["check", "--help"], &[]);
     assert_eq!(code_of(&check_help), 0);
-    assert!(stdout_of(&check_help).contains("Usage: engraven check"));
+    assert!(stdout_of(&check_help).contains("Usage: hyphasma check"));
 
     let bare = run_in(&dir, &[], &[]);
     assert_eq!(code_of(&bare), 2);
@@ -243,8 +246,8 @@ fn check_runs_vault_then_memory_and_combines_exit_codes() {
         &[("__VAULT__", &vault_path_of("vault-clean"))],
     );
     let expected = format!(
-        "{vault_part}No memory directory found for project 'vault-clean-fixture' — skipping.\n\
-         (normal on CI runners; locally, pass --memory-dir or set ENGRAVEN_MEMORY_DIR)\n"
+        "{vault_part}No memory directory found for project 'vault-clean-fixture'; skipping.\n\
+         (normal on CI runners; locally, pass --memory-dir or set HYPHASMA_MEMORY_DIR)\n"
     );
     assert_eq!(stdout_of(&out), expected);
     assert_eq!(code_of(&out), 0);
@@ -257,7 +260,7 @@ fn check_runs_vault_then_memory_and_combines_exit_codes() {
     );
     assert_eq!(code_of(&bad), 1);
     let text = stdout_of(&bad);
-    assert!(text.contains("engraven vault-check"));
+    assert!(text.contains("hyphasma vault-check"));
     assert!(text.contains("No memory directory found"));
 
     // Extra arguments are rejected.

@@ -9,7 +9,7 @@ they are. Harassment, personal attacks, and sustained disruption are not
 tolerated.
 
 Report unacceptable behavior privately via
-[GitHub security advisories](https://github.com/geektechniquestudios/engraven/security/advisories/new)
+[GitHub security advisories](https://github.com/geektechniquestudios/hyphasma/security/advisories/new)
 or by contacting [@geektechniquestudios](https://github.com/geektechniquestudios).
 Reports are handled confidentially. Maintainers who violate this code are
 subject to the same consequences as anyone else, up to removal from the

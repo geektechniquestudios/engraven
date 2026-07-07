@@ -1,9 +1,9 @@
-engraven validate-memory · memory-bad
+hyphasma validate-memory · memory-bad
 Checking router exists...
   ✓ MEMORY.md present
 Checking auto-load budget (≤ 20 lines)...
-  ✗ MEMORY.md is 22 lines — lines past 20 are silently truncated at session start
+  ✗ MEMORY.md is 22 lines (lines past 20 are silently truncated at session start)
 === Summary ===
 Errors:   1
 Warnings: 0
-FAIL — fix memory errors before moving on
+FAIL: fix memory errors before moving on

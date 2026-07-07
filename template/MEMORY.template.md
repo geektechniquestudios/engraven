@@ -17,7 +17,7 @@ covers the situation. Detail lives in the files, not here.
 
 | Encounter...                                   | Read                                       |
 | ---------------------------------------------- | ------------------------------------------ |
-| How this memory system works; where facts go   | [[Engraven Memory System - Meta-Analysis]]   |
+| How this memory system works; where facts go   | [[Hyphasma Memory System - Meta-Analysis]]   |
 | {{ENCOUNTER_1}}                                | [[{{ARCHITECTURE_KB_META}}]]               |
 | {{ENCOUNTER_2}}                                | [[{{DECISIONS_KB_META}}]]                  |
 | What happened in a past session                | [[Session Archive Index]]                  |
@@ -44,4 +44,4 @@ material → vault doc, pointer here. Significant session → `archive-session`
 skill. Keep this file ≤200 lines — promote, compress, or prune before adding.
 
 ---
-_Installed by Engraven on {{DATE}} · https://github.com/geektechniquestudios/engraven_
+_Installed by Hyphasma on {{DATE}} · https://github.com/geektechniquestudios/hyphasma_

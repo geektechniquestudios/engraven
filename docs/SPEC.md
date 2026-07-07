@@ -1,6 +1,6 @@
-# The Engraven Specification
+# The Hyphasma Specification
 
-> The complete architecture of the Engraven memory system. This is the document
+> The complete architecture of the Hyphasma memory system. This is the document
 > a coding agent reads to understand *why* the system is shaped the way it is.
 > For installation, see [BOOTSTRAP.md](../BOOTSTRAP.md). For creating knowledge
 > bases, see [KB-GUIDE.md](KB-GUIDE.md). For upkeep, see [MAINTENANCE.md](MAINTENANCE.md).
@@ -23,7 +23,7 @@ Two naive fixes fail in opposite directions:
   reads, because nothing at session start tells it they exist or when they
   matter.
 
-Engraven's position: **memory is a retrieval problem, not a storage problem.**
+Hyphasma's position: **memory is a retrieval problem, not a storage problem.**
 The scarce resource is the agent's attention at the moment of decision. The
 system's whole job is to put a *tiny, always-loaded routing layer* in front of
 a *deep, on-demand knowledge store* — and to keep both from rotting.
@@ -44,7 +44,7 @@ a *deep, on-demand knowledge store* — and to keep both from rotting.
    Open the vault in [Obsidian](https://obsidian.md) and you get a graph view
    of your agent's brain for free.
 4. **Verify or rot.** Memory that is not linted decays: links break, indexes
-   drift from files, stale facts outlive their truth. Engraven ships a linter
+   drift from files, stale facts outlive their truth. Hyphasma ships a linter
    and treats memory integrity like CI treats tests.
 5. **Write-time discipline beats read-time cleverness.** A memory is only as
    retrievable as the moment it was filed. Every write follows a contract:
@@ -57,7 +57,7 @@ a *deep, on-demand knowledge store* — and to keep both from rotting.
 
 ## 3. The four surfaces
 
-Engraven organizes agent memory into four surfaces. Each has a distinct load
+Hyphasma organizes agent memory into four surfaces. Each has a distinct load
 behavior, owner, and purpose. Collapsing them into one surface produces either
 bloat (everything always loaded) or loss (knowledge trapped in one machine).
 
@@ -85,7 +85,7 @@ belongs in the vault with a pointer here.
 The router is the always-loaded index into everything else. In Claude Code
 this is `MEMORY.md` in the project's auto-memory directory
 (`~/.claude/projects/<encoded-path>/memory/`), of which **only the first 200
-lines are auto-loaded** — Engraven treats that as a hard budget and lints it.
+lines are auto-loaded** — Hyphasma treats that as a hard budget and lints it.
 For other harnesses, an equivalent compact router is embedded in `AGENTS.md`
 (see [HARNESSES.md](HARNESSES.md)).
 
@@ -178,7 +178,7 @@ real file. The linter enforces this bidirectionally.
 ## 5. The vault: three-tier navigation
 
 Flat piles of docs don't scale past ~30 files — agents (and humans) stop
-finding things. Engraven vaults use a three-tier structure for every knowledge
+finding things. Hyphasma vaults use a three-tier structure for every knowledge
 base (KB):
 
 ```
@@ -219,7 +219,7 @@ And one special KB: **`Session-Archive/`** (Surface 4), with its own index.
 
 ### The trust hierarchy
 
-Not all vault knowledge is equally authoritative. Engraven vaults declare a
+Not all vault knowledge is equally authoritative. Hyphasma vaults declare a
 hierarchy, and agents are instructed to respect it:
 
 > **repo-grounded docs** (describe *this* codebase — verify against code when
@@ -259,7 +259,7 @@ title and wiki-links resolve ambiguously; the router grows past its auto-load
 budget and silently truncates — the worst failure, because the agent doesn't
 know what it isn't seeing.
 
-Engraven ships two zero-dependency linters:
+Hyphasma ships two zero-dependency linters:
 
 **`scripts/vault-check.mjs`** — vault integrity:
 
@@ -295,7 +295,7 @@ in the template). A red memory check is treated like a red test.
 
 ## 8. Self-maintenance: the agent tends its own memory
 
-Engraven is designed to be maintained *by the agent*, per written protocol —
+Hyphasma is designed to be maintained *by the agent*, per written protocol —
 that's what the instruction-surface blocks installed by the bootstrap say:
 
 - **Lookup first.** At task start, scan the router; on a row match, read the
@@ -331,7 +331,7 @@ in ordinary code review, because it's all just files in git.
 
 ## 10. Origin
 
-Engraven is the extracted, genericized structure of a production memory system
+Hyphasma is the extracted, genericized structure of a production memory system
 that runs a real venture-studio codebase — thousands of vault documents,
 dozens of KBs, multiple agents across multiple machines, maintained almost
 entirely by the agents themselves. The patterns here weren't designed on a

@@ -40,12 +40,12 @@ Doc counts in indexes and READMEs are wrapped in count directives —
 `<!-- count:kb:Payments-Domain -->12<!-- /count -->` — so they are *checked*
 numbers, not aspirations. `--fix` refreshes them after docs are added or
 removed; files outside the vault join the sweep via `countFiles` in
-`engraven.config.json`. Vocabulary: `vault-docs`, `kbs`, `hubs`,
+`hyphasma.config.json`. Vocabulary: `vault-docs`, `kbs`, `hubs`,
 `meta-analyses`, `archive-entries`, `kb:<KB-Dir-Name>`.
 
 Treat a red memory check exactly like a red test: fix it before shipping.
 Both linters are zero-dependency (Node ≥18, bash) and configured via
-`engraven.config.json`.
+`hyphasma.config.json`.
 
 ---
 
@@ -75,8 +75,10 @@ Monthly, or when the linters have been red-ish for a while:
 3. Read the router top to bottom. For each row ask: *has this fired in the
    last month?* Rows that never fire get compressed or demoted; rules that
    keep being violated get promoted toward the top (primacy).
-4. Check the vault graph (open it in Obsidian): orphan clusters, hub-less
-   docs, KBs that should merge or split.
+4. Look at the shape of the vault (the Obsidian graph view is pleasant here,
+   but optional). Orphans, hub gaps, and unreachable KBs were already caught
+   mechanically in step 1; you are looking for the judgment calls the linters
+   can't make: KBs that should merge or split, sections that outgrew their hub.
 5. Prune. Deletion is a feature. Archive entries are the one append-only
    surface — everything else earns its place or leaves.
 

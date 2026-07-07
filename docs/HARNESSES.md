@@ -3,22 +3,22 @@
 > The vault layer is harness-agnostic — plain markdown in git that any agent
 > can read. The **router** layer is per-harness: each agent runtime has its
 > own way of auto-loading a small index at session start. This doc maps
-> Engraven onto the harnesses we know about.
+> Hyphasma onto the harnesses we know about.
 
 ---
 
 ## Claude Code (first-class)
 
-Claude Code has a documented, first-class memory substrate that Engraven rides
+Claude Code has a documented, first-class memory substrate that Hyphasma rides
 directly:
 
-| Mechanism             | What Engraven does with it                                        |
+| Mechanism             | What Hyphasma does with it                                        |
 |-----------------------|------------------------------------------------------------------|
 | **Auto-memory dir** (`~/.claude/projects/<encoded-path>/memory/`) | the router (`MEMORY.md`) + topic files live here |
 | **200-line auto-load** of `MEMORY.md`                             | treated as a hard budget; linted            |
 | **`#` quick-add**     | fast capture; the maintenance habit files it properly later      |
 | **`/memory`**         | inspect/edit what the harness is treating as memory              |
-| **`CLAUDE.md`**       | gets the Engraven protocol block (lookup-first, what-goes-where)   |
+| **`CLAUDE.md`**       | gets the Hyphasma protocol block (lookup-first, what-goes-where)   |
 | **`.claude/rules/*.md`** with `paths:` frontmatter                 | path-scoped guardrails                      |
 | **`.claude/skills/`** | `archive-session`, `new-kb`, `research`, `memory-maintenance` install here |
 
@@ -28,7 +28,7 @@ Notes:
   discovers it (glob `~/.claude/projects/*<project>*/memory`, shortest match
   wins — worktree encodings strictly extend the main one) rather than
   hardcoding it. `validate-memory.sh` implements this; override with
-  `--memory-dir` or `ENGRAVEN_MEMORY_DIR`.
+  `--memory-dir` or `HYPHASMA_MEMORY_DIR`.
 - The harness may auto-save its own memories into the same directory with the
   minimal frontmatter (`name`, `description`, `metadata.type`). The linter
   hard-requires only those three fields, so harness-written files are never
@@ -37,7 +37,7 @@ Notes:
 
 ## Codex / anything that reads AGENTS.md
 
-Most non-Claude coding agents load `AGENTS.md` from the repo root. Engraven's
+Most non-Claude coding agents load `AGENTS.md` from the repo root. Hyphasma's
 bootstrap appends the [AGENTS-SECTION](../template/AGENTS-SECTION.md) block,
 which embeds:
 
@@ -52,7 +52,7 @@ other harnesses put everything in the vault.
 
 ## Cursor and rules-file harnesses
 
-Add a always-on rule (e.g. `.cursor/rules/engraven.mdc`) containing the same
+Add an always-on rule (e.g. `.cursor/rules/hyphasma.mdc`) containing the same
 lookup-protocol block and a pointer to `docs/vault/00-Index.md`. Path-scoped
 rules map naturally onto Cursor's glob-scoped rules.
 

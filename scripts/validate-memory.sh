@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# validate-memory.sh — Engraven router + topic-file linter (bash + coreutils only).
+# validate-memory.sh — Hyphasma router + topic-file linter (bash + coreutils only).
 #
 # Checks:
 #   1. MEMORY.md (the router) exists
@@ -17,7 +17,7 @@
 #   bash scripts/validate-memory.sh --self-test         # verify the linter itself
 #
 # Memory dir resolution order:
-#   --memory-dir flag → $ENGRAVEN_MEMORY_DIR → auto-discovery under
+#   --memory-dir flag → $HYPHASMA_MEMORY_DIR → auto-discovery under
 #   ~/.claude/projects/*<projectSlug>*/memory (shortest path wins — worktree
 #   encodings strictly extend the main project's encoding).
 #
@@ -41,12 +41,12 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-# ── Config (engraven.config.json in cwd; flat keys, defaults if absent) ──
+# ── Config (hyphasma.config.json in cwd; flat keys, defaults if absent) ──
 cfg() { # cfg <key> <default>
   local key="$1" default="$2"
-  if [[ -f engraven.config.json ]] && command -v node >/dev/null 2>&1; then
+  if [[ -f hyphasma.config.json ]] && command -v node >/dev/null 2>&1; then
     node -e "
-      const c = JSON.parse(require('fs').readFileSync('engraven.config.json','utf8'));
+      const c = JSON.parse(require('fs').readFileSync('hyphasma.config.json','utf8'));
       const v = c['$key'];
       if (v !== undefined && v !== null) process.stdout.write(String(v));
     " 2>/dev/null | grep . || echo "$default"
@@ -69,7 +69,7 @@ ok()   { echo "  ✓ $1"; }
 # ── Memory directory discovery ────────────────────────────────────────
 find_memory_dir() {
   if [[ -n "$MEMORY_DIR_ARG" ]]; then echo "$MEMORY_DIR_ARG"; return; fi
-  if [[ -n "${ENGRAVEN_MEMORY_DIR:-}" ]]; then echo "$ENGRAVEN_MEMORY_DIR"; return; fi
+  if [[ -n "${HYPHASMA_MEMORY_DIR:-}" ]]; then echo "$HYPHASMA_MEMORY_DIR"; return; fi
   local base="$HOME/.claude/projects"
   [[ -d "$base" ]] || { echo ""; return; }
   local best="" d
@@ -99,7 +99,7 @@ run_checks() {
   local lines
   lines=$(wc -l < "$memory_md" | tr -d ' ')
   if (( lines > BUDGET )); then
-    err "MEMORY.md is $lines lines — lines past $BUDGET are silently truncated at session start"
+    err "MEMORY.md is $lines lines (lines past $BUDGET are silently truncated at session start)"
   else
     ok "MEMORY.md is $lines/$BUDGET lines"
   fi
@@ -155,7 +155,7 @@ run_checks() {
     [[ "$name" == "MEMORY.md" ]] && continue
     lines=$(wc -l < "$f" | tr -d ' ')
     if (( lines > SOFT_CAP )); then
-      warn "$name is $lines lines — promote deep content to the vault, keep a pointer"
+      warn "$name is $lines lines (promote deep content to the vault, keep a pointer)"
       oversize=1
     fi
   done
@@ -244,19 +244,19 @@ EOF
 
 MEMORY_DIR="$(find_memory_dir)"
 if [[ -z "$MEMORY_DIR" || ! -d "$MEMORY_DIR" ]]; then
-  echo "No memory directory found for project '$PROJECT_SLUG' — skipping."
-  echo "(normal on CI runners; locally, pass --memory-dir or set ENGRAVEN_MEMORY_DIR)"
+  echo "No memory directory found for project '$PROJECT_SLUG'; skipping."
+  echo "(normal on CI runners; locally, pass --memory-dir or set HYPHASMA_MEMORY_DIR)"
   exit 0
 fi
 
-echo "engraven validate-memory · $MEMORY_DIR"
+echo "hyphasma validate-memory · $MEMORY_DIR"
 run_checks "$MEMORY_DIR"
 
 echo "=== Summary ==="
 echo "Errors:   $ERRORS"
 echo "Warnings: $WARNINGS"
 if (( ERRORS > 0 )); then
-  echo "FAIL — fix memory errors before moving on"
+  echo "FAIL: fix memory errors before moving on"
   exit 1
 fi
-echo "PASS — memory system is healthy"
+echo "PASS: memory system is healthy"

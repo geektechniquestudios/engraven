@@ -1,16 +1,16 @@
 ---
-description: Install an Engraven memory system into the current project through a guided, interview-driven bootstrap. Use when the user asks to set up Engraven, add agent memory, or bootstrap a knowledge vault.
+description: Install an Hyphasma memory system into the current project through a guided, interview-driven bootstrap. Use when the user asks to set up Hyphasma, add agent memory, or bootstrap a knowledge vault.
 disable-model-invocation: true
 ---
 
-# Engraven bootstrap
+# Hyphasma bootstrap
 
-You are installing Engraven into the human's project. The full Engraven
+You are installing Hyphasma into the human's project. The full Hyphasma
 repository is already on disk at `${CLAUDE_PLUGIN_ROOT}` (the installed
 plugin), so there is nothing to clone.
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/BOOTSTRAP.md` and follow it phase by phase,
-   in order. Wherever it refers to the Engraven clone (`$ENGRAVEN`), use
+   in order. Wherever it refers to the Hyphasma clone (`$HYPHASMA`), use
    `${CLAUDE_PLUGIN_ROOT}`. The human's project (`$TARGET`) is the current
    working directory unless they say otherwise.
 2. Honor the runbook's non-negotiables: interview at every `ASK THE HUMAN`

@@ -1,7 +1,7 @@
-engraven validate-memory · memory-empty
+hyphasma validate-memory · memory-empty
 Checking router exists...
   ✗ MEMORY.md not found in memory-empty
 === Summary ===
 Errors:   1
 Warnings: 0
-FAIL — fix memory errors before moving on
+FAIL: fix memory errors before moving on

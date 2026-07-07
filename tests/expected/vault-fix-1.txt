@@ -1,4 +1,4 @@
-engraven vault-check · 2 docs · __VAULT__
+hyphasma vault-check · 2 docs · __VAULT__
 
 5 warning(s):
   ⚠ stale count "vault-docs" in 00-Index.md: 9 → 2 (run --fix)

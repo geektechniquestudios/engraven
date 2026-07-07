@@ -1,14 +1,14 @@
 {
-  "name": "engraven",
+  "name": "hyphasma",
   "owner": {
     "name": "Geektechnique Studios"
   },
-  "description": "Engraven: memory + research for coding agents.",
+  "description": "Hyphasma: memory + research for coding agents.",
   "plugins": [
     {
-      "name": "engraven",
+      "name": "hyphasma",
       "source": "./",
-      "description": "Install and maintain an Engraven memory system: guided bootstrap into your project, plus a doctor that checks vault and router health.",
+      "description": "Install and maintain an Hyphasma memory system: guided bootstrap into your project, plus a doctor that checks vault and router health.",
       "category": "productivity",
       "tags": ["memory", "knowledge-base", "obsidian", "agents"]
     }

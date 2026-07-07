@@ -1,4 +1,4 @@
-//! `engraven memory` — router + topic-file linter.
+//! `hyphasma memory` — router + topic-file linter.
 //!
 //! A faithful port of `scripts/validate-memory.sh`. Verdict lines, check
 //! semantics, and exit codes are contractually identical to the script; when
@@ -113,18 +113,18 @@ pub fn run(args: &MemoryArgs, out: &mut dyn Write) -> i32 {
     if !usable {
         let _ = writeln!(
             out,
-            "No memory directory found for project '{}' — skipping.",
+            "No memory directory found for project '{}'; skipping.",
             cfg.project_slug
         );
         let _ = writeln!(
             out,
-            "(normal on CI runners; locally, pass --memory-dir or set ENGRAVEN_MEMORY_DIR)"
+            "(normal on CI runners; locally, pass --memory-dir or set HYPHASMA_MEMORY_DIR)"
         );
         return 0;
     }
     let memory_dir = memory_dir.unwrap_or_default();
 
-    let _ = writeln!(out, "engraven validate-memory · {memory_dir}");
+    let _ = writeln!(out, "hyphasma validate-memory · {memory_dir}");
     let mut r = Reporter::new(out);
     let status = run_checks(
         &memory_dir,
@@ -143,14 +143,14 @@ pub fn run(args: &MemoryArgs, out: &mut dyn Write) -> i32 {
     let _ = writeln!(out, "Errors:   {errors}");
     let _ = writeln!(out, "Warnings: {warnings}");
     if errors > 0 {
-        let _ = writeln!(out, "FAIL — fix memory errors before moving on");
+        let _ = writeln!(out, "FAIL: fix memory errors before moving on");
         return 1;
     }
-    let _ = writeln!(out, "PASS — memory system is healthy");
+    let _ = writeln!(out, "PASS: memory system is healthy");
     0
 }
 
-/// Memory dir resolution order: `--memory-dir` flag → `$ENGRAVEN_MEMORY_DIR`
+/// Memory dir resolution order: `--memory-dir` flag → `$HYPHASMA_MEMORY_DIR`
 /// → auto-discovery under `~/.claude/projects/*<projectSlug>*/memory`
 /// (shortest path wins; ties break lexicographically).
 fn find_memory_dir(flag: Option<&str>, project_slug: &str) -> Option<String> {
@@ -159,7 +159,7 @@ fn find_memory_dir(flag: Option<&str>, project_slug: &str) -> Option<String> {
             return Some(d.to_string());
         }
     }
-    if let Ok(env_dir) = std::env::var("ENGRAVEN_MEMORY_DIR") {
+    if let Ok(env_dir) = std::env::var("HYPHASMA_MEMORY_DIR") {
         if !env_dir.is_empty() {
             return Some(env_dir);
         }
@@ -239,7 +239,7 @@ fn run_checks(
     let lines = count_newlines(Path::new(&memory_md)).unwrap_or(0) as i64;
     if lines > cfg.budget {
         r.err(&format!(
-            "MEMORY.md is {lines} lines — lines past {} are silently truncated at session start",
+            "MEMORY.md is {lines} lines (lines past {} are silently truncated at session start)",
             cfg.budget
         ));
     } else {
@@ -305,7 +305,7 @@ fn run_checks(
         let lines = count_newlines(Path::new(&format!("{dir}/{name}"))).unwrap_or(0) as i64;
         if lines > cfg.soft_cap {
             r.warn(&format!(
-                "{name} is {lines} lines — promote deep content to the vault, keep a pointer"
+                "{name} is {lines} lines (promote deep content to the vault, keep a pointer)"
             ));
             oversize = true;
         }
@@ -496,7 +496,7 @@ fn self_test(cfg: &MemoryConfig, cwd: &Path, out: &mut dyn Write) -> i32 {
         .map(|d| d.as_nanos())
         .unwrap_or(0);
     let tmp =
-        std::env::temp_dir().join(format!("engraven-selftest-{}-{nanos}", std::process::id()));
+        std::env::temp_dir().join(format!("hyphasma-selftest-{}-{nanos}", std::process::id()));
     let scratch = ScratchDir { path: tmp.clone() };
 
     let pass_dir = tmp.join("pass").join("memory");

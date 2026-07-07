@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * vault-check.mjs — Engraven vault integrity linter (zero dependencies).
+ * vault-check.mjs — Hyphasma vault integrity linter (zero dependencies).
  *
  * Checks:
  *   1.  Wiki-links resolve        [[Target]] / [[Target|alias]] / [[Target#h]]
@@ -22,7 +22,7 @@
  * Usage:
  *   node scripts/vault-check.mjs [--vault <dir>] [--strict] [--fix] [--allow-placeholders] [--quiet]
  *
- * Config: engraven.config.json in the working directory (all keys optional):
+ * Config: hyphasma.config.json in the working directory (all keys optional):
  *   { "vaultDir": "docs/vault", "requireFrontmatter": ["tags","date"],
  *     "sessionArchiveDir": "Session-Archive", "countFiles": [] }
  *
@@ -70,11 +70,11 @@ for (let i = 0; i < args.length; i++) {
 
 // ── Config ────────────────────────────────────────────────────────────
 let config = {};
-if (existsSync("engraven.config.json")) {
+if (existsSync("hyphasma.config.json")) {
   try {
-    config = JSON.parse(readFileSync("engraven.config.json", "utf8"));
+    config = JSON.parse(readFileSync("hyphasma.config.json", "utf8"));
   } catch (e) {
-    console.error(`engraven.config.json is not valid JSON: ${e.message}`);
+    console.error(`hyphasma.config.json is not valid JSON: ${e.message}`);
     process.exit(2);
   }
 }
@@ -85,7 +85,7 @@ const COUNT_FILES = config.countFiles ?? [];
 
 if (!existsSync(VAULT) || !statSync(VAULT).isDirectory()) {
   console.error(`Vault directory not found: ${VAULT}`);
-  console.error(`(set "vaultDir" in engraven.config.json or pass --vault <dir>)`);
+  console.error(`(set "vaultDir" in hyphasma.config.json or pass --vault <dir>)`);
   process.exit(2);
 }
 
@@ -331,7 +331,7 @@ for (const [f, d] of docs) {
 
 // ── Report ────────────────────────────────────────────────────────────
 const say = (s) => !quiet && console.log(s);
-say(`engraven vault-check · ${files.length} docs · ${VAULT}`);
+say(`hyphasma vault-check · ${files.length} docs · ${VAULT}`);
 if (fixedCounts) say(`✎ refreshed ${fixedCounts} count directive(s)`);
 if (errors.length) {
   say(`\n${errors.length} error(s):`);

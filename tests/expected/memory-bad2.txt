@@ -1,8 +1,8 @@
-engraven validate-memory · memory-bad2
+hyphasma validate-memory · memory-bad2
 Checking router exists...
   ✓ MEMORY.md present
 Checking auto-load budget (≤ 20 lines)...
-  ✗ MEMORY.md is 21 lines — lines past 20 are silently truncated at session start
+  ✗ MEMORY.md is 21 lines (lines past 20 are silently truncated at session start)
 Checking router rows point at real files...
   ✓ all referenced topic files exist
 Checking every topic file has a router entry...
@@ -16,4 +16,4 @@ Checking vault_refs resolve...
 === Summary ===
 Errors:   1
 Warnings: 0
-FAIL — fix memory errors before moving on
+FAIL: fix memory errors before moving on
