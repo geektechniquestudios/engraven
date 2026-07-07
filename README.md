@@ -126,7 +126,7 @@ That is one `/research` run, in timelapse: findings land as a wiki-linked cluste
 3. **Abstraction turns it into doctrine.** The synthesis rolls up into the motive: "given our constraints, do X; revisit if Y changes" lands in the meta-analysis, a router row makes it ambient if it changes default behavior, and a **falsifier** records what observation would expire it. Doctrine without an expiry condition is dogma.
 
 <div align="center">
-<img src="assets/heatmap.svg" width="880" alt="Animated heatmap of three knowledge bases living day to day. Phase one: a routed read heats exactly the docs a task needs, and the heat leaves a residue. Phase two: cross-KB synthesis draws links from two distant KBs into a new synthesis doc, which is immediately indexed with a plus-one-row marker at 00-Index and persists. Phase three: an integrity scanline sweeps the vault, finds rotted cells, and flips them green.">
+<img src="assets/heatmap.svg" width="880" alt="Animated heatmap of three knowledge bases living day to day. Phase one: a routed read heats exactly the docs a task needs, and the heat leaves a residue. Phase two: docs in two distant KBs warm together and a new synthesis doc forms between them, immediately indexed with a plus-one-row marker at 00-Index, and persists. Phase three: an integrity scanline sweeps the vault, finds rotted cells, and flips them green.">
 </div>
 
 And that is the same knowledge living day to day: routed reads heat exactly the docs a task needs, a synthesis doc forms between clusters and is indexed on the spot, and the integrity scan flips rot green before an agent can trust it.
