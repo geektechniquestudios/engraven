@@ -1,11 +1,11 @@
 ---
-tags: [engraven, memory, section-hub]
+tags: [hyphasma, memory, section-hub]
 date: {{DATE}}
 ---
 
 # Operations - Section Hub
 
-> Section hub for [[Engraven Memory System - Meta-Analysis]] — 2 documents
+> Section hub for [[Hyphasma Memory System - Meta-Analysis]] — 2 documents
 > covering how the memory system stays trustworthy over months: linting,
 > anti-entropy habits, and episodic capture.
 

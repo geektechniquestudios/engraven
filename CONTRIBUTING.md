@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for wanting to make Engraven better. It is the extracted structure of
+Thanks for wanting to make Hyphasma better. It is the extracted structure of
 a production agent-memory system, so the bar for every change is simple:
 would this survive months of real agent traffic?
 
@@ -16,20 +16,20 @@ would this survive months of real agent traffic?
 
 ## Proposing features
 
-Open a [feature request](https://github.com/geektechniquestudios/engraven/issues/new?template=feature_request.yml)
+Open a [feature request](https://github.com/geektechniquestudios/hyphasma/issues/new?template=feature_request.yml)
 before writing code for anything structural: template shape, spec, router
 contract, linter checks. Structure changes ripple into every install, so
 they need a story from real use, not just a preference. Small fixes and
 clarity improvements can go straight to a PR.
 
 Questions and ideas that are not yet concrete belong in
-[Discussions](https://github.com/geektechniquestudios/engraven/discussions).
+[Discussions](https://github.com/geektechniquestudios/hyphasma/discussions).
 
 ## Dev setup
 
 ```bash
-git clone https://github.com/geektechniquestudios/engraven
-cd engraven
+git clone https://github.com/geektechniquestudios/hyphasma
+cd hyphasma
 ```
 
 You need: **Rust stable** (for the CLI), **Node 18+** (for the script
@@ -53,7 +53,7 @@ CI diffs them on every push and fails the PR if they drift:
 
 ```bash
 node scripts/vault-check.mjs --vault template/vault --strict --allow-placeholders > /tmp/a
-./target/release/engraven vault --vault template/vault --strict --allow-placeholders > /tmp/b
+./target/release/hyphasma vault --vault template/vault --strict --allow-placeholders > /tmp/b
 diff /tmp/a /tmp/b
 ```
 
@@ -71,7 +71,7 @@ applies).
 
 ## Reporting bugs
 
-Use the [bug report template](https://github.com/geektechniquestudios/engraven/issues/new?template=bug_report.yml).
+Use the [bug report template](https://github.com/geektechniquestudios/hyphasma/issues/new?template=bug_report.yml).
 The fastest bugs to fix come with the linter output and a minimal vault
 layout that reproduces the problem.
 

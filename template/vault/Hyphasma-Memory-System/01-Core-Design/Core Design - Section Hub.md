@@ -1,11 +1,11 @@
 ---
-tags: [engraven, memory, section-hub]
+tags: [hyphasma, memory, section-hub]
 date: {{DATE}}
 ---
 
 # Core Design - Section Hub
 
-> Section hub for [[Engraven Memory System - Meta-Analysis]] — 4 documents
+> Section hub for [[Hyphasma Memory System - Meta-Analysis]] — 4 documents
 > covering the architecture: how memory is split across loading speeds, how
 > retrieval works without search infrastructure, how to file knowledge, and
 > how the vault grows through research and synthesis.

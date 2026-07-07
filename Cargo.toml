@@ -1,11 +1,11 @@
 [package]
-name = "engraven"
-version = "0.2.1"
+name = "hyphasma"
+version = "0.3.0"
 edition = "2024"
 rust-version = "1.85"
 license = "MIT"
-description = "Linters for the Engraven memory system: vault integrity (engraven vault) and router/topic-file health (engraven memory)."
-repository = "https://github.com/geektechniquestudios/engraven"
+description = "Linters for the Hyphasma memory system: vault integrity (hyphasma vault) and router/topic-file health (hyphasma memory)."
+repository = "https://github.com/geektechniquestudios/hyphasma"
 keywords = ["lint", "memory", "vault", "knowledge-base", "obsidian"]
 categories = ["command-line-utilities", "development-tools"]
 

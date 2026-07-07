@@ -1,4 +1,4 @@
-engraven vault-check · 2 docs · __VAULT__
+hyphasma vault-check · 2 docs · __VAULT__
 
 1 warning(s):
   ⚠ unknown count directive "count:mystery" in 00-Index.md

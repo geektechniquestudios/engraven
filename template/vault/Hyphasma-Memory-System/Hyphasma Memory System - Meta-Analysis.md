@@ -1,16 +1,16 @@
 ---
-tags: [engraven, memory, knowledge-management, meta-analysis]
+tags: [hyphasma, memory, knowledge-management, meta-analysis]
 date: {{DATE}}
 ---
 
-# Engraven Memory System - Meta-Analysis
+# Hyphasma Memory System - Meta-Analysis
 
 > Index hub: [[00-Index]]
 
 > How this project's memory system works: the four surfaces, the routing
 > model, the pipeline that grows the vault, and the hygiene that keeps it
 > trustworthy.
-> **<!-- count:kb:Engraven-Memory-System -->9<!-- /count --> documents | 6 topical docs + 2 section hubs + this meta-analysis | 2 sections**
+> **<!-- count:kb:Hyphasma-Memory-System -->9<!-- /count --> documents | 6 topical docs + 2 section hubs + this meta-analysis | 2 sections**
 
 This KB is self-referential by design: it documents the memory system it
 lives inside, and doubles as the worked example of every structure it
@@ -45,8 +45,8 @@ structured and operated**: surfaces, routing, file contracts, verification,
 archiving.
 
 It is **not** authoritative for this project's domain or architecture (see
-the project KBs registered in [[00-Index]]), nor for the upstream Engraven
-design rationale (see the [Engraven spec](https://github.com/geektechniquestudios/engraven/blob/main/docs/SPEC.md),
+the project KBs registered in [[00-Index]]), nor for the upstream Hyphasma
+design rationale (see the [Hyphasma spec](https://github.com/geektechniquestudios/hyphasma/blob/main/docs/SPEC.md),
 of which this KB is the operational digest).
 
 ## How to Use This KB

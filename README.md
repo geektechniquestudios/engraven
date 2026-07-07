@@ -1,18 +1,18 @@
 <div align="center">
 
-<img src="assets/logo.svg" width="440" alt="engraven: memory + research for coding agents. The mark is a three-tier knowledge graph drawn as a neuron, with an amber memory trace lighting the route through it.">
+<img src="assets/logo.svg" width="440" alt="hyphasma: memory + research for coding agents. The mark is a three-tier knowledge graph drawn as a neuron, with an amber memory trace lighting the route through it.">
 
 **A knowledge network for coding agents, checked into your repo as a wiki-linked Obsidian vault: any doc in 3 hops or less, new knowledge bases researched and welded in as you work, and linters that fail CI when anything rots.**
 
-[![CI](https://github.com/geektechniquestudios/engraven/actions/workflows/ci.yml/badge.svg)](https://github.com/geektechniquestudios/engraven/actions/workflows/ci.yml)
+[![CI](https://github.com/geektechniquestudios/hyphasma/actions/workflows/ci.yml/badge.svg)](https://github.com/geektechniquestudios/hyphasma/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-3fb950)](LICENSE)
 [![CLI: Rust](https://img.shields.io/badge/CLI-Rust-f97316)](src/)
 [![Scripts: zero deps](https://img.shields.io/badge/scripts-zero%20deps-a78bfa)](scripts/)
 [![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Codex%20·%20Cursor-67e8f9)](docs/HARNESSES.md)
 
-<img src="assets/graph.svg" width="1000" alt="An Obsidian-style knowledge graph of a mature Engraven vault: hundreds of documents as dots, clustered and colored by knowledge base, densely cross-linked. Four lookups land four different ways: a three-hop drill-down ending at a dev-east access runbook, a one-hop deep link, a cross-KB wiki-link read, and an episodic read into the session archive, with each hop naming the doc it lands on while a few of its links glow violet. Meanwhile a new knowledge base grows in the background while stale docs elsewhere are flagged red and repaired green; when it matures, violet synthesis links weld it to its neighbor KBs, and two final lookups route into it, one straight from the index and one riding a fresh weld across from the rate-limiting KB. A toast above the graph shows the short question that prompts each lookup.">
+<img src="assets/graph.svg" width="1000" alt="An Obsidian-style knowledge graph of a mature Hyphasma vault: hundreds of documents as dots, clustered and colored by knowledge base, densely cross-linked. Four lookups land four different ways: a three-hop drill-down ending at a dev-east access runbook, a one-hop deep link, a cross-KB wiki-link read, and an episodic read into the session archive, with each hop naming the doc it lands on while a few of its links glow violet. Meanwhile a new knowledge base grows in the background while stale docs elsewhere are flagged red and repaired green; when it matures, violet synthesis links weld it to its neighbor KBs, and two final lookups route into it, one straight from the index and one riding a fresh weld across from the rate-limiting KB. A toast above the graph shows the short question that prompts each lookup.">
 
-*Every dot is a doc, every line is a `[[wiki-link]]`, every color is a knowledge base.<br>Engraven is the extracted skeleton of a real system that grew to roughly 3,800 docs, 29 research KBs, and 386 section hubs, still routed by one index under 200 lines.*
+*Every dot is a doc, every line is a `[[wiki-link]]`, every color is a knowledge base.<br>Hyphasma is the extracted skeleton of a real system that grew to roughly 3,800 docs, 29 research KBs, and 386 section hubs, still routed by one index under 200 lines.*
 
 </div>
 
@@ -20,28 +20,28 @@
 
 Coding agents forget everything between sessions. The context window closes, and the architecture, the conventions, and the fix that took four hours are gone. Next week you explain them again.
 
-Engraven fixes that with files in your repo. A small router loads every session and says "when you hit X, go read Y". It points into a vault of wiki-linked markdown knowledge bases, so retrieval is deterministic, takes at most three hops, and needs no embeddings, no vector database, and no index server.
+Hyphasma fixes that with files in your repo. A small router loads every session and says "when you hit X, go read Y". It points into a vault of wiki-linked markdown knowledge bases, so retrieval is deterministic, takes at most three hops, and needs no embeddings, no vector database, and no index server.
 
 A research skill grows the vault, synthesis welds new knowledge into what is already there, and two linters fail CI the moment memory rots. Because everything is plain markdown in git, memory is versioned, reviewable in PR diffs, and shared across machines, branches, agents, and teammates.
 
 ## Install
 
-**Claude Code, the short way.** Engraven ships as a plugin:
+**Claude Code, the short way.** Hyphasma ships as a plugin:
 
 ```text
-/plugin marketplace add geektechniquestudios/engraven
-/plugin install engraven@engraven
-/engraven:bootstrap
+/plugin marketplace add geektechniquestudios/hyphasma
+/plugin install hyphasma@hyphasma
+/hyphasma:bootstrap
 ```
 
-The bootstrap interviews you for five minutes, then builds the memory system around your answers: skeleton, instruction wiring, router, and your first two knowledge bases. It explains every piece as it goes and finishes only when both linters pass. Later, `/engraven:doctor` health-checks the install.
+The bootstrap interviews you for five minutes, then builds the memory system around your answers: skeleton, instruction wiring, router, and your first two knowledge bases. It explains every piece as it goes and finishes only when both linters pass. Later, `/hyphasma:doctor` health-checks the install.
 
 **Any agent, by pasting.** Open your agent inside your project (Codex, Cursor, or anything that can run shell commands and read files) and paste this:
 
 ```text
-Set up the Engraven memory system in this project.
+Set up the Hyphasma memory system in this project.
 
-1. Clone https://github.com/geektechniquestudios/engraven into a scratch
+1. Clone https://github.com/geektechniquestudios/hyphasma into a scratch
    directory OUTSIDE this repo (it is only the template source).
 2. Read BOOTSTRAP.md in the clone, top to bottom, and follow it exactly.
 3. It will have you interview me first. Do that before writing anything.
@@ -54,7 +54,7 @@ Set up the Engraven memory system in this project.
 ### What it needs
 
 - **git and a repo.** That is the whole platform. No database, no embeddings, no service, and nothing phones home.
-- **One way to run the checks.** Either the `engraven` CLI, a single Rust binary from [Releases](https://github.com/geektechniquestudios/engraven/releases) (or `cargo install --git https://github.com/geektechniquestudios/engraven`), or the bundled scripts: `vault-check.mjs` on Node 18+ with zero packages, `validate-memory.sh` on bash. Same checks, same output, verified by a parity gate in this repo's CI.
+- **One way to run the checks.** Either the `hyphasma` CLI, a single Rust binary from [Releases](https://github.com/geektechniquestudios/hyphasma/releases) (or `cargo install --git https://github.com/geektechniquestudios/hyphasma`), or the bundled scripts: `vault-check.mjs` on Node 18+ with zero packages, `validate-memory.sh` on bash. Same checks, same output, verified by a parity gate in this repo's CI.
 - **No Rust toolchain needed.** The bootstrap wires your CI to prefer the binary (a small static download on the runner) and fall back to the vendored scripts automatically.
 - **Obsidian is optional.** The vault is an Obsidian vault by construction, but it is all plain markdown; the app just gives you the graph view of it.
 
@@ -133,11 +133,11 @@ And that is the same knowledge living day to day: routed reads heat exactly the 
 
 ## Memory that lints
 
-Trusting memory is the whole game, and trust needs verification. The checks ship two ways with one output contract: the **`engraven` CLI**, a single Rust binary your CI runs as the integrity gate (`engraven vault` · `engraven memory` · `engraven check`), and **zero-dependency scripts** vendored into your repo as the fallback. This repo's CI diffs the two implementations on every push so they cannot drift.
+Trusting memory is the whole game, and trust needs verification. The checks ship two ways with one output contract: the **`hyphasma` CLI**, a single Rust binary your CI runs as the integrity gate (`hyphasma vault` · `hyphasma memory` · `hyphasma check`), and **zero-dependency scripts** vendored into your repo as the fallback. This repo's CI diffs the two implementations on every push so they cannot drift.
 
 ```console
-$ engraven vault
-engraven vault-check · 214 docs · docs/vault
+$ hyphasma vault
+hyphasma vault-check · 214 docs · docs/vault
 
 2 error(s):
   ✗ broken link: [[Dunning and Retires]] in Payments-Domain/01-Billing-Core/Subscription Lifecycle.md
@@ -159,14 +159,14 @@ Doc counts in your indexes are wrapped in `<!-- count:… -->` markers and verif
 ```
 your-project/
 ├── CLAUDE.md / AGENTS.md            ← memory protocol appended (existing content untouched)
-├── engraven.config.json             ← linter config (vault path, budgets, frontmatter contract)
+├── hyphasma.config.json             ← linter config (vault path, budgets, frontmatter contract)
 ├── scripts/
 │   ├── vault-check.mjs              ← vault linter · Node 18+, stdlib only
 │   └── validate-memory.sh           ← router linter · bash + coreutils
 ├── docs/vault/
 │   ├── 00-Index.md                  ← vault entry point: task → doc routing
 │   ├── Research Library.md          ← registry of every KB (with checked doc-counts)
-│   ├── Engraven-Memory-System/      ← the system documenting itself (working example KB)
+│   ├── Hyphasma-Memory-System/      ← the system documenting itself (working example KB)
 │   ├── <Your-First-KB>/             ← seeded from your interview during bootstrap
 │   └── Session-Archive/             ← one entry per significant session
 └── .claude/                         ← Claude Code only
@@ -174,29 +174,29 @@ your-project/
     └── skills/                      ← /archive-session · /new-kb · /research · /memory-maintenance
 ```
 
-Plus, on the harness side, a `MEMORY.md` router installed into your agent's auto-loaded memory. The vault ships with one real KB, **Engraven documenting Engraven**, so you always have a live example of every structure, three tiers and all. Your CI runs the `engraven` binary as the integrity gate; the vendored scripts mean nothing hard-depends on this repo or the plugin staying installed, and any machine with Node can run the same checks.
+Plus, on the harness side, a `MEMORY.md` router installed into your agent's auto-loaded memory. The vault ships with one real KB, **Hyphasma documenting Hyphasma**, so you always have a live example of every structure, three tiers and all. Your CI runs the `hyphasma` binary as the integrity gate; the vendored scripts mean nothing hard-depends on this repo or the plugin staying installed, and any machine with Node can run the same checks.
 
 Day-to-day, the loop is: work normally → the agent hits something worth keeping → it writes a doc and a router row → `/research` when a topic deserves a whole KB → `/archive-session` captures the why before the context dies → CI keeps every link honest.
 
 ## Manual quick start
 
 ```bash
-git clone https://github.com/geektechniquestudios/engraven
+git clone https://github.com/geektechniquestudios/hyphasma
 cd your-project
 
 # 1. copy the skeleton
-cp -R ../engraven/template/vault docs/vault
-cp ../engraven/template/engraven.config.json .
-mkdir -p scripts && cp ../engraven/scripts/vault-check.mjs ../engraven/scripts/validate-memory.sh scripts/
+cp -R ../hyphasma/template/vault docs/vault
+cp ../hyphasma/template/hyphasma.config.json .
+mkdir -p scripts && cp ../hyphasma/scripts/vault-check.mjs ../hyphasma/scripts/validate-memory.sh scripts/
 
 # 2. wire your instruction file
-cat ../engraven/template/CLAUDE-SECTION.md >> CLAUDE.md     # or AGENTS-SECTION.md >> AGENTS.md
+cat ../hyphasma/template/CLAUDE-SECTION.md >> CLAUDE.md     # or AGENTS-SECTION.md >> AGENTS.md
 
 # 3. install the router
 #    Claude Code: seed MEMORY.md in your project's auto-memory dir from
 #    template/MEMORY.template.md, then fill the {{PLACEHOLDERS}}
 
-# 4. verify (or: engraven check)
+# 4. verify (or: hyphasma check)
 node scripts/vault-check.mjs
 bash scripts/validate-memory.sh
 ```
@@ -227,14 +227,14 @@ Retrieval here is *routing*: a human-readable index consulted by the agent's own
 <summary><b>Do I need Obsidian?</b></summary>
 <br>
 
-No. The vault is an Obsidian vault by construction, but everything in it is plain markdown with `[[wiki-links]]`. Obsidian gives you a free graph view of the vault, and it looks like the top of this page. You never need it to keep the vault healthy: orphan docs, solitary docs, and unreachable KBs are linter failures the `engraven` CLI catches in CI, not things a human has to spot by eye.
+No. The vault is an Obsidian vault by construction, but everything in it is plain markdown with `[[wiki-links]]`. Obsidian gives you a free graph view of the vault, and it looks like the top of this page. You never need it to keep the vault healthy: orphan docs, solitary docs, and unreachable KBs are linter failures the `hyphasma` CLI catches in CI, not things a human has to spot by eye.
 </details>
 
 <details>
 <summary><b>What do the tools require?</b></summary>
 <br>
 
-The `engraven` CLI is a single static binary (Rust, prebuilt in Releases). The vendored scripts need only Node 18+ and bash, with zero packages. There is no Python, no database, and no build step in your repo.
+The `hyphasma` CLI is a single static binary (Rust, prebuilt in Releases). The vendored scripts need only Node 18+ and bash, with zero packages. There is no Python, no database, and no build step in your repo.
 </details>
 
 <details>
@@ -255,14 +255,14 @@ It is files in your repo. Nothing phones home, nothing is uploaded, there is no 
 <summary><b>How is this different from just writing a NOTES.md?</b></summary>
 <br>
 
-Structure and verification. A flat file has no retrieval story past a couple hundred lines and no defense against rot. Engraven gives knowledge a shape agents can navigate (router to meta-analysis to hub to doc), a pipeline that grows it (research, synthesis, doctrine), and linters that fail CI when memory lies.
+Structure and verification. A flat file has no retrieval story past a couple hundred lines and no defense against rot. Hyphasma gives knowledge a shape agents can navigate (router to meta-analysis to hub to doc), a pipeline that grows it (research, synthesis, doctrine), and linters that fail CI when memory lies.
 </details>
 
 <details>
 <summary><b>Where did this come from?</b></summary>
 <br>
 
-Engraven is the extracted skeleton of the memory system running a real production venture-studio monorepo, where it grew to roughly 3,800 vault docs across 29 research KBs and 386 section hubs, maintained by multiple agents working parallel branches, while keeping the always-loaded footprint near 5k tokens. The patterns here are the ones that survived contact; [`docs/SPEC.md`](docs/SPEC.md) is the distillation.
+Hyphasma is the extracted skeleton of the memory system running a real production venture-studio monorepo, where it grew to roughly 3,800 vault docs across 29 research KBs and 386 section hubs, maintained by multiple agents working parallel branches, while keeping the always-loaded footprint near 5k tokens. The patterns here are the ones that survived contact; [`docs/SPEC.md`](docs/SPEC.md) is the distillation.
 </details>
 
 ---

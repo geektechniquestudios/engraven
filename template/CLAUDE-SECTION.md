@@ -1,11 +1,11 @@
 <!-- ══════════════════════════════════════════════════════════════════
-     ENGRAVEN MEMORY PROTOCOL — appended to CLAUDE.md by the Engraven bootstrap
-     https://github.com/geektechniquestudios/engraven
+     HYPHASMA MEMORY PROTOCOL — appended to CLAUDE.md by the Hyphasma bootstrap
+     https://github.com/geektechniquestudios/hyphasma
      ══════════════════════════════════════════════════════════════════ -->
 
-## Memory System (Engraven)
+## Memory System (Hyphasma)
 
-This project runs an Engraven memory system. **Long-term knowledge base:**
+This project runs an Hyphasma memory system. **Long-term knowledge base:**
 `{{VAULT_DIR}}/` — start from `00-Index.md` for task routing. Navigate KBs
 using the **three-tier pattern**: meta-analysis (entry/decision router) →
 section hub (thematic cluster) → individual doc (deep content). Read the
@@ -53,4 +53,4 @@ A red memory check is a failing test: fix it before moving on. Keep
 truncated at session start. Never put secrets or personal data in any memory
 surface.
 
-<!-- ══════════════════ end Engraven memory protocol ══════════════════ -->
+<!-- ══════════════════ end Hyphasma memory protocol ══════════════════ -->
