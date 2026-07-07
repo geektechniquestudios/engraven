@@ -2,7 +2,7 @@
 
 <img src="assets/logo.svg" width="440" alt="engraven: memory + research for coding agents. The mark is a three-tier knowledge graph drawn as a neuron, with an amber memory trace lighting the route through it.">
 
-**Long-term memory for coding agents, stored as an Obsidian-based markdown vault in your repo: a small routing index retrieves it, linters verify it in CI, and a research pipeline grows it.**
+**A knowledge network for coding agents, checked into your repo as a wiki-linked Obsidian vault: any doc in 3 hops or less, new knowledge bases researched and welded in as you work, and linters that fail CI when anything rots.**
 
 [![CI](https://github.com/geektechniquestudios/engraven/actions/workflows/ci.yml/badge.svg)](https://github.com/geektechniquestudios/engraven/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-3fb950)](LICENSE)
